@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('main')
-
+    Aliishu
     @if(get_option('enable_slider') == 1 )
 
         <div class="container-fluid">

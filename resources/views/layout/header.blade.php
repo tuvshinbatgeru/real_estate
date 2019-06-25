@@ -19,7 +19,17 @@
         <meta name="og:site_name" content="{{ get_option('site_name') }}">
     @show
 
-    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/filter.css') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-theme.min.css') }}">
     <!-- Font awesome 4.4.0 -->
@@ -62,7 +72,28 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div class="header-nav-top">
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="header">
+                <div class="logo">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="">
+                </div>
+                <div class="group-button">
+                    <!-- <a href="login.html">
+                        Нэвтрэх
+                    </a> -->
+                    <a href="" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect"
+                        data-toggle="modal" data-target="#exampleModal">
+                        Бүртгүүлэх / Нэвтрэх
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+{{-- <div class="header-nav-top">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-12 ">
@@ -129,10 +160,9 @@
             </div>
         </div>
     </div>
+</div> --}}
 
-</div>
-
-<nav class="navbar navbar-default" role="navigation">
+{{-- <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -191,4 +221,4 @@
 
         </div><!--/.navbar-collapse -->
     </div>
-</nav>
+</nav> --}}
