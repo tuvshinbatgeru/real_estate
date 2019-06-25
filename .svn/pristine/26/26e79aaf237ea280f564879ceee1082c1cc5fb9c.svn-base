@@ -1,0 +1,709 @@
+<?php $__env->startSection('title'); ?> <?php if( ! empty($title)): ?> <?php echo e($title); ?> | <?php endif; ?> ##parent-placeholder-3c6de1b7dd91465d437ef415f94f36afc1fbc8a8## <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('social-meta'); ?>
+    <meta property="og:title" content="<?php echo e($ad->title); ?>">
+    <meta property="og:description" content="<?php echo e(substr(trim(preg_replace('/\s\s+/', ' ',strip_tags($ad->description) )),0,160)); ?>">
+    <?php if($ad->media_img->first()): ?>
+        <meta property="og:image" content="<?php echo e(media_url($ad->media_img->first(), true)); ?>">
+    <?php else: ?>
+        <meta property="og:image" content="<?php echo e(asset('uploads/placeholder.png')); ?>">
+    <?php endif; ?>
+    <meta property="og:url" content="<?php echo e(route('single_ad', $ad->slug)); ?>">
+    <meta name="twitter:card" content="summary_large_image">
+    <!--  Non-Essential, But Recommended -->
+    <meta name="og:site_name" content="<?php echo e(get_option('site_name')); ?>">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-css'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/fotorama-4.6.4/fotorama.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/owl.carousel/assets/owl.carousel.css')); ?>">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('main'); ?>
+
+    <div class="modern-single-ad-top-description-wrap">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="modern-single-ad-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li><a href="<?php echo e(route('home')); ?>"><?php echo app('translator')->getFromJson('app.home'); ?></a></li>
+                            <?php if($ad->category): ?>
+                                <li><a href="<?php echo e(route('listing', ['category' => $ad->category->id])); ?>">  <?php echo e($ad->category->category_name); ?> </a> </li>
+                            <?php endif; ?>
+                            <li><?php echo e($ad->title); ?></li>
+                        </ol><!-- breadcrumb -->
+                        <h2 class="modern-single-ad-top-title"><?php echo e($ad->title); ?></h2>
+                    </div>
+
+                    <?php if($enable_monetize): ?>
+                        <?php echo get_option('monetize_code_below_ad_title'); ?>
+
+                    <?php endif; ?>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="modern-single-ad-top-description">
+
+                    <div class="col-sm-7 col-xs-12">
+                        <?php if( ! $ad->is_published()): ?>
+                            <div class="alert alert-warning"> <i class="fa fa-warning"></i> <?php echo app('translator')->getFromJson('app.ad_not_published_warning'); ?></div>
+                        <?php endif; ?>
+
+                        <?php if( ! empty($ad->video_url)): ?>
+                            <?php
+                            $video_url = $ad->video_url;
+                            if (strpos($video_url, 'youtube') > 0) {
+                                preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video_url, $matches);
+                                if ( ! empty($matches[1])){
+                                    echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/'.$matches[1].'" frameborder="0" allowfullscreen></iframe></div>';
+                                }
+
+                            } elseif (strpos($video_url, 'vimeo') > 0) {
+                                if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $video_url, $regs)) {
+                                    if (!empty($regs[3])){
+                                        echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/'.$regs[3].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+                                    }
+                                }
+                            }
+                            ?>
+
+                        <?php else: ?>
+
+                            <div class="ads-gallery">
+                                <div class="fotorama"  data-nav="thumbs" data-allowfullscreen="true" data-width="100%">
+                                    <?php $__currentLoopData = $ad->media_img; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $img): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <img src="<?php echo e(media_url($img, true)); ?>" alt="<?php echo e($ad->title); ?>">
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="col-sm-5 col-xs-12">
+                        <h2 class="ad-title"><a href="<?php echo e(route('single_ad', $ad->slug)); ?>"><?php echo e($ad->title); ?></a>  </h2>
+                        <h2 class="modern-single-ad-price"><?php echo e(themeqx_price_ng($ad)); ?></h2>
+                        <h3><?php echo app('translator')->getFromJson('app.general_info'); ?></h3>
+                        <p><strong><i class="fa fa-money"></i> <?php echo app('translator')->getFromJson('app.price'); ?></strong> <?php echo e(themeqx_price_ng($ad)); ?> </p>
+                        <p><strong><i class="fa fa-map-marker"></i>  <?php echo app('translator')->getFromJson('app.location'); ?> </strong> <?php echo $ad->full_address(); ?> </p>
+                        <p><strong><i class="fa fa-check-circle-o"></i> <?php echo app('translator')->getFromJson('app.condition'); ?></strong> <?php echo e($ad->ad_condition); ?> </p>
+
+                        <div class="modern-social-share-btn-group">
+                            <h4><?php echo app('translator')->getFromJson('app.share_this_ad'); ?></h4>
+                            <a href="javascript:;" class="btn btn-default shareEmbedded"  data-toggle="modal" data-target="#shareEmbedded"><i class="fa fa-code"></i> </a>
+                            <a href="#" class="btn btn-default share s_facebook"><i class="fa fa-facebook"></i> </a>
+                            <a href="#" class="btn btn-default share s_plus"><i class="fa fa-google-plus"></i> </a>
+                            <a href="#" class="btn btn-default share s_twitter"><i class="fa fa-twitter"></i> </a>
+                            <a href="#" class="btn btn-default share s_linkedin"><i class="fa fa-linkedin"></i> </a>
+                        </div>
+
+                        <?php if($enable_monetize): ?>
+                            <?php echo get_option('monetize_code_below_general_info'); ?>
+
+                        <?php endif; ?>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-xs-12">
+                <div class="ads-detail bg-white">
+                    <div class="single-at-a-glance">
+                        <ul class="list-group ">
+
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-building"></i> <?php echo e(ucfirst( trans('app.'.$ad->type))); ?> </li>
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-arrows-alt "></i> <?php echo e($ad->square_unit_space.' '.trans('app.square_meter')); ?> </li>
+
+                            <?php if($ad->beds): ?>
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-bed"></i> <?php echo e($ad->beds.' '.trans('app.bedrooms')); ?> </li>
+                            <?php endif; ?>
+
+                            <?php if($ad->attached_bath): ?>
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-bath"></i> <?php echo e($ad->attached_bath.' '.trans('app.attached_bath')); ?> </li>
+                            <?php endif; ?>
+
+                            <?php if($ad->common_bath): ?>
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-shower"></i> <?php echo e($ad->common_bath.' '.trans('app.common_bath')); ?> </li>
+                            <?php endif; ?>
+
+                            <?php if($ad->floor): ?>
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-building-o"></i> <?php echo e($ad->floor.' '.trans('app.floor')); ?> </li>
+                            <?php endif; ?>
+
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-briefcase"></i> <?php echo e(ucfirst($ad->purpose)); ?> </li>
+
+                            <?php if($ad->balcony): ?>
+                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-window-maximize"></i> <?php echo e($ad->balcony.' '.trans('app.belcony')); ?> </li>
+                            <?php endif; ?>
+                            <?php if($ad->dining_space): ?>
+                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-cutlery"></i> <?php echo e(trans('app.dining_space')); ?> </li>
+                            <?php endif; ?>
+                            <?php if($ad->living_room): ?>
+                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-folder-o"></i> <?php echo e(trans('app.living_room')); ?> </li>
+                            <?php endif; ?>
+
+                            <?php if($ad->price > 0): ?>
+                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-money"></i> <?php echo e(number_format($ad->price_per_unit) .get_option('currency_sign').'(M2)'); ?> </li>
+                            <?php endif; ?>
+
+                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-money"></i>
+                                <?php echo e(number_format($ad->price).get_option('currency_sign').'(Нийт)'); ?> <?php if($ad->purpose == 'rent'): ?> <?php echo app('translator')->getFromJson('app.per_month'); ?> <?php endif; ?>
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+
+                    </div>
+
+
+
+
+                    <h4 class="ads-detail-title"><?php echo app('translator')->getFromJson('app.description'); ?></h4>
+                    <p> <?php echo nl2br($ad->description); ?> </p>
+
+
+                    <?php if($enable_monetize): ?>
+                        <?php echo get_option('monetize_code_below_ad_description'); ?>
+
+                    <?php endif; ?>
+                </div>
+
+
+
+
+                <?php $amenities = unserialize($ad->amenities);  ?>
+                <?php if(is_array($amenities)): ?>
+                    <div class="ads-detail bg-white">
+
+                        <legend><?php echo app('translator')->getFromJson('app.indoor_amenities'); ?></legend>
+
+                        <div class="single-at-a-glance">
+                            <ul class="list-group ">
+                                <?php $__currentLoopData = $indore_ammenties; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in_ammenty): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if(array_key_exists($in_ammenty->id, $amenities)): ?>
+                                        <li class="list-group-item col-sm-4 col-xs-6">
+                                            <i class="fa fa-check-circle-o"></i> <?php echo e($in_ammenty->category_name); ?> </li>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <legend><?php echo app('translator')->getFromJson('app.outdoor_amenities'); ?></legend>
+                        <div class="single-at-a-glance">
+                            <ul class="list-group ">
+                                <?php $__currentLoopData = $outdoor_ammenties; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $out_ammenty): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if(array_key_exists($out_ammenty->id, $amenities)): ?>
+                                        <li class="list-group-item col-sm-4 col-xs-6">
+                                            <i class="fa fa-check-circle-o"></i> <?php echo e($out_ammenty->category_name); ?> </li>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                <?php endif; ?>
+
+                <?php $ad_distances = unserialize($ad->distances)  ?>
+                <?php if(is_array($ad_distances)): ?>
+                    <div class="ads-detail bg-white">
+
+                        <legend><?php echo app('translator')->getFromJson('app.distances'); ?></legend>
+
+                        <div class="single-at-a-glance">
+                            <ul class="list-group ">
+                                <?php $__currentLoopData = $distances; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $golbal_distance): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if(array_key_exists($golbal_distance->id, $ad_distances)): ?>
+                                        <?php if($ad_distances[$golbal_distance['id']] > 0): ?>
+                                            <li class="list-group-item col-sm-4 col-xs-6">
+                                                <i class="fa fa-road"></i> <?php echo e($golbal_distance->brand_name); ?> => <?php echo e(themeqx_distance_measure($ad_distances[$golbal_distance->id])); ?> </li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+
+                <div class="ads-detail bg-white">
+
+                    <legend><?php echo app('translator')->getFromJson('app.map'); ?></legend>
+                    <div id="dvMap" style="width: 100%; height: 400px; margin: 20px 0;"></div>
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-4 col-xs-12">
+                <div class="sidebar-widget">
+
+                    <h3><?php echo app('translator')->getFromJson('app.seller_info'); ?></h3>
+                    <div class="sidebar-user-info">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img src="<?php echo e($ad->user->get_gravatar()); ?>" class="img-circle img-responsive" />
+                            </div>
+                            <div class="col-xs-9">
+                                <h5><?php echo e($ad->user->name); ?></h5>
+                                <p class="text-muted"><i class="fa fa-map-marker"></i> <?php echo e($ad->user->get_address()); ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-user-link">
+                        <button class="btn btn-block" id="onClickShowPhone">
+                            <strong> <span id="ShowPhoneWrap"></span> </strong> <br />
+                            <span class="text-muted"><?php echo app('translator')->getFromJson('app.click_to_show_phone_number'); ?></span>
+                        </button>
+
+                        <?php if($ad->user->email): ?>
+                            <button class="btn btn-block" data-toggle="modal" data-target="#replyByEmail">
+                                <i class="fa fa-envelope-o"> <?php echo app('translator')->getFromJson('app.reply_by_email'); ?></i>
+                            </button>
+                        <?php endif; ?>
+
+                        <ul class="ad-action-list">
+                            <li><a href="<?php echo e(route('listing', ['user_id'=>$ad->user_id])); ?>"><i class="fa fa-user"></i> <?php echo app('translator')->getFromJson('app.more_ads_by_this_seller'); ?></a></li>
+                            <li><a href="javascript:;" id="save_as_favorite" data-slug="<?php echo e($ad->slug); ?>">
+                                    <?php if( ! $ad->is_my_favorite()): ?>
+                                        <i class="fa fa-star-o"></i> <?php echo app('translator')->getFromJson('app.save_ad_as_favorite'); ?>
+                                    <?php else: ?>
+                                        <i class="fa fa-star"></i> <?php echo app('translator')->getFromJson('app.remove_from_favorite'); ?>
+                                    <?php endif; ?>
+                                </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#reportAdModal"><i class="fa fa-ban"></i> <?php echo app('translator')->getFromJson('app.report_this_ad'); ?></a></li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="sidebar-widget">
+
+                    <h3><?php echo app('translator')->getFromJson('app.feature_agents'); ?></h3>
+                    <?php $__currentLoopData = $agents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="sidebar-feature-agents">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a href="<?php echo e(route('listing', ['user_id'=>$agent->id])); ?>">
+                                        <img src="<?php echo e($agent->get_gravatar()); ?>" class="img-circle img-responsive" /> </a>
+                                </div>
+                                <div class="col-xs-9">
+                                    <a href="<?php echo e(route('listing', ['user_id'=>$agent->id])); ?>">
+                                        <h5><?php echo e($agent->name); ?></h5>
+                                        <p class="text-muted"><i class="fa fa-map-marker"></i> <?php echo e($agent->get_address()); ?></p>
+                                        <p class="text-muted"><i class="fa fa-building-o"></i> <?php echo e($agent->ads->count()); ?> <?php echo app('translator')->getFromJson('app.estates'); ?>
+                                            <?php if($agent->phone): ?>, <i class="fa fa-phone"></i> <?php echo e($agent->phone); ?> <?php endif; ?>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <?php if($related_ads->count() > 0 && get_option('enable_related_ads') == 1): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php if($enable_monetize): ?>
+                        <?php echo get_option('monetize_code_below_ad_description'); ?>
+
+                    <?php endif; ?>
+                    <div class="carousel-header">
+                        <h4><a href="<?php echo e(route('listing')); ?>">
+                                <?php echo app('translator')->getFromJson('app.more_ads_from_this_agent'); ?>
+                            </a>
+                        </h4>
+                    </div>
+                    <hr />
+                    <div class="themeqx_new_regular_ads_wrap themeqx-carousel-ads">
+                        <?php $__currentLoopData = $related_ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div>
+                                <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-<?php echo e($rad->price_plan); ?>">
+                                    <div class="ads-thumbnail">
+                                        <a href="<?php echo e(route('single_ad', $rad->slug)); ?>">
+                                            <img itemprop="image"  src="<?php echo e(media_url($rad->feature_img)); ?>" class="img-responsive" alt="<?php echo e($rad->title); ?>">
+                                             <span class="modern-img-indicator">
+                                                <?php if(! empty($rad->video_url)): ?>
+                                                     <i class="fa fa-file-video-o"></i>
+                                                 <?php else: ?>
+                                                     <i class="fa fa-file-image-o"> <?php echo e($rad->media_img->count()); ?></i>
+                                                 <?php endif; ?>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption">
+                                        <h4><a href="<?php echo e(route('single_ad', $rad->slug)); ?>" title="<?php echo e($rad->title); ?>"><span itemprop="name"><?php echo e(str_limit($rad->title, 40)); ?> </span></a></h4>
+                                        <?php if($rad->category): ?>
+                                            <a class="price text-muted" href="<?php echo e(route('listing', ['category' => $rad->category->id])); ?>"> <i class="fa fa-folder-o"></i> <?php echo e($rad->category->category_name); ?> </a>
+                                        <?php endif; ?>
+
+                                        <?php if($rad->city): ?>
+                                            <a class="location text-muted" href="<?php echo e(route('listing', ['city' => $rad->city->id])); ?>"> <i class="fa fa-location-arrow"></i> <?php echo e($rad->city->city_name); ?> </a>
+                                        <?php endif; ?>
+                                        <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> <?php echo e($rad->created_at->diffForHumans()); ?></p>
+                                        <p class="price"> <span itemprop="price" content="<?php echo e($rad->price); ?>"> <?php echo e(themeqx_price_ng($rad)); ?> </span></p>
+                                        <link itemprop="availability" href="http://schema.org/InStock" />
+                                    </div>
+
+                                    <?php if($rad->price_plan == 'premium'): ?>
+                                        <div class="ribbon-wrapper-green"><div class="ribbon-green"><?php echo e(ucfirst($rad->price_plan)); ?></div></div>
+                                    <?php endif; ?>
+                                    <?php if($rad->mark_ad_urgent == '1'): ?>
+                                        <div class="ribbon-wrapper-red"><div class="ribbon-red"><?php echo app('translator')->getFromJson('app.urgent'); ?></div></div>
+                                    <?php endif; ?>
+
+
+                                </div>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div> <!-- themeqx_new_premium_ads_wrap -->
+                </div>
+
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div class="modal fade" id="reportAdModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><?php echo app('translator')->getFromJson('app.report_ad_title'); ?></h4>
+                </div>
+                <div class="modal-body">
+
+                    <p><?php echo app('translator')->getFromJson('app.report_ad_description'); ?></p>
+
+                    <form>
+
+                        <div class="form-group">
+                            <label class="control-label"><?php echo app('translator')->getFromJson('app.reason'); ?>:</label>
+                            <select class="form-control" name="reason">
+                                <option value=""><?php echo app('translator')->getFromJson('app.select_a_reason'); ?></option>
+                                <option value="unavailable"><?php echo app('translator')->getFromJson('app.item_sold_unavailable'); ?></option>
+                                <option value="fraud"><?php echo app('translator')->getFromJson('app.fraud'); ?></option>
+                                <option value="duplicate"><?php echo app('translator')->getFromJson('app.duplicate'); ?></option>
+                                <option value="spam"><?php echo app('translator')->getFromJson('app.spam'); ?></option>
+                                <option value="wrong_category"><?php echo app('translator')->getFromJson('app.wrong_category'); ?></option>
+                                <option value="offensive"><?php echo app('translator')->getFromJson('app.offensive'); ?></option>
+                                <option value="other"><?php echo app('translator')->getFromJson('app.other'); ?></option>
+                            </select>
+
+                            <div id="reason_info"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="control-label"><?php echo app('translator')->getFromJson('app.email'); ?>:</label>
+                            <input type="text" class="form-control" id="email" name="email">
+                            <div id="email_info"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label"><?php echo app('translator')->getFromJson('app.message'); ?>:</label>
+                            <textarea class="form-control" id="message" name="message"></textarea>
+                            <div id="message_info"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo app('translator')->getFromJson('app.close'); ?></button>
+                    <button type="button" class="btn btn-primary" id="report_ad"><?php echo app('translator')->getFromJson('app.report_ad'); ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="replyByEmail" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+
+                <?php echo Form::open(['id' => 'replyByEmailForm']); ?>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name" class="control-label"><?php echo app('translator')->getFromJson('app.name'); ?>:</label>
+                        <input type="text" class="form-control" id="name" name="name" data-validation="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="control-label"><?php echo app('translator')->getFromJson('app.email'); ?>:</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number" class="control-label"><?php echo app('translator')->getFromJson('app.phone_number'); ?>:</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="control-label"><?php echo app('translator')->getFromJson('app.message'); ?>:</label>
+                        <textarea class="form-control" id="message" name="message"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="ad_id" value="<?php echo e($ad->id); ?>" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo app('translator')->getFromJson('app.close'); ?></button>
+                    <button type="submit" class="btn btn-primary" id="reply_by_email_btn"><?php echo app('translator')->getFromJson('app.send_email'); ?></button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="shareEmbedded" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><?php echo app('translator')->getFromJson('app.embedded_preview'); ?></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="embedded_width" class="control-label"><?php echo app('translator')->getFromJson('app.embedded_width'); ?>:</label>
+                                <input type="number" class="form-control" id="embedded_width" name="embedded_width" value="300" placeholder="<?php echo app('translator')->getFromJson('app.embedded_width'); ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="embedded_height" class="control-label"><?php echo app('translator')->getFromJson('app.embedded_height'); ?>:</label>
+                            <input type="number" class="form-control" id="embedded_height" name="embedded_height" value="460" placeholder="<?php echo app('translator')->getFromJson('app.embedded_width'); ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="control-label"><?php echo app('translator')->getFromJson('app.embedded_code'); ?>:</label>
+                        <textarea class="form-control" readonly id="embedded_code"><?php echo e('<iframe src="'.route('embedded_ad', $ad->slug).'" style="border:0;width:300px;height:460px;"></iframe>'); ?></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <iframe src="<?php echo e(route('embedded_ad', $ad->slug)); ?>" style="border:0;width:300px;height:460px;"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-js'); ?>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo e(get_option('google_map_api_key')); ?>&libraries=places&callback=initMap" async defer></script>
+    <script type="text/javascript">
+        function initMap() {
+            var myLatLng = {lat: <?php echo e($ad->latitude); ?>, lng: <?php echo e($ad->longitude); ?> };
+
+            var map = new google.maps.Map(document.getElementById('dvMap'), {
+                center: myLatLng,
+                zoom: 15
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: '<?php echo e($ad->title); ?>'
+            });
+            marker.setMap(map);
+        }
+
+    </script>
+
+    <script src="<?php echo e(asset('assets/plugins/fotorama-4.6.4/fotorama.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/SocialShare/SocialShare.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/owl.carousel/owl.carousel.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/form-validator/form-validator.min.js')); ?>"></script>
+
+    <script>
+        $('.share').ShareLink({
+            title: '<?php echo e($ad->title); ?>', // title for share message
+            text: '<?php echo e(substr(trim(preg_replace('/\s\s+/', ' ',strip_tags($ad->description) )),0,160)); ?>', // text for share message
+
+            <?php if($ad->media_img->first()): ?>
+            image: '<?php echo e(media_url($ad->media_img->first(), true)); ?>', // optional image for share message (not for all networks)
+            <?php else: ?>
+            image: '<?php echo e(asset('uploads/placeholder.png')); ?>', // optional image for share message (not for all networks)
+            <?php endif; ?>
+            url: '<?php echo e(route('single_ad', $ad->slug)); ?>', // link on shared page
+            class_prefix: 's_', // optional class prefix for share elements (buttons or links or everything), default: 's_'
+            width: 640, // optional popup initial width
+            height: 480 // optional popup initial height
+        })
+    </script>
+    <script>
+        $.validate();
+    </script>
+    <script>
+        $(document).ready(function(){
+            $(".themeqx_new_regular_ads_wrap").owlCarousel({
+                loop:true,
+                margin:10,
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:true
+                    },
+                    600:{
+                        items:3,
+                        nav:false
+                    },
+                    1000:{
+                        items:4,
+                        nav:true,
+                        loop:false
+                    }
+                },
+                navText : ['<i class="fa fa-arrow-circle-o-left"></i>','<i class="fa fa-arrow-circle-o-right"></i>']
+            });
+        });
+    </script>
+    <script>
+        $(function(){
+            $('#onClickShowPhone').click(function(){
+                $('#ShowPhoneWrap').html('<i class="fa fa-phone"></i> <?php echo e($ad->seller_phone); ?>');
+            });
+
+            $('#save_as_favorite').click(function(){
+                var selector = $(this);
+                var slug = selector.data('slug');
+
+                $.ajax({
+                    type : 'POST',
+                    url : '<?php echo e(route('save_ad_as_favorite')); ?>',
+                    data : { slug : slug, action: 'add',  _token : '<?php echo e(csrf_token()); ?>' },
+                    success : function (data) {
+                        if (data.status == 1){
+                            selector.html(data.msg);
+                        }else {
+                            if (data.redirect_url){
+                                location.href= data.redirect_url;
+                            }
+                        }
+                    }
+                });
+            });
+
+            $('button#report_ad').click(function(){
+                var reason = $('[name="reason"]').val();
+                var email = $('[name="email"]').val();
+                var message = $('[name="message"]').val();
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+                var error = 0;
+                if(reason.length < 1){
+                    $('#reason_info').html('<p class="text-danger">Reason required</p>');
+                    error++;
+                }else {
+                    $('#reason_info').html('');
+                }
+                if(email.length < 1){
+                    $('#email_info').html('<p class="text-danger">Email required</p>');
+                    error++;
+                }else {
+                    if ( ! regex.test(email)){
+                        $('#email_info').html('<p class="text-danger">Valid email required</p>');
+                        error++;
+                    }else {
+                        $('#email_info').html('');
+                    }
+                }
+                if(message.length < 1){
+                    $('#message_info').html('<p class="text-danger">Message required</p>');
+                    error++;
+                }else {
+                    $('#message_info').html('');
+                }
+
+                if (error < 1){
+                    $('#loadingOverlay').show();
+                    $.ajax({
+                        type : 'POST',
+                        url : '<?php echo e(route('report_ads_pos')); ?>',
+                        data : { reason : reason, email: email,message:message, slug:'<?php echo e($ad->slug); ?>',  _token : '<?php echo e(csrf_token()); ?>' },
+                        success : function (data) {
+                            if (data.status == 1){
+                                toastr.success(data.msg, '<?php echo app('translator')->getFromJson('app.success'); ?>', toastr_options);
+                            }else {
+                                toastr.error(data.msg, '<?php echo app('translator')->getFromJson('app.error'); ?>', toastr_options);
+                            }
+                            $('#reportAdModal').modal('hide');
+                            $('#loadingOverlay').hide();
+                        }
+                    });
+                }
+            });
+
+            $('#replyByEmailForm').submit(function(e){
+                e.preventDefault();
+                var reply_email_form_data = $(this).serialize();
+
+                $('#loadingOverlay').show();
+                $.ajax({
+                    type : 'POST',
+                    url : '<?php echo e(route('reply_by_email_post')); ?>',
+                    data : reply_email_form_data,
+                    success : function (data) {
+                        if (data.status == 1){
+                            toastr.success(data.msg, '<?php echo app('translator')->getFromJson('app.success'); ?>', toastr_options);
+                        }else {
+                            toastr.error(data.msg, '<?php echo app('translator')->getFromJson('app.error'); ?>', toastr_options);
+                        }
+                        $('#replyByEmail').modal('hide');
+                        $('#loadingOverlay').hide();
+                    }
+                });
+            });
+
+            $(document).on('change past keyup', '#embedded_width', function(){
+                var width = $(this).val();
+                var height = $('#embedded_height').val();
+                $('iframe').css('width', width+'px');
+
+                var iframe_code = '<iframe src="http://localhost/real-estate/source/embedded/2-beds-nice-apertment-in-ny-united-states" style="border:0;width:'+width+'px;height:'+height+'px;"></iframe> ';
+
+                $('#embedded_code').val(iframe_code);
+            });
+            $(document).on('change past keyup', '#embedded_height', function(){
+                var height = $(this).val();
+                var width = $('#embedded_width').val();
+                $('iframe').css('height', height+'px');
+
+                var iframe_code = '<iframe src="http://localhost/real-estate/source/embedded/2-beds-nice-apertment-in-ny-united-states" style="border:0;width:'+width+'px;height:'+height+'px;"></iframe> ';
+
+                $('#embedded_code').val(iframe_code);
+            });
+
+        });
+    </script>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

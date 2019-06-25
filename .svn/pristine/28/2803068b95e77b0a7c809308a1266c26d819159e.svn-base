@@ -1,0 +1,95 @@
+
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="<?php echo e(route('dashboard')); ?>"><i class="fa fa-dashboard fa-fw"></i> <?php echo app('translator')->getFromJson('app.dashboard'); ?></a>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-bullhorn"></i> <?php echo app('translator')->getFromJson('app.my_ads'); ?><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>  <a href="<?php echo e(route('my_ads')); ?>"><?php echo app('translator')->getFromJson('app.my_ads'); ?></a> </li>
+                    <li>  <a href="<?php echo e(route('create_ad')); ?>"><?php echo app('translator')->getFromJson('app.post_an_ad'); ?></a> </li>
+                    <li>  <a href="<?php echo e(route('pending_ads')); ?>"><?php echo app('translator')->getFromJson('app.pending_for_approval'); ?></a> </li>
+                    <li>  <a href="<?php echo e(route('favorite_ads')); ?>"><?php echo app('translator')->getFromJson('app.favourite_ads'); ?></a> </li>
+                </ul>
+            </li>
+
+            <?php if($lUser->is_admin()): ?>
+
+            <li> <a href="<?php echo e(route('parent_categories')); ?>"><i class="fa fa-list"></i> <?php echo app('translator')->getFromJson('app.categories'); ?></a>  </li>
+            <li> <a href="<?php echo e(route('admin_brands')); ?>"><i class="fa fa-adjust"></i> <?php echo app('translator')->getFromJson('app.brands'); ?></a>  </li>
+            <li>
+                <a href="#"><i class="fa fa-bullhorn"></i> <?php echo app('translator')->getFromJson('app.ads'); ?><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>  <a href="<?php echo e(route('approved_ads')); ?>"><?php echo app('translator')->getFromJson('app.approved_ads'); ?></a> </li>
+                    <li>  <a href="<?php echo e(route('admin_pending_ads')); ?>"><?php echo app('translator')->getFromJson('app.pending_for_approval'); ?></a> </li>
+                    <li>  <a href="<?php echo e(route('admin_blocked_ads')); ?>"><?php echo app('translator')->getFromJson('app.blocked_ads'); ?></a> </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-rss-square"></i> <?php echo app('translator')->getFromJson('app.blog'); ?><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>  <a href="<?php echo e(route('posts')); ?>"><?php echo app('translator')->getFromJson('app.posts'); ?></a> </li>
+                    <li>  <a href="<?php echo e(route('create_new_post')); ?>"><?php echo app('translator')->getFromJson('app.create_new_post'); ?></a> </li>
+                </ul>
+            </li>
+
+            <li> <a href="<?php echo e(route('pages')); ?>"><i class="fa fa-file-word-o"></i> <?php echo app('translator')->getFromJson('app.pages'); ?></a>  </li>
+            <li> <a href="<?php echo e(route('ad_reports')); ?>"><i class="fa fa-exclamation"></i> <?php echo app('translator')->getFromJson('app.ad_reports'); ?></a>  </li>
+            <li> <a href="<?php echo e(route('users')); ?>"><i class="fa fa-users"></i> <?php echo app('translator')->getFromJson('app.users'); ?></a>  </li>
+
+            <li>
+                <a href="#"><i class="fa fa-desktop fa-fw"></i> <?php echo app('translator')->getFromJson('app.appearance'); ?><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li> <a href="<?php echo e(route('theme_settings')); ?>"><?php echo app('translator')->getFromJson('app.theme_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('modern_theme_settings')); ?>"><?php echo app('translator')->getFromJson('app.modern_theme_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('social_url_settings')); ?>"><?php echo app('translator')->getFromJson('app.social_url'); ?></a> </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-map-marker"></i> <?php echo app('translator')->getFromJson('app.locations'); ?><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li> <a href="<?php echo e(route('country_list')); ?>"><?php echo app('translator')->getFromJson('app.countries'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('state_list')); ?>"><?php echo app('translator')->getFromJson('app.states'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('city_list')); ?>"><?php echo app('translator')->getFromJson('app.cities'); ?></a> </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+            <li> <a href="<?php echo e(route('contact_messages')); ?>"><i class="fa fa-envelope-o"></i> <?php echo app('translator')->getFromJson('app.contact_messages'); ?></a>  </li>
+            <li> <a href="<?php echo e(route('monetization')); ?>"><i class="fa fa-dollar"></i> <?php echo app('translator')->getFromJson('app.monetization'); ?></a>  </li>
+
+            <li>
+                <a href="#"><i class="fa fa-wrench fa-fw"></i> <?php echo app('translator')->getFromJson('app.settings'); ?><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li> <a href="<?php echo e(route('general_settings')); ?>"><?php echo app('translator')->getFromJson('app.general_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('ad_settings')); ?>"><?php echo app('translator')->getFromJson('app.ad_settings_and_pricing'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('payment_settings')); ?>"><?php echo app('translator')->getFromJson('app.payment_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('language_settings')); ?>"><?php echo app('translator')->getFromJson('app.language_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('file_storage_settings')); ?>"><?php echo app('translator')->getFromJson('app.file_storage_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('social_settings')); ?>"><?php echo app('translator')->getFromJson('app.social_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('blog_settings')); ?>"><?php echo app('translator')->getFromJson('app.blog_settings'); ?></a> </li>
+                    <li> <a href="<?php echo e(route('other_settings')); ?>"><?php echo app('translator')->getFromJson('app.other_settings'); ?></a> </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+                <li> <a href="<?php echo e(route('administrators')); ?>"><i class="fa fa-users"></i> <?php echo app('translator')->getFromJson('app.administrators'); ?></a>  </li>
+
+
+            <?php endif; ?>
+
+            <li> <a href="<?php echo e(route('payments')); ?>"><i class="fa fa-money"></i> <?php echo app('translator')->getFromJson('app.payments'); ?></a>  </li>
+            <li> <a href="<?php echo e(route('profile')); ?>"><i class="fa fa-user"></i> <?php echo app('translator')->getFromJson('app.profile'); ?></a>  </li>
+            <li> <a href="<?php echo e(route('change_password')); ?>"><i class="fa fa-lock"></i> <?php echo app('translator')->getFromJson('app.change_password'); ?></a>  </li>
+
+
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>

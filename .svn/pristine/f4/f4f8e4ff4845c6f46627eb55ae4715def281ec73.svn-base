@@ -1,0 +1,146 @@
+<?php $__env->startSection('title'); ?> <?php if( ! empty($title)): ?> <?php echo e($title); ?> | <?php endif; ?> ##parent-placeholder-3c6de1b7dd91465d437ef415f94f36afc1fbc8a8## <?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('main'); ?>
+
+    <div class="container">
+
+        <div id="wrapper">
+
+            <?php echo $__env->make('admin.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+            <div id="page-wrapper">
+                <?php if( ! empty($title)): ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header"> <?php echo e($title); ?>  </h1>
+                        </div> <!-- /.col-lg-12 -->
+                    </div> <!-- /.row -->
+                <?php endif; ?>
+
+                <?php echo $__env->make('admin.flash_msg', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-1 col-xs-12">
+
+                        <?php echo e(Form::open(['class' => 'form-horizontal'])); ?>
+
+
+
+                        <div class="form-group">
+                            <label for="category_type" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.categories_type'); ?></label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2icon" name="category_type">
+                                    <option value="indoor"><?php echo app('translator')->getFromJson('app.indoor'); ?></option>
+                                    <option value="outdoor"><?php echo app('translator')->getFromJson('app.outdoor'); ?></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group <?php echo e($errors->has('category_name')? 'has-error':''); ?>">
+                            <label for="category_name" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.category_name'); ?></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="category_name" value="<?php echo e(old('category_name')); ?>" name="category_name" placeholder="<?php echo app('translator')->getFromJson('app.category_name'); ?>">
+                                <?php echo $errors->has('category_name')? '<p class="help-block">'.$errors->first('category_name').'</p>':''; ?>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="`color_class" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.select_color'); ?></label>
+                            <div class="col-sm-8">
+                                <input type="color" name="color_class" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group <?php echo e($errors->has('description')? 'has-error':''); ?>">
+                            <label for="description" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.description'); ?></label>
+                            <div class="col-sm-8">
+                                <textarea name="description" id="description" class="form-control" rows="6"><?php echo e(old('description')); ?></textarea>
+                                <?php echo $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':''; ?>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-primary"><?php echo app('translator')->getFromJson('app.save_new_category'); ?></button>
+                            </div>
+                        </div>
+                        <?php echo e(Form::close()); ?>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th><?php echo app('translator')->getFromJson('app.category_name'); ?> (<?php echo app('translator')->getFromJson('app.total_products'); ?>) </th>
+                            </tr>
+                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr>
+                                    <td>
+                                        <div class="clearfix">
+                                            <strong><span style="color: <?php echo e($category->color_class); ?>"><?php echo e($category->category_name); ?></span> </strong>
+
+                                            <span class="pull-right">
+
+                                            <a href="<?php echo e(route('edit_categories', $category->id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
+                                            <a href="javascript:;" class="btn btn-danger btn-xs" data-id="<?php echo e($category->id); ?>"><i class="fa fa-trash"></i> </a>
+                                            </span>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+            </div>   <!-- /#page-wrapper -->
+
+
+
+
+        </div>   <!-- /#wrapper -->
+
+
+    </div> <!-- /#container -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-js'); ?>
+    <script>
+        $(document).ready(function() {
+            $('.btn-danger').on('click', function (e) {
+                if (!confirm("Are you sure? its can't be undone")) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                var selector = $(this);
+                var data_id = $(this).data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo e(route('delete_categories')); ?>',
+                    data: {data_id: data_id, _token: '<?php echo e(csrf_token()); ?>'},
+                    success: function (data) {
+                        if (data.success == 1) {
+                            selector.closest('div').hide('slow');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

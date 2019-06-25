@@ -1,0 +1,4 @@
+Name : <?php echo e($data['name']); ?> <br />
+Email : <?php echo e($data['email']); ?> <br />
+Phone Number : <?php echo e($data['phone_number']); ?> <br />
+Message : <?php echo $data['message']; ?><br />

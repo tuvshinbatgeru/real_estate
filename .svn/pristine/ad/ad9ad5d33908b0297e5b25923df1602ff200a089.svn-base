@@ -1,0 +1,71 @@
+<?php $__env->startSection('title'); ?> <?php if( ! empty($title)): ?> <?php echo e($title); ?> | <?php endif; ?> ##parent-placeholder-3c6de1b7dd91465d437ef415f94f36afc1fbc8a8## <?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('main'); ?>
+
+    <div class="container">
+
+        <div id="wrapper">
+
+            <?php echo $__env->make('admin.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+            <div id="page-wrapper">
+                <?php if( ! empty($title)): ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header"> <?php echo e($title); ?>  </h1>
+                        </div> <!-- /.col-lg-12 -->
+                    </div> <!-- /.row -->
+                <?php endif; ?>
+
+                <?php echo $__env->make('admin.flash_msg', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-1 col-xs-12">
+
+                        <div class="alert alert-warning">
+                            <?php echo app('translator')->getFromJson('app.brand_edit_page_warning_msg'); ?> <br />
+                            <?php echo app('translator')->getFromJson('app.current_slug'); ?> : <strong><?php echo e($edit_brand->brand_slug); ?></strong>
+                        </div>
+
+
+                        <?php echo e(Form::open(['class' => 'form-horizontal'])); ?>
+
+
+
+                        <div class="form-group <?php echo e($errors->has('brand_name')? 'has-error':''); ?>">
+                            <label for="brand_name" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.brand_name'); ?></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="brand_name" value="<?php echo e(old('brand_name')? old('brand_name') : $edit_brand->brand_name); ?>" name="brand_name" placeholder="<?php echo app('translator')->getFromJson('app.brand_name'); ?>">
+                                <?php echo $errors->has('brand_name')? '<p class="help-block">'.$errors->first('brand_name').'</p>':''; ?>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-primary"><?php echo app('translator')->getFromJson('app.edit_brand'); ?></button>
+                            </div>
+                        </div>
+                        <?php echo e(Form::close()); ?>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>   <!-- /#page-wrapper -->
+
+
+
+
+        </div>   <!-- /#wrapper -->
+
+
+    </div> <!-- /#container -->
+<?php $__env->stopSection(); ?>
+
+
+
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

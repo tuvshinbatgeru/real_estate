@@ -1,0 +1,173 @@
+<?php $__env->startSection('title'); ?> Register | ##parent-placeholder-3c6de1b7dd91465d437ef415f94f36afc1fbc8a8## <?php $__env->stopSection(); ?>
+<?php $__env->startSection('main'); ?>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-4 col-sm-4 col-xs-12">
+                <div class="info-box bg-white ">
+                    <h4><i class="fa fa-edit"></i> </h4>
+                    <p class="intro"> View, edit and delete your ads. </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="info-box bg-white ">
+                    <h4><i class="fa fa-clock-o"></i> </h4>
+                    <p class="intro"> Quick publish new ads with contact details. </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="info-box bg-white ">
+                    <h4><i class="fa fa-bar-chart-o"></i> </h4>
+                    <p class="intro"> Keep track of your favorite ads. </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+
+                <div class="login">
+                    <h3 class="authTitle">Sign up or <a href="<?php echo e(route('login')); ?>"><?php echo app('translator')->getFromJson('app.login'); ?></a></h3>
+
+
+                    <?php if(session('error')): ?>
+                        <div class="alert alert-danger">
+                            <?php echo e(session('error')); ?>
+
+                        </div>
+                    <?php endif; ?>
+
+                    <?php echo e(Form::open(['route'=>'user.store', 'role'=> 'form'])); ?>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group <?php echo e($errors->has('first_name')? 'has-error':''); ?> ">
+                                <input type="text" name="first_name" id="first_name" class="form-control" value="<?php echo e(old('first_name')); ?>" placeholder="First Name" tabindex="1">
+
+                                <?php echo $errors->has('first_name')? '<p class="help-block">'.$errors->first('first_name').'</p>':''; ?>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group <?php echo e($errors->has('last_name')? 'has-error':''); ?> ">
+                                <input type="text" name="last_name" id="last_name" class="form-control"  value="<?php echo e(old('last_name')); ?>" placeholder="Last Name" tabindex="2">
+                                <?php echo $errors->has('last_name')? '<p class="help-block">'.$errors->first('last_name').'</p>':''; ?>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group <?php echo e($errors->has('email')? 'has-error':''); ?> ">
+                        <input type="email" name="email" id="email" class="form-control" value="<?php echo e(old('email')); ?>" placeholder="Email Address" tabindex="4">
+                        <?php echo $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':''; ?>
+
+
+                    </div>
+
+                    <div class="form-group <?php echo e($errors->has('phone')? 'has-error':''); ?>">
+                        <input type="text" name="phone" id="phone" class="form-control" value="<?php echo e(old('phone')); ?>" placeholder="Phone Number" tabindex="3">
+                        <?php echo $errors->has('phone')? '<p class="help-block">'.$errors->first('phone').'</p>':''; ?>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group <?php echo e($errors->has('gender')? 'has-error':''); ?>">
+                                <select id="gender" name="gender" class="form-control select2">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Fe-Male</option>
+                                    <option value="third_gender">Third Gender</option>
+                                </select>
+                                <?php echo $errors->has('gender')? '<p class="help-block">'.$errors->first('gender').'</p>':''; ?>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group <?php echo e($errors->has('country')? 'has-error':''); ?>">
+                                <select id="country" name="country" class="form-control select2">
+                                    <option value=""><?php echo app('translator')->getFromJson('app.select_a_country'); ?></option>
+                                    <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($country->id); ?>" <?php echo e(old('country') == $country->id ? 'selected' :''); ?>><?php echo e($country->country_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <?php echo $errors->has('country')? '<p class="help-block">'.$errors->first('country').'</p>':''; ?>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group <?php echo e($errors->has('password')? 'has-error':''); ?>">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" tabindex="5">
+                                <?php echo $errors->has('password')? '<p class="help-block">'.$errors->first('password').'</p>':''; ?>
+
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group <?php echo e($errors->has('password_confirmation')? 'has-error':''); ?>">
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm Password" tabindex="6">
+                                <?php echo $errors->has('password_confirmation')? '<p class="help-block">'.$errors->first('password_confirmation').'</p>':''; ?>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  <?php echo e($errors->has('password')? 'has-error':''); ?>">
+                        <div class="col-xs-4 col-sm-3 col-md-3">
+					<span class="button-checkbox">
+						<label><input type="checkbox" name="agree" value="1" /> I Agree </label>
+					</span>
+                        </div>
+                        <div class="col-xs-8 col-sm-9 col-md-9">
+                            By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="<?php echo e(route('single_page', 'terms-and-condition')); ?>" target="_blank">Terms and Conditions</a> set out by this site, including our Cookie Use.
+                        </div>
+
+                        <div class="col-sm-12">
+                            <?php echo $errors->has('password')? '<p class="help-block">You must agree with terms and condition</p>':''; ?>
+
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-xs-12"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                    </div>
+                    <?php echo e(Form::close()); ?>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-js'); ?>
+    <script>
+        $(document).ready(function() {
+            $('#phone').keyup(function(){
+                $(this).val($(this).val().replace(/[^0-9]/g,""));
+            });
+        });
+
+    </script>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/embedded.css')); ?>">
+
+
+<div class="embedded-item-thumbnail embedded-box-<?php echo e($ad->price_plan); ?>">
+
+    <h4 class="embedded-ad-title"><a href="<?php echo e(route('single_ad', $ad->slug)); ?>" title="<?php echo e($ad->title); ?>"><span itemprop="name"><?php echo e(str_limit($ad->title, 40)); ?> </span></a></h4>
+
+        <div class="embedded-ads-thumbnail">
+            <a href="<?php echo e(route('single_ad', $ad->slug)); ?>">
+                <img itemprop="image"  src="<?php echo e(media_url($ad->feature_img)); ?>" class="img-responsive" alt="<?php echo e($ad->title); ?>">
+
+                <?php if($ad->purpose): ?>
+                    <span class="modern-sale-rent-indicator">
+                        <?php echo e(ucfirst($ad->purpose)); ?>
+
+                    </span>
+                <?php endif; ?>
+
+                <span class="modern-img-indicator">
+                    <?php if(! empty($ad->video_url)): ?>
+                        <?php echo app('translator')->getFromJson('app.video'); ?>
+                    <?php else: ?>
+                        <?php echo app('translator')->getFromJson('app.img'); ?> <?php echo e($ad->media_img->count()); ?></i>
+                    <?php endif; ?>
+                </span>
+            </a>
+        </div>
+        <div class="caption">
+
+            <p class="price"> <?php echo e(themeqx_price_ng($ad)); ?></p>
+
+            <table class="table table-responsive property-box-info">
+
+                <?php if($ad->city): ?>
+                    <tr>
+                        <td> <?php echo e($ad->city->city_name); ?></td>
+                        <td>  <?php echo e($ad->created_at->diffForHumans()); ?> </td>
+                    </tr>
+                <?php endif; ?>
+
+                <tr>
+                    <td><?php echo e(ucfirst($ad->type)); ?> </td>
+                    <td> <?php echo e($ad->square_unit_space.' '.$ad->unit_type); ?></td>
+                </tr>
+
+                <?php if($ad->beds): ?>
+                    <tr>
+                        <td><?php echo e($ad->beds.' '.trans('app.bedrooms')); ?></td>
+                        <td> <?php echo e($ad->floor.' '.trans('app.floor')); ?> </td>
+                    </tr>
+                <?php endif; ?>
+
+            </table>
+
+            <a href="<?php echo e(route('single_ad', $ad->slug)); ?>" class="btn-details"><?php echo app('translator')->getFromJson('app.view_details'); ?></a>
+
+        </div>
+
+        <?php if($ad->price_plan == 'premium'): ?>
+            <div class="ribbon-wrapper-green"><div class="ribbon-green"><?php echo e(ucfirst($ad->price_plan)); ?></div></div>
+        <?php endif; ?>
+        <?php if($ad->mark_ad_urgent == '1'): ?>
+            <div class="ribbon-wrapper-red"><div class="ribbon-red"><?php echo app('translator')->getFromJson('app.urgent'); ?></div></div>
+        <?php endif; ?>
+    </div>

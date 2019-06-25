@@ -1,0 +1,102 @@
+<?php $__env->startSection('title'); ?> <?php if( ! empty($title)): ?> <?php echo e($title); ?> | <?php endif; ?> ##parent-placeholder-3c6de1b7dd91465d437ef415f94f36afc1fbc8a8## <?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('main'); ?>
+
+    <div class="container">
+
+        <div id="wrapper">
+
+            <?php echo $__env->make('admin.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+            <div id="page-wrapper">
+                <?php if( ! empty($title)): ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header"> <?php echo e($title); ?>  </h1>
+                        </div> <!-- /.col-lg-12 -->
+                    </div> <!-- /.row -->
+                <?php endif; ?>
+
+                <?php echo $__env->make('admin.flash_msg', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-1 col-xs-12">
+
+                        <?php echo e(Form::open(['class' => 'form-horizontal'])); ?>
+
+
+
+                        <div class="form-group">
+                            <label for="category_type" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.categories_type'); ?></label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2icon" name="category_type">
+                                    <option value="indoor" <?php if($edit_category->category_type =='indoor' ): ?> selected="selected" <?php endif; ?> ><?php echo app('translator')->getFromJson('app.indoor'); ?></option>
+                                    <option value="outdoor" <?php if($edit_category->category_type =='outdoor' ): ?> selected="selected" <?php endif; ?> ><?php echo app('translator')->getFromJson('app.outdoor'); ?></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group <?php echo e($errors->has('category_name')? 'has-error':''); ?>">
+                            <label for="category_name" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.category_name'); ?></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="category_name" value="<?php echo e(old('category_name') ? old('category_name') : $edit_category->category_name); ?>" name="category_name" placeholder="<?php echo app('translator')->getFromJson('app.category_name'); ?><">
+                                <?php echo $errors->has('category_name')? '<p class="help-block">'.$errors->first('category_name').'</p>':''; ?>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="`color_class" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.select_color'); ?></label>
+                            <div class="col-sm-8">
+                                <input type="color" name="color_class" class="form-control" value="<?php echo e($edit_category->color_class); ?>" />
+                            </div>
+                        </div>
+
+                        <div class="form-group <?php echo e($errors->has('description')? 'has-error':''); ?>">
+                            <label for="description" class="col-sm-4 control-label"><?php echo app('translator')->getFromJson('app.description'); ?></label>
+                            <div class="col-sm-8">
+                                <textarea name="description" id="description" class="form-control" rows="6"><?php echo e(old('description')? old('description') : $edit_category->description); ?></textarea>
+                                <?php echo $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':''; ?>
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-primary"><?php echo app('translator')->getFromJson('app.edit_category'); ?></button>
+                            </div>
+                        </div>
+                        <?php echo e(Form::close()); ?>
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>   <!-- /#page-wrapper -->
+
+
+
+
+        </div>   <!-- /#wrapper -->
+
+
+    </div> <!-- /#container -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-js'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

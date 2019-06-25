@@ -1,0 +1,513 @@
+<?php $__env->startSection('page-css'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/owl.carousel/assets/owl.carousel.css')); ?>">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('main'); ?>
+    <div class="modern-top-intoduce-section">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="modern-top-hom-cat-section">
+
+                        <div class="modern-home-search-bar-wrap">
+                            <div class="search-wrapper">
+                                <h3> <i class="fa fa-home"></i> <span style="color:white"> <?php echo app('translator')->getFromJson('app.find_your_property'); ?> </span></h3>
+
+                                <form class="form-inline" action="<?php echo e(route('listing')); ?>" method="get">
+                                    <div class="form-group">
+                                        <input type="text"  class="form-control" id="searchTerms" name="q" value="<?php echo e(request('q')); ?>" placeholder="<?php echo app('translator')->getFromJson('app.search___'); ?>" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control select2" name="country">
+                                            <option value=""><?php echo app('translator')->getFromJson('app.select_a_country'); ?></option>
+                                            <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($country->id); ?>" <?php echo e(request('country') == $country->id ? 'selected' :''); ?>><?php echo e($country->country_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control select2" id="state_select" name="state">
+                                            <option value=""> <?php echo app('translator')->getFromJson('app.select_state'); ?> </option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="btn theme-btn"> <i class="fa fa-search"></i> <?php echo app('translator')->getFromJson('app.search_property'); ?></button>
+                                </form>
+
+                                <div class="or-search"> OR </div>
+
+                                <a href="<?php echo e(route('listing')); ?>" class="btn btn-info btn-lg"><i class="fa fa-search-plus"></i> <?php echo app('translator')->getFromJson('app.try_advance_search'); ?></a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <?php if($enable_monetize): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php echo get_option('monetize_code_below_categories'); ?>
+
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if($urgent_ads->count() > 0): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="carousel-header">
+                        <h4><a href="<?php echo e(route('listing')); ?>">
+                                <?php echo app('translator')->getFromJson('app.new_urgent_ads'); ?>
+                            </a>
+                        </h4>
+                    </div>
+                    <hr />
+                    <div class="themeqx_new_regular_ads_wrap themeqx-carousel-ads">
+                        <?php $__currentLoopData = $urgent_ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div>
+                                <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-<?php echo e($ad->price_plan); ?>">
+                                    <div class="ads-thumbnail">
+                                        <a href="<?php echo e(route('single_ad', $ad->slug)); ?>">
+                                            <img itemprop="image"  src="<?php echo e(media_url($ad->feature_img)); ?>" class="img-responsive" alt="<?php echo e($ad->title); ?>">
+
+                                            <?php if($ad->purpose): ?>
+                                                <span class="modern-sale-rent-indicator">
+                                                    <?php echo e(ucfirst($ad->purpose)); ?>
+
+                                                </span>
+                                            <?php endif; ?>
+
+                                            <span class="modern-img-indicator">
+                                                <?php if(! empty($ad->video_url)): ?>
+                                                    <i class="fa fa-file-video-o"></i>
+                                                <?php else: ?>
+                                                    <i class="fa fa-file-image-o"> <?php echo e($ad->media_img->count()); ?></i>
+                                                <?php endif; ?>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption">
+                                        <h4><a href="<?php echo e(route('single_ad', $ad->slug)); ?>" title="<?php echo e($ad->title); ?>"><span itemprop="name"><?php echo e(str_limit($ad->title, 40)); ?> </span></a></h4>
+
+                                        <p class="price"> <span itemprop="price" content="<?php echo e($ad->price); ?>"> <?php echo e(themeqx_price_ng($ad)); ?> </span></p>
+
+                                        <table class="table table-responsive property-box-info">
+
+                                            <?php if($ad->city): ?>
+                                                <tr>
+                                                    <td> <a class="location text-muted" href="<?php echo e(route('listing', ['city' => $ad->city->id])); ?>"> <i class="fa fa-map-marker"></i> <?php echo e($ad->city->city_name); ?> </a>
+                                                    </td>
+                                                    <td> <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> <?php echo e($ad->created_at->diffForHumans()); ?></p> </td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                            <tr>
+                                                <td> <i class="fa fa-building"></i> <?php echo e(ucfirst($ad->type)); ?> </td>
+                                                <td><i class="fa fa-arrows-alt "></i>  <?php echo e($ad->square_unit_space.' '.$ad->unit_type); ?></td>
+                                            </tr>
+
+                                            <?php if($ad->beds): ?>
+                                                <tr>
+                                                    <td><i class="fa fa-bed"></i> <?php echo e($ad->beds.' '.trans('app.bedrooms')); ?></td>
+                                                    <td> <?php echo e($ad->floor.' '.trans('app.floor')); ?> </td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                        </table>
+
+                                    </div>
+
+                                    <?php if($ad->price_plan == 'premium'): ?>
+                                        <div class="ribbon-wrapper-green"><div class="ribbon-green"><?php echo e(ucfirst($ad->price_plan)); ?></div></div>
+                                    <?php endif; ?>
+                                    <?php if($ad->mark_ad_urgent == '1'): ?>
+                                        <div class="ribbon-wrapper-red"><div class="ribbon-red"><?php echo app('translator')->getFromJson('app.urgent'); ?></div></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div> <!-- themeqx_new_premium_ads_wrap -->
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if($premium_ads->count() > 0): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="carousel-header">
+                        <h4><a href="<?php echo e(route('listing')); ?>">
+                                <?php echo app('translator')->getFromJson('app.new_premium_ads'); ?>
+                            </a>
+                        </h4>
+                    </div>
+                    <hr />
+                    <div class="themeqx_new_regular_ads_wrap themeqx-carousel-ads">
+                        <?php $__currentLoopData = $premium_ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div>
+                                <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-<?php echo e($ad->price_plan); ?>">
+                                    <div class="ads-thumbnail">
+                                        <a href="<?php echo e(route('single_ad', $ad->slug)); ?>">
+                                            <img itemprop="image"  src="<?php echo e(media_url($ad->feature_img)); ?>" class="img-responsive" alt="<?php echo e($ad->title); ?>">
+
+                                            <?php if($ad->purpose): ?>
+                                                <span class="modern-sale-rent-indicator">
+                                                    <?php echo e(ucfirst($ad->purpose)); ?>
+
+                                                </span>
+                                            <?php endif; ?>
+
+                                            <span class="modern-img-indicator">
+                                                <?php if(! empty($ad->video_url)): ?>
+                                                    <i class="fa fa-file-video-o"></i>
+                                                <?php else: ?>
+                                                    <i class="fa fa-file-image-o"> <?php echo e($ad->media_img->count()); ?></i>
+                                                <?php endif; ?>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption">
+                                        <h4><a href="<?php echo e(route('single_ad', $ad->slug)); ?>" title="<?php echo e($ad->title); ?>"><span itemprop="name"><?php echo e(str_limit($ad->title, 40)); ?> </span></a></h4>
+
+                                        <p class="price"> <span itemprop="price" content="<?php echo e($ad->price); ?>"> <?php echo e(themeqx_price_ng($ad)); ?> </span></p>
+
+                                        <table class="table table-responsive property-box-info">
+
+                                            <?php if($ad->city): ?>
+                                                <tr>
+                                                    <td> <a class="location text-muted" href="<?php echo e(route('listing', ['city' => $ad->city->id])); ?>"> <i class="fa fa-map-marker"></i> <?php echo e($ad->city->city_name); ?> </a>
+                                                    </td>
+                                                    <td> <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> <?php echo e($ad->created_at->diffForHumans()); ?></p> </td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                            <tr>
+                                                <td> <i class="fa fa-building"></i> <?php echo e(ucfirst($ad->type)); ?> </td>
+                                                <td><i class="fa fa-arrows-alt "></i>  <?php echo e($ad->square_unit_space.' '.$ad->unit_type); ?></td>
+                                            </tr>
+
+                                            <?php if($ad->beds): ?>
+                                                <tr>
+                                                    <td><i class="fa fa-bed"></i> <?php echo e($ad->beds.' '.trans('app.bedrooms')); ?></td>
+                                                    <td> <?php echo e($ad->floor.' '.trans('app.floor')); ?> </td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                        </table>
+
+                                    </div>
+
+                                    <?php if($ad->price_plan == 'premium'): ?>
+                                        <div class="ribbon-wrapper-green"><div class="ribbon-green"><?php echo e(ucfirst($ad->price_plan)); ?></div></div>
+                                    <?php endif; ?>
+                                    <?php if($ad->mark_ad_urgent == '1'): ?>
+                                        <div class="ribbon-wrapper-red"><div class="ribbon-red"><?php echo app('translator')->getFromJson('app.urgent'); ?></div></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div> <!-- themeqx_new_premium_ads_wrap -->
+                </div>
+
+            </div>
+        </div>
+        <?php if($enable_monetize): ?>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?php echo get_option('monetize_code_below_premium_ads'); ?>
+
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if($regular_ads->count() > 0): ?>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12">
+
+                    <div class="carousel-header">
+                        <h4><a href="<?php echo e(route('listing')); ?>">
+                                <?php echo app('translator')->getFromJson('app.new_regular_ads'); ?>
+                            </a>
+                        </h4>
+                    </div>
+                    <hr />
+
+                    <div class="themeqx_new_premium_ads_wrap themeqx-carousel-ads">
+                        <?php $__currentLoopData = $regular_ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div>
+                                <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-<?php echo e($ad->price_plan); ?>">
+                                    <div class="ads-thumbnail">
+                                        <a href="<?php echo e(route('single_ad', $ad->slug)); ?>">
+                                            <img itemprop="image"  src="<?php echo e(media_url($ad->feature_img)); ?>" class="img-responsive" alt="<?php echo e($ad->title); ?>">
+
+                                            <?php if($ad->purpose): ?>
+                                                <span class="modern-sale-rent-indicator">
+                                                    <?php echo e(ucfirst($ad->purpose)); ?>
+
+                                                </span>
+                                            <?php endif; ?>
+
+                                            <span class="modern-img-indicator">
+                                                <?php if(! empty($ad->video_url)): ?>
+                                                    <i class="fa fa-file-video-o"></i>
+                                                <?php else: ?>
+                                                    <i class="fa fa-file-image-o"> <?php echo e($ad->media_img->count()); ?></i>
+                                                <?php endif; ?>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption">
+                                        <h4><a href="<?php echo e(route('single_ad', $ad->slug)); ?>" title="<?php echo e($ad->title); ?>"><span itemprop="name"><?php echo e(str_limit($ad->title, 40)); ?> </span></a></h4>
+
+                                        <p class="price"> <span itemprop="price" content="<?php echo e($ad->price); ?>"> <?php echo e(themeqx_price_ng($ad)); ?> </span></p>
+
+                                        <table class="table table-responsive property-box-info">
+
+                                            <?php if($ad->city): ?>
+                                                <tr>
+                                                    <td> <a class="location text-muted" href="<?php echo e(route('listing', ['city' => $ad->city->id])); ?>"> <i class="fa fa-map-marker"></i> <?php echo e($ad->city->city_name); ?> </a>
+                                                    </td>
+                                                    <td> <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> <?php echo e($ad->created_at->diffForHumans()); ?></p> </td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                            <tr>
+                                                <td> <i class="fa fa-building"></i> <?php echo e(ucfirst($ad->type)); ?> </td>
+                                                <td><i class="fa fa-arrows-alt "></i>  <?php echo e($ad->square_unit_space.' '.$ad->unit_type); ?></td>
+                                            </tr>
+
+                                            <?php if($ad->beds): ?>
+                                                <tr>
+                                                    <td><i class="fa fa-bed"></i> <?php echo e($ad->beds.' '.trans('app.bedrooms')); ?></td>
+                                                    <td> <?php echo e($ad->floor.' '.trans('app.floor')); ?> </td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                        </table>
+
+                                    </div>
+
+                                    <?php if($ad->price_plan == 'premium'): ?>
+                                        <div class="ribbon-wrapper-green"><div class="ribbon-green"><?php echo e(ucfirst($ad->price_plan)); ?></div></div>
+                                    <?php endif; ?>
+                                    <?php if($ad->mark_ad_urgent == '1'): ?>
+                                        <div class="ribbon-wrapper-red"><div class="ribbon-red"><?php echo app('translator')->getFromJson('app.urgent'); ?></div></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div> <!-- themeqx_new_premium_ads_wrap -->
+                </div>
+
+            </div>
+        </div>
+
+    <?php endif; ?>
+
+    <?php if($enable_monetize): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php echo get_option('monetize_code_below_regular_ads'); ?>
+
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if(get_option('show_latest_blog_in_homepage') ==1): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="carousel-header">
+                        <h4><a href="<?php echo e(route('blog')); ?>">
+                                <?php echo app('translator')->getFromJson('app.latest_post_from_blog'); ?>
+                            </a>
+                        </h4>
+                    </div>
+                    <hr />
+
+                    <div class="home-latest-blog themeqx-carousel-blog-post">
+                        <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div>
+                                <div class="image">
+                                    <a href="<?php echo e(route('blog_single', $post->slug)); ?>">
+                                        <?php if($post->feature_img): ?>
+                                            <img alt="<?php echo e($post->title); ?>" src="<?php echo e(media_url($post->feature_img)); ?>">
+                                        <?php else: ?>
+                                            <img  alt="<?php echo e($post->title); ?>" src="<?php echo e(asset('uploads/placeholder.png')); ?>">
+                                        <?php endif; ?>
+                                    </a>
+                                </div>
+
+                                <h2><a href="<?php echo e(route('blog_single', $post->slug)); ?>" class="blog-title"><?php echo e($post->title); ?></a></h2>
+
+                                <div class="blog-post-carousel-meta-info">
+                                    <?php if($post->author): ?>
+                                        <span class="pull-left"><a href="<?php echo e(route('author_blog_posts', $post->author->id)); ?>"><?php echo e($post->author->name); ?></a></span>
+                                    <?php endif; ?>
+                                    <span class="pull-right">
+                                        <i class="fa fa-calendar"></i> <?php echo e($post->created_at_datetime()); ?>
+
+                                    </span>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <p class="intro"> <?php echo e(str_limit(strip_tags($post->post_content), 80)); ?></p>
+                                <a class="btn btn-default" href="<?php echo e(route('blog_single', $post->slug)); ?>" ><?php echo app('translator')->getFromJson('app.continue_reading'); ?>  <i class="fa fa-external-link"></i> </a>
+
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-js'); ?>
+    <script src="<?php echo e(asset('assets/plugins/owl.carousel/owl.carousel.min.js')); ?>"></script>
+    <script>
+        $(document).ready(function(){
+            $(".themeqx_new_premium_ads_wrap").owlCarousel({
+                loop: true,
+                autoplay:true,
+                autoplayTimeout:3000,
+                margin:10,
+                autoplayHoverPause : true,
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:true,
+                        loop:true
+                    },
+                    600:{
+                        items:3,
+                        nav:false,
+                        loop:true
+                    },
+                    1000:{
+                        items:4,
+                        nav:true,
+                        loop:true
+                    }
+                },
+                navText : ['<i class="fa fa-arrow-circle-o-left"></i>','<i class="fa fa-arrow-circle-o-right"></i>']
+            });
+        });
+
+        $(document).ready(function(){
+            $(".themeqx_new_regular_ads_wrap").owlCarousel({
+                loop: true,
+                autoplay : true,
+                autoplayTimeout : 2000,
+                margin:10,
+                autoplayHoverPause : true,
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:true,
+                        loop:true
+                    },
+                    600:{
+                        items:3,
+                        nav:false,
+                        loop:true
+                    },
+                    1000:{
+                        items:4,
+                        nav:true,
+                        loop:true
+                    }
+                },
+                navText : ['<i class="fa fa-arrow-circle-o-left"></i>','<i class="fa fa-arrow-circle-o-right"></i>']
+            });
+        });
+        $(document).ready(function(){
+            $(".home-latest-blog").owlCarousel({
+                loop: true,
+                autoplay : true,
+                autoplayTimeout : 3000,
+                margin:10,
+                autoplayHoverPause : true,
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:true,
+                        loop:true
+                    },
+                    600:{
+                        items:3,
+                        nav:false,
+                        loop:true
+                    },
+                    1000:{
+                        items:4,
+                        nav:true,
+                        loop:true
+                    }
+                },
+                navText : ['<i class="fa fa-arrow-circle-o-left"></i>','<i class="fa fa-arrow-circle-o-right"></i>']
+            });
+        });
+
+    </script>
+    <script>
+        function generate_option_from_json(jsonData, fromLoad){
+            //Load Category Json Data To Brand Select
+            if(fromLoad === 'country_to_state'){
+                var option = '';
+                if (jsonData.length > 0) {
+                    option += '<option value="" selected> <?php echo app('translator')->getFromJson('app.select_state'); ?> </option>';
+                    for ( i in jsonData){
+                        option += '<option value="'+jsonData[i].id+'"> '+jsonData[i].state_name +' </option>';
+                    }
+                    $('#state_select').html(option);
+                    $('#state_select').select2();
+                }else {
+                    $('#state_select').html('<option value="" selected> <?php echo app('translator')->getFromJson('app.select_state'); ?> </option>');
+                    $('#state_select').select2();
+                }
+                $('#loaderListingIcon').hide('slow');
+            }
+        }
+
+        $(document).ready(function(){
+            $('[name="country"]').change(function(){
+                var country_id = $(this).val();
+                $('#loaderListingIcon').show();
+                $.ajax({
+                    type : 'POST',
+                    url : '<?php echo e(route('get_state_by_country')); ?>',
+                    data : { country_id : country_id,  _token : '<?php echo e(csrf_token()); ?>' },
+                    success : function (data) {
+                        generate_option_from_json(data, 'country_to_state');
+                    }
+                });
+            });
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
