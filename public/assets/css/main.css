@@ -70,15 +70,19 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 
 .main-container {
     position: relative;
-    width: 100%;
-    min-height: 100%;
+    width: 100% !important;
+    min-height: 100% !important;
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+.main-header .container {
+    max-width: 86% !important;
+}
+
 .main-container .container {
-    max-width: 86%;
+    max-width: 86% !important;
 }
 
 header {

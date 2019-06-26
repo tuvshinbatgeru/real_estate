@@ -1,101 +1,65 @@
 
-<div class="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-sm-4 col-xs-12">
-                    <div class="footer-widget">
-                        <h4>Бидний тухай</h4>
-                        <p>{{ get_option('footer_about_us') }}</p>
-                        <p>{!! get_option('footer_about_us_read_more_text') !!}</p>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-xs-12">
-                    <div class="footer-widget footer-address">
-                        <h4>@lang('app.contact_us')</h4>
-                        <address>
-                            <strong>{{ get_text_tpl(get_option('footer_company_name')) }}</strong>
-                            @if(get_option('footer_address'))
-                                <br />
-                                <i class="fa fa-map-marker"></i>
-                                {!! get_option('footer_address') !!}
-                            @endif
-                            @if(get_option('site_phone_number'))
-                                <br><i class="fa fa-phone"></i>
-                                <abbr title="Phone">{!! get_option('site_phone_number') !!}</abbr>
-                            @endif
-                        </address>
-
-                        @if(get_option('site_email_address'))
-                            <address>
-                                <strong>@lang('app.email')</strong>
-                                <br> <i class="fa fa-envelope-o"></i>
-                                <a href="mailto:{{ get_option('site_email_address') }}"> {{ get_option('site_email_address') }} </a>
-                            </address>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-xs-12">
-                    <div class="footer-widget">
-                        <h4>Бусад холбоос</h4>
-                        <ul class="footer-menu">
-                            @if($show_in_footer_menu->count() > 0)
-                                @foreach($show_in_footer_menu as $page)
-                                    <li><a href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a></li>
-                                @endforeach
-                            @endif
-
-                            @if(get_option('show_blog_in_footer'))
-                                <li><a href="{{ route('blog') }}">@lang('app.blog')</a></li>
-                            @endif
-                            <li><a href="{{ route('contact_us_page') }}">@lang('app.contact_us')</a></li>
-                        </ul>
-
-                        <div class="social-icons">
-                            <ul class="social-ul">
-                                @if(get_option('facebook_url'))
-                                    <li><a href="{{ get_option('facebook_url') }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                @endif
-
-                                @if(get_option('twitter_url'))
-                                    <li><a href="{{ get_option('twitter_url') }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                @endif
-                                @if(get_option('linked_in_url'))
-                                    <li><a href="{{ get_option('linked_in_url') }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                                @endif
-                                @if(get_option('dribble_url'))
-                                    <li><a href="{{ get_option('dribble_url') }}" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-                                @endif
-                                @if(get_option('google_plus_url'))
-                                    <li><a href="{{ get_option('google_plus_url') }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                                @endif
-                                @if(get_option('youtube_url'))
-                                    <li><a href="{{ get_option('youtube_url') }}" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                                @endif
-
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
-
+<div class="subscribe">
+    <div class="container">
+        <div class="row blue-input">
+            <div class="input-field col s12">
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Утасны дугаараа оруулаад бүртгүүлээрэй</label>
             </div>
         </div>
     </div>
-
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="pull-left">{!! get_text_tpl(get_option('footer_left_text')) !!}</p>
-                    <p class="pull-right"> {!! get_text_tpl(get_option('footer_right_text')) !!} </p>
-                </div>
-            </div>
+</div>
+<div class="footer-menus">
+    <div class="container">
+        <div class="row">
+            <ul>
+                <li>
+                    <a href="">
+                        Эхлэл
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Бид
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Хамтрах
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Төлбөрийн боломж
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Агент
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Компани
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        Холбогдох
+                    </a>
+                </li>
+            </ul>
         </div>
+    </div>
+</div>
+<div class="copyright">
+    <p>© 2019 <span class="blue-color">Research</span>. Made with love by Research. All Rights Reserve</p>
+    <div class="social-icons">
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-behance"></i>
+        <i class="fab fa-linkedin-in"></i>
+        <i class="fab fa-google-plus-g"></i>
     </div>
 </div>
 
@@ -110,6 +74,8 @@
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('assets/select2-3.5.3/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/nprogress/nprogress.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 <script type="text/javascript">
     NProgress.start();
     NProgress.done();

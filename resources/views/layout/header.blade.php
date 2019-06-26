@@ -27,11 +27,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
 
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/filter.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-theme.min.css') }}">
     <!-- Font awesome 4.4.0 -->
     <link rel="stylesheet" href="{{ asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <!-- load page specific css -->
@@ -42,6 +37,8 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/nprogress/nprogress.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/filter.css') }}">
     <!-- Conditional page load script -->
     @if(request()->segment(1) === 'dashboard')
         <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
@@ -72,26 +69,28 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="header">
-                <div class="logo">
-                    <img src="{{ asset('assets/img/logo.png') }}" alt="">
-                </div>
-                <div class="group-button">
-                    <!-- <a href="login.html">
-                        Нэвтрэх
-                    </a> -->
-                    <a href="" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect"
-                        data-toggle="modal" data-target="#exampleModal">
-                        Бүртгүүлэх / Нэвтрэх
-                    </a>
+<div class="main-header">
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="header">
+                    <div class="logo">
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="">
+                    </div>
+                    <div class="group-button">
+                        <!-- <a href="login.html">
+                            Нэвтрэх
+                        </a> -->
+                        <a href="" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect"
+                            data-toggle="modal" data-target="#exampleModal">
+                            Бүртгүүлэх / Нэвтрэх
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+</div>
 
 {{-- <div class="header-nav-top">
     <div class="container">
