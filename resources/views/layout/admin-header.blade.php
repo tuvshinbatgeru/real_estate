@@ -19,14 +19,9 @@
         <meta name="og:site_name" content="{{ get_option('site_name') }}">
     @show
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-theme.min.css') }}">
     <!-- Font awesome 4.4.0 -->
     <link rel="stylesheet" href="{{ asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <!-- load page specific css -->
@@ -67,30 +62,7 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div class="main-header">
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="header">
-                    <div class="logo">
-                        <img src="{{ asset('assets/img/logo.png') }}" alt="">
-                    </div>
-                    <div class="group-button">
-                        <!-- <a href="login.html">
-                            Нэвтрэх
-                        </a> -->
-                        <a href="" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect"
-                            data-toggle="modal" data-target="#exampleModal">
-                            Бүртгүүлэх / Нэвтрэх
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-</div>
-
-{{-- <div class="header-nav-top">
+<div class="header-nav-top">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-12 ">
@@ -157,9 +129,10 @@
             </div>
         </div>
     </div>
-</div> --}}
 
-{{-- <nav class="navbar navbar-default" role="navigation">
+</div>
+
+<nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -197,11 +170,7 @@
                 @endif
 
                 <li><a href="{{ route('create_ad') }}"> <i class="fa fa-tag"></i> @lang('app.post_an_ad')</a></li>
-                @if(get_option('show_blog_in_header'))
-                    <li><a href="{{ route('blog') }}"> <i class="fa fa-rss"></i> @lang('app.blog')</a></li>
-                @endif
-                <li><a href="{{ route('contact_us_page') }}"> <i class="fa fa-mail-forward"></i>@lang('app.contact_us')</a></li>
-
+                
                     @if(get_option('enable_language_switcher') == 1)
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
@@ -218,4 +187,4 @@
 
         </div><!--/.navbar-collapse -->
     </div>
-</nav> --}}
+</nav>

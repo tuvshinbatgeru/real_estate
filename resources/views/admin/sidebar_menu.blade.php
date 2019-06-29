@@ -34,19 +34,11 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="#"><i class="fa"></i> @lang('app.blog')<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>  <a href="{{ route('posts') }}"> @lang('app.posts')</a> </li>
-                    <li>  <a href="{{ route('create_new_post') }}"> @lang('app.create_new_post')</a> </li>
-                </ul>
-            </li>
-
             <li> <a href="{{ route('pages') }}"><i class="fa"></i> @lang('app.pages')</a>  </li>
             <li> <a href="{{ route('ad_reports') }}"><i class="fa"></i> @lang('app.ad_reports')</a>  </li>
             <li> <a href="{{ route('users') }}"><i class="fa"></i> @lang('app.users')</a>  </li>
 
-            <li>
+            {{-- <li>
                 <a href="#"><i class="fa"></i> @lang('app.appearance')<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li> <a href="{{ route('theme_settings') }}"> @lang('app.theme_settings')</a> </li>
@@ -54,7 +46,7 @@
                     <li> <a href="{{ route('social_url_settings') }}"> @lang('app.social_url')</a> </li>
                 </ul>
                 <!-- /.nav-second-level -->
-            </li>
+            </li> --}}
 
             <li>
                 <a href="#"><i class="fa"></i> @lang('app.locations')<span class="fa arrow"></span></a>
@@ -66,8 +58,8 @@
                 <!-- /.nav-second-level -->
             </li>
 
-            <li> <a href="{{ route('contact_messages') }}"><i class="fa"></i> @lang('app.contact_messages')</a>  </li>
-            <li> <a href="{{ route('monetization') }}"><i class="fa"></i> @lang('app.monetization')</a>  </li>
+            {{-- <li> <a href="{{ route('contact_messages') }}"><i class="fa"></i> @lang('app.contact_messages')</a>  </li> --}}
+            {{-- <li> <a href="{{ route('monetization') }}"><i class="fa"></i> @lang('app.monetization')</a>  </li> --}}
 
             <li>
                 <a href="#"><i class="fa"></i> @lang('app.settings')<span class="fa arrow"></span></a>
@@ -87,7 +79,6 @@
             @endif
 
             <li> <a href="{{ route('payments') }}"><i class="fa"></i> @lang('app.payments')</a>  </li>
-            <li> <a href="{{ route('profile') }}"><i class="fa"></i> @lang('app.profile')</a>  </li>
             <li> <a href="{{ route('change_password') }}"><i class="fa"></i> @lang('app.change_password')</a>  </li>
         </ul>
     </div>
