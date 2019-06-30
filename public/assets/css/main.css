@@ -1458,7 +1458,6 @@ header.scrolled .header .group-button>.profile-logged .profile-dropdown {
 }
 
 .agent-image {
-    display: flex;
     justify-content: space-between;
     margin: 20px 0px;
     margin-bottom: 0;

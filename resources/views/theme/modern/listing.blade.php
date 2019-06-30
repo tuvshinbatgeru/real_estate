@@ -1288,7 +1288,7 @@
                                         <div class="grid-container">
                                             @foreach($ads as $ad)
                                                 <div class="grid-item">
-                                                    <a href="">
+                                                    <a href="{{ route('single_ad', $ad->slug) }}">
                                                         <div class="img-container">
                                                             <img itemprop="image" width="100%" src="{{ media_url($ad->feature_img) }}" alt="{{ $ad->title }}" />
 

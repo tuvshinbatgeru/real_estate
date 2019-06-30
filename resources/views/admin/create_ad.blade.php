@@ -282,9 +282,8 @@
                         <div class="form-group  {{ $errors->has('country')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.country')</label>
                             <div class="col-sm-8">
-                                <select class="form-control select2" name="country">
+                                <select class="form-control" name="country">
                                     <option value="">@lang('app.select_a_country')</option>
-
                                     @foreach($countries as $country)
                                         <option value="{{ $country->id }}" {{ old('country') == $country->id ? 'selected' :'' }}>{{ $country->country_name }}</option>
                                     @endforeach
@@ -615,7 +614,7 @@
                     }
                 });
 
-/*                $.ajax({
+/*\                $.ajax({
                     type : 'POST',
                     url : '{{ route('get_category_info') }}',
                     data : { category_id : category_id,  _token : '{{ csrf_token() }}' },

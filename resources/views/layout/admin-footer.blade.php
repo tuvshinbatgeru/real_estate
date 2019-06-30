@@ -104,7 +104,7 @@
     <p>@lang('app.loading')...</p>
 </div>
 
-
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('assets/js/vendor/jquery-1.11.2.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
@@ -127,6 +127,7 @@
 <script>
     var toastr_options = {closeButton : true};
 </script>
+
 @yield('page-js')
 
 
@@ -138,7 +139,7 @@
         $('.themeqx-demo-chooser-wrap').toggleClass('open');
     });
 </script>
-<script src="{{ asset('js/app.js') }}"></script>
+
 
 </body>
 </html>

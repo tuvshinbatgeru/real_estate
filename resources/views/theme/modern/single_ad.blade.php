@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.main-layout')
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 @section('social-meta')
@@ -21,366 +21,179 @@
 @endsection
 
 @section('main')
+    <div>
+        <div class="main-container">
+            <div class="detail">
+                <div class="container">
+                    <div class="detail-container">
+                        <div class="detail-images">
+                            @foreach($ad->media_img as $img)
+                                <img src="{{ media_url($img, true) }}" alt="{{ $ad->title }}" width="100%">
+                            @endforeach                            
+                        </div>
+                        <div class="detail-info">
+                            <div class="border">
+                                <h3>Бүрдүүлэх бичиг баримтууд</h3>
+                                <ul>
+                                    <li>
+                                        <span>#</span> Зээлийн хүсэлт
+                                    </li>
+                                    <li>
+                                        <span>#</span> Иргэний үнэмлэх
+                                    </li>
+                                    <li>
+                                        <span>#</span> 1 хувь цээж зураг
+                                    </li>
+                                    <li>
+                                        <span>#</span> Оршин суугаа хорооны тодорхойлолт
+                                    </li>
+                                    <li>
+                                        <span>#</span> Нийгмийн даатгалын дэвтэр
+                                    </li>
+                                    <li>
+                                        <span>#</span> Ажлын газрын тодорхойлолт
+                                    </li>
+                                    <li>
+                                        <span>#</span> Хөдөлмөрийн гэрээ
+                                    </li>
+                                    <li>
+                                        <span>#</span> Хувиараа бизнес эрхэлдэг бол бизнесийн үйл ажиллагаатай
+                                        холбоотой бичиг баримтууд
+                                    </li>
+                                    <li>
+                                        <span>#</span> Өрхийн орлогыг баталгаажуулах бичиг баримт
+                                    </li>
+                                </ul>
+                                <a href="">
+                                    Дэлгэрэнгүй
+                                </a>
+                                <button data-toggle="modal" data-target="#loanmodal">Зээлийн хүсэлт</button>
+                            </div>
+                            <div class="border">
+                                <div class="name-price">
+                                    <div class="name">
+                                        <span>{{ $ad->title }}</span>
+                                        <p>{{ themeqx_price_ng($ad) }}</p>
+                                        <b>34м2 - 75м2 / 3 өрөө байр</b><br />
+                                        <b>Баянзүрх дүүрэг, 2-р хороо, 34А байр, 7 давхар</b>
+                                        <b>{!! $ad->full_address() !!}</b>
+                                    </div>
+                                    <div class="icons">
+                                        <i class="material-icons">favorite_border</i>
+                                        <i class="material-icons">share</i>
+                                    </div>
+                                </div>
+                                <div class="tags">
+                                    <div class="tag bgrey" data-toggle="modal" data-target="#tagmodal">
+                                        2018 онд бариглсан
+                                    </div>
+                                    <div class="tag bgrey">
+                                        Захиалагч
+                                    </div>
+                                    <div class="tag bgrey">
+                                        Гүйцэтгэгч
+                                    </div>
+                                    <div class="tag bgrey">
+                                        Хийцлэл
+                                    </div>
+                                    <div class="tag bgrey">
+                                        12 давхар барилга
+                                    </div>
+                                    <div class="tag bgrey">
+                                        Гадна фасад
+                                    </div>
+                                    <div class="tag bgrey">
+                                        Тэсвэртэй баллын хэмжээ
+                                    </div>
+                                    <div class="tag bgrey">
+                                        Цахилгаан шатны тоо
+                                    </div>
+                                    <div class="tag bblue" data-toggle="modal" data-target="#tagmodal1">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bblue">
+                                        Цонхны хэмжээ
+                                    </div>
+                                    <div class="tag bblue">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bblue">
+                                        Цонхны хэмжээ
+                                    </div>
+                                    <div class="tag bblue">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bblue">
+                                        Цонхны хэмжээ
+                                    </div>
+                                    <div class="tag bblue">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bblue">
+                                        Цонхны хэмжээ
+                                    </div>
 
-    <div class="modern-single-ad-top-description-wrap">
+                                    <div class="tag bgreen">
+                                        Цонхны хэмжээ
+                                    </div>
+                                    <div class="tag bgreen">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bgreen">
+                                        Цонхны хэмжээ
+                                    </div>
+                                    <div class="tag bgreen">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bgreen">
+                                        Цонхны хэмжээ
+                                    </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="modern-single-ad-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li><a href="{{ route('home') }}">@lang('app.home')</a></li>
-                            @if($ad->category)
-                                <li><a href="{{ route('listing', ['category' => $ad->category->id]) }}">  {{ $ad->category->category_name }} </a> </li>
-                            @endif
-                            <li>{{ $ad->title }}</li>
-                        </ol><!-- breadcrumb -->
-                        <h2 class="modern-single-ad-top-title">{{ $ad->title }}</h2>
-                    </div>
-
-                    @if($enable_monetize)
-                        {!! get_option('monetize_code_below_ad_title') !!}
-                    @endif
-
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="modern-single-ad-top-description">
-
-                    <div class="col-sm-7 col-xs-12">
-                        @if ( ! $ad->is_published())
-                            <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_not_published_warning')</div>
-                        @endif
-
-                        @if( ! empty($ad->video_url))
-                            <?php
-                            $video_url = $ad->video_url;
-                            if (strpos($video_url, 'youtube') > 0) {
-                                preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video_url, $matches);
-                                if ( ! empty($matches[1])){
-                                    echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/'.$matches[1].'" frameborder="0" allowfullscreen></iframe></div>';
-                                }
-
-                            } elseif (strpos($video_url, 'vimeo') > 0) {
-                                if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $video_url, $regs)) {
-                                    if (!empty($regs[3])){
-                                        echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/'.$regs[3].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
-                                    }
-                                }
-                            }
-                            ?>
-
-                        @else
-
-                            <div class="ads-gallery">
-                                <div class="fotorama"  data-nav="thumbs" data-allowfullscreen="true" data-width="100%">
-                                    @foreach($ad->media_img as $img)
-                                        <img src="{{ media_url($img, true) }}" alt="{{ $ad->title }}">
+                                    <div class="tag bblack">
+                                        Цонхны хэмжээ
+                                    </div>
+                                    <div class="tag bblack">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bblack">
+                                        Цонхны хэмжээ
+                                    </div>
+                                    <div class="tag bblack">
+                                        Таазны өндөр
+                                    </div>
+                                    <div class="tag bblack">
+                                        Цонхны хэмжээ
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border">
+                                <div class="agent-header">
+                                    <div class="agent-pro">
+                                        <img src="{{ $ad->user->get_gravatar() }}" style="width: 50px; height: 50px; background: #333; border-radius: 50%;" />
+                                        <div class="agent-name">
+                                            <p>{{ $ad->user->name }}</p>
+                                            <span>агент</span>
+                                        </div>
+                                    </div>
+                                    <div class="agent-phone">
+                                        <i class="material-icons">local_phone</i> {{ $ad->user->phone }}
+                                    </div>
+                                </div>
+                                <div class="agent-image">
+                                    @foreach($related_ads as $rad)
+                                        <a href="{{ route('single_ad', $rad->slug) }}">
+                                            <img height="100" width="100" style="object-fit: cover;" src="{{ media_url($rad->feature_img) }}">
+                                        </a>
                                     @endforeach
                                 </div>
                             </div>
-                        @endif
-                    </div>
 
-                    <div class="col-sm-5 col-xs-12">
-                        <h2 class="ad-title"><a href="{{ route('single_ad', $ad->slug) }}">{{ $ad->title }}</a>  </h2>
-                        <h2 class="modern-single-ad-price">{{ themeqx_price_ng($ad) }}</h2>
-                        <h3>@lang('app.general_info')</h3>
-                        <p><strong><i class="fa fa-money"></i> @lang('app.price')</strong> {{ themeqx_price_ng($ad) }} </p>
-                        <p><strong><i class="fa fa-map-marker"></i>  @lang('app.location') </strong> {!! $ad->full_address() !!} </p>
-                        <p><strong><i class="fa fa-check-circle-o"></i> @lang('app.condition')</strong> {{ $ad->ad_condition }} </p>
-
-                        <div class="modern-social-share-btn-group">
-                            <h4>@lang('app.share_this_ad')</h4>
-                            <a href="javascript:;" class="btn btn-default shareEmbedded"  data-toggle="modal" data-target="#shareEmbedded"><i class="fa fa-code"></i> </a>
-                            <a href="#" class="btn btn-default share s_facebook"><i class="fa fa-facebook"></i> </a>
-                            <a href="#" class="btn btn-default share s_plus"><i class="fa fa-google-plus"></i> </a>
-                            <a href="#" class="btn btn-default share s_twitter"><i class="fa fa-twitter"></i> </a>
-                            <a href="#" class="btn btn-default share s_linkedin"><i class="fa fa-linkedin"></i> </a>
                         </div>
-
-                        @if($enable_monetize)
-                            {!! get_option('monetize_code_below_general_info') !!}
-                        @endif
-
                     </div>
-                    <div class="clearfix"></div>
                 </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-xs-12">
-                <div class="ads-detail bg-white">
-                    <div class="single-at-a-glance">
-                        <ul class="list-group ">
-
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-building"></i> {{  ucfirst( trans('app.'.$ad->type)) }} </li>
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-arrows-alt "></i> {{ $ad->square_unit_space.' '.trans('app.square_meter') }} </li>
-
-                            @if($ad->beds)
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-bed"></i> {{ $ad->beds.' '.trans('app.bedrooms') }} </li>
-                            @endif
-
-                            @if($ad->attached_bath)
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-bath"></i> {{ $ad->attached_bath.' '.trans('app.attached_bath') }} </li>
-                            @endif
-
-                            @if($ad->common_bath)
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-shower"></i> {{ $ad->common_bath.' '.trans('app.common_bath') }} </li>
-                            @endif
-
-                            @if($ad->floor)
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-building-o"></i> {{ $ad->floor.' '.trans('app.floor') }} </li>
-                            @endif
-
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-briefcase"></i> {{ ucfirst($ad->purpose) }} </li>
-
-                            @if($ad->balcony)
-                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-window-maximize"></i> {{ $ad->balcony.' '.trans('app.belcony') }} </li>
-                            @endif
-                            @if($ad->dining_space)
-                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-cutlery"></i> {{ trans('app.dining_space') }} </li>
-                            @endif
-                            @if($ad->living_room)
-                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-folder-o"></i> {{ trans('app.living_room') }} </li>
-                            @endif
-
-                            @if($ad->price > 0)
-                                <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-money"></i> {{ number_format($ad->price_per_unit) .get_option('currency_sign').'(M2)'  }} </li>
-                            @endif
-
-                            <li class="list-group-item col-sm-4 col-xs-6"><i class="fa fa-money"></i>
-                                {{ number_format($ad->price).get_option('currency_sign').'(Нийт)'  }} @if($ad->purpose == 'rent') @lang('app.per_month') @endif
-                            </li>
-
-                        </ul>
-                        <div class="clearfix"></div>
-
-                    </div>
-
-
-
-
-                    <h4 class="ads-detail-title">@lang('app.description')</h4>
-                    <p> {!! nl2br($ad->description) !!} </p>
-
-
-                    @if($enable_monetize)
-                        {!! get_option('monetize_code_below_ad_description') !!}
-                    @endif
-                </div>
-
-
-
-
-                <?php $amenities = unserialize($ad->amenities);  ?>
-                @if(is_array($amenities))
-                    <div class="ads-detail bg-white">
-
-                        <legend>@lang('app.indoor_amenities')</legend>
-
-                        <div class="single-at-a-glance">
-                            <ul class="list-group ">
-                                @foreach($indore_ammenties as $in_ammenty)
-                                    @if(array_key_exists($in_ammenty->id, $amenities))
-                                        <li class="list-group-item col-sm-4 col-xs-6">
-                                            <i class="fa fa-check-circle-o"></i> {{ $in_ammenty->category_name }} </li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-
-                        <legend>@lang('app.outdoor_amenities')</legend>
-                        <div class="single-at-a-glance">
-                            <ul class="list-group ">
-                                @foreach($outdoor_ammenties as $out_ammenty)
-                                    @if(array_key_exists($out_ammenty->id, $amenities))
-                                        <li class="list-group-item col-sm-4 col-xs-6">
-                                            <i class="fa fa-check-circle-o"></i> {{ $out_ammenty->category_name }} </li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-
-                    </div>
-                @endif
-
-                @php $ad_distances = unserialize($ad->distances)  @endphp
-                @if(is_array($ad_distances))
-                    <div class="ads-detail bg-white">
-
-                        <legend>@lang('app.distances')</legend>
-
-                        <div class="single-at-a-glance">
-                            <ul class="list-group ">
-                                @foreach($distances as $golbal_distance)
-                                    @if(array_key_exists($golbal_distance->id, $ad_distances))
-                                        @if($ad_distances[$golbal_distance['id']] > 0)
-                                            <li class="list-group-item col-sm-4 col-xs-6">
-                                                <i class="fa fa-road"></i> {{ $golbal_distance->brand_name }} => {{ themeqx_distance_measure($ad_distances[$golbal_distance->id]) }} </li>
-                                        @endif
-                                    @endif
-                                @endforeach
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                @endif
-
-
-                <div class="ads-detail bg-white">
-
-                    <legend>@lang('app.map')</legend>
-                    <div id="dvMap" style="width: 100%; height: 400px; margin: 20px 0;"></div>
-
-                </div>
-
-            </div>
-
-            <div class="col-sm-4 col-xs-12">
-                <div class="sidebar-widget">
-
-                    <h3>@lang('app.seller_info')</h3>
-                    <div class="sidebar-user-info">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <img src="{{ $ad->user->get_gravatar() }}" class="img-circle img-responsive" />
-                            </div>
-                            <div class="col-xs-9">
-                                <h5>{{ $ad->user->name }}</h5>
-                                <p class="text-muted"><i class="fa fa-map-marker"></i> {{ $ad->user->get_address()}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sidebar-user-link">
-                        <button class="btn btn-block" id="onClickShowPhone">
-                            <strong> <span id="ShowPhoneWrap"></span> </strong> <br />
-                            <span class="text-muted">@lang('app.click_to_show_phone_number')</span>
-                        </button>
-
-                        @if($ad->user->email)
-                            <button class="btn btn-block" data-toggle="modal" data-target="#replyByEmail">
-                                <i class="fa fa-envelope-o"> @lang('app.request_by_email')</i>
-                            </button>
-                        @endif
-
-                        <ul class="ad-action-list">
-                            <li><a href="{{ route('listing', ['user_id'=>$ad->user_id]) }}"><i class="fa fa-user"></i> @lang('app.more_ads_by_this_seller')</a></li>
-                            <li><a href="javascript:;" id="save_as_favorite" data-slug="{{ $ad->slug }}">
-                                    @if( ! $ad->is_my_favorite())
-                                        <i class="fa fa-star-o"></i> @lang('app.save_ad_as_favorite')
-                                    @else
-                                        <i class="fa fa-star"></i> @lang('app.remove_from_favorite')
-                                    @endif
-                                </a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#reportAdModal"><i class="fa fa-ban"></i> @lang('app.report_this_ad')</a></li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-                <div class="sidebar-widget">
-
-                    <h3>@lang('app.feature_agents')</h3>
-                    @foreach($agents as $agent)
-                        <div class="sidebar-feature-agents">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <a href="{{ route('listing', ['user_id'=>$agent->id]) }}">
-                                        <img src="{{ $agent->get_gravatar() }}" class="img-circle img-responsive" /> </a>
-                                </div>
-                                <div class="col-xs-9">
-                                    <a href="{{ route('listing', ['user_id'=>$agent->id]) }}">
-                                        <h5>{{ $agent->name }}</h5>
-                                        <p class="text-muted"><i class="fa fa-map-marker"></i> {{ $agent->get_address()}}</p>
-                                        <p class="text-muted"><i class="fa fa-building-o"></i> {{ $agent->ads->count() }} @lang('app.estates')
-                                            @if($agent->phone), <i class="fa fa-phone"></i> {{ $agent->phone }} @endif
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
             </div>
         </div>
     </div>
-
-
-
-    @if($related_ads->count() > 0 && get_option('enable_related_ads') == 1)
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    @if($enable_monetize)
-                        {!! get_option('monetize_code_below_ad_description') !!}
-                    @endif
-                    <div class="carousel-header">
-                        <h4><a href="{{ route('listing') }}">
-                                @lang('app.more_ads_from_this_agent')
-                            </a>
-                        </h4>
-                    </div>
-                    <hr />
-                    <div class="themeqx_new_regular_ads_wrap themeqx-carousel-ads">
-                        @foreach($related_ads as $rad)
-                            <div>
-                                <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-{{$rad->price_plan}}">
-                                    <div class="ads-thumbnail">
-                                        <a href="{{ route('single_ad', $rad->slug) }}">
-                                            <img itemprop="image"  src="{{ media_url($rad->feature_img) }}" class="img-responsive" alt="{{ $rad->title }}">
-                                             <span class="modern-img-indicator">
-                                                @if(! empty($rad->video_url))
-                                                     <i class="fa fa-file-video-o"></i>
-                                                 @else
-                                                     <i class="fa fa-file-image-o"> {{ $rad->media_img->count() }}</i>
-                                                 @endif
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4><a href="{{ route('single_ad', $rad->slug) }}" title="{{ $rad->title }}"><span itemprop="name">{{ str_limit($rad->title, 40) }} </span></a></h4>
-                                        @if($rad->category)
-                                            <a class="price text-muted" href="{{ route('listing', ['category' => $rad->category->id]) }}"> <i class="fa fa-folder-o"></i> {{ $rad->category->category_name }} </a>
-                                        @endif
-
-                                        @if($rad->city)
-                                            <a class="location text-muted" href="{{ route('listing', ['city' => $rad->city->id]) }}"> <i class="fa fa-location-arrow"></i> {{ $rad->city->city_name }} </a>
-                                        @endif
-                                        <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> {{ $rad->created_at->diffForHumans() }}</p>
-                                        <p class="price"> <span itemprop="price" content="{{$rad->price}}"> {{ themeqx_price_ng($rad) }} </span></p>
-                                        <link itemprop="availability" href="http://schema.org/InStock" />
-                                    </div>
-
-                                    @if($rad->price_plan == 'premium')
-                                        <div class="ribbon-wrapper-green"><div class="ribbon-green">{{ ucfirst($rad->price_plan) }}</div></div>
-                                    @endif
-                                    @if($rad->mark_ad_urgent == '1')
-                                        <div class="ribbon-wrapper-red"><div class="ribbon-red">@lang('app.urgent')</div></div>
-                                    @endif
-
-
-                                </div>
-                            </div>
-                        @endforeach
-                    </div> <!-- themeqx_new_premium_ads_wrap -->
-                </div>
-
-            </div>
-        </div>
-    @endif
 
     <div class="modal fade" id="reportAdModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -431,243 +244,6 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="replyByEmail" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Агенттай харилцах мэдээлэл</h4>
-                </div>
-
-                {!! Form::open(['id' => 'replyByEmailForm']) !!}
-                
-                <div class="modal-body">
-                <div class="panel panel-default">
-                <div class="panel-heading">Хувийн мэдээлэл</div>
-                <div class="panel-body">
-                <input type="hidden" name="ad_id" id='ad_id' value="{{ $ad->id }}" />
-                    <div class="row">
-                        <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.first_name'):</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" data-validation="required">
-                        </div>
-                        <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.last_name'):</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" data-validation="required">
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-xs-6 form-group">
-                            <label class="control-label">@lang('app.phone_number'):</label>
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
-                        </div>
-                        <div class="col-xs-6 form-group">
-                            <label class="control-label">@lang('app.email'):</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">@lang('app.facebook_user_name')</label>
-                        <input type="text" class="form-control" id="facebookUserName" name="facebookUserName">
-                    </div>
-                </div>
-                </div>
-
-                <div class="panel panel-default">
-                <div class="panel-heading">Худалдан авалтын мэдээлэл</div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-4 form-group">
-                            <label  class="control-label">@lang('app.cash_percent')</label>
-                            <select id='cashPercent' name='cashPercent' class="form-control">
-                                <option selected="selected">@lang('app.choose_percent')</option>
-                                    <?php
-                                        $percent = array("5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%","50%", "55%","60%","65%","70%","75%","80%","85%","90%","95%","100%");
-                                        foreach($percent as $item){?>
-                                                <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                                        <?php
-                                        }?>
-                            </select>
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label class="control-label">@lang('app.barter_percent')</label>
-                            <select id='barterPercent' name='barterPercent' class="form-control">
-                                <option  selected="selected">@lang('app.choose_percent')</option>
-                                    <?php
-                                        $percent = array("5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%","50%", "55%","60%","65%","70%","75%","80%","85%","90%","95%","100%");
-                                        foreach($percent as $item){?>
-                                                <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                                        <?php
-                                        }?>
-                            </select>
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label class="control-label">@lang('app.loan_percent')</label>
-                            <select id='loanPercent' name='loanPercent' class="form-control">
-                                <option selected="selected">@lang('app.choose_percent')</option>
-                                    <?php
-                                        $percent = array("5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%","50%", "55%","60%","65%","70%","75%","80%","85%","90%","95%","100%");
-                                        foreach($percent as $item){?>
-                                                <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                                        <?php
-                                        }?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4 form-group">
-                            <label class="control-label">@lang('app.cash_pay_time')</label>
-                            <select id='cashPayTime' name='cashPayTime' class="form-control">
-                                <option selected="selected">@lang('app.choose_percent')</option>
-                                    <?php
-                                        $percent = array("6 сар", "1 жил", "18 сар", "2 жил", "3 жил", "4 жил", "5 жил", "6 жил", "7 жил","8 жил", "9 жил","10 жил","15 жил","20 жил","30 жил");
-                                        foreach($percent as $item){?>
-                                                <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                                        <?php
-                                        }?>
-                            </select>
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label class="control-label">@lang('app.barter_pay_time')</label>
-                            <select id='barterPayTime' name='barterPayTime' class="form-control">
-                                <option  selected="selected">@lang('app.choose_percent')</option>
-                                    <?php
-                                        $percent = array("6 сар", "1 жил", "18 сар", "2 жил", "3 жил", "4 жил", "5 жил", "6 жил", "7 жил","8 жил", "9 жил","10 жил","15 жил","20 жил","30 жил");
-                                        foreach($percent as $item){?>
-                                                <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                                        <?php
-                                        }?>
-                            </select>
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label class="control-label">@lang('app.loan_pay_time')</label>
-                            <select id='loanPayTime' name='loanPayTime' class="form-control">
-                                <option selected="selected">@lang('app.choose_percent')</option>
-                                    <?php
-                                        $percent = array("6 сар", "1 жил", "18 сар", "2 жил", "3 жил", "4 жил", "5 жил", "6 жил", "7 жил","8 жил", "9 жил","10 жил","15 жил","20 жил","30 жил");
-                                        foreach($percent as $item){?>
-                                                <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                                        <?php
-                                        }?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-                <div class="panel panel-default">
-                <div class="panel-heading">Зээлтэй авахад шаардагдах мэдээлэл</div>
-                <div class="panel-body">
-                    <div class="row">
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.working_company')</label>
-                                <input type="text" class="form-control" id="workingCompany" name="workingCompany">
-                            </div>
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.working_year')</label>
-                                <input type="text" class="form-control" id="workingYear" name="workingYear">
-                            </div>
-                    </div>
-                    <div class="row">
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.family_income')</label>
-                                <input type="text" class="form-control" id="familyIncome" name="familyIncome">
-                            </div>
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.family_members')</label>
-                                <input type="text" class="form-control" id="familyMembers" name="familyMembers">
-                            </div>
-                    </div>
-                    <div class="row">
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.family_kindergarden')</label>
-                                <input type="text" class="form-control" id="familyKindergarden" name="familyKindergarden">
-                            </div>
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.family_elementary_school')</label>
-                                <input type="text" class="form-control" id="familyElementarySchool" name="familyElementarySchool">
-                            </div>
-                    </div>
-                    <div class="row">
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.family_secondary_school')</label>
-                                <input type="text" class="form-control" id="familySecondarySchool" name="familySecondarySchool">
-                            </div>
-                            <div class="col-xs-6 form-group">
-                                <label class="control-label">@lang('app.family_high_school')</label>
-                                <input type="text" class="form-control" id="familyHighSchool" name="familyHighSchool">
-                            </div>
-                    </div>
-                    <div class="form-group">
-                    <label class="control-label">@lang('app.living_place_type')</label>
-                            <select id='livingPlaceType' name='livingPlaceType' class="form-control" >
-                                <option selected="selected">@lang('app.choose_percent')</option>
-                                    <?php
-                                        $percent = array("Гэр хороолол", "түрээсийн орон сууц", "Хувийн орон сууц");
-                                        foreach($percent as $item){?>
-                                                <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                                        <?php
-                                        }?>
-                            </select>
-                    </div>
-                </div>
-                </div>
-
-                <div class="form-group">
-                        <label 
-                        class="control-label">@lang('app.additional_info')</label>
-                        <textarea class="form-control" id="additionalInfo" name="additionalInfo"></textarea>
-                </div>
-
-                <div class="modal-footer">
-                    <input type="hidden" name="ad_id" value="{{ $ad->id }}" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('app.close')</button>
-                    <button type="submit" class="btn btn-primary" id="reply_by_email_btn">@lang('app.send_email')</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="shareEmbedded" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">@lang('app.embedded_preview')</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="embedded_width" class="control-label">@lang('app.embedded_width'):</label>
-                                <input type="number" class="form-control" id="embedded_width" name="embedded_width" value="300" placeholder="@lang('app.embedded_width')">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label for="embedded_height" class="control-label">@lang('app.embedded_height'):</label>
-                            <input type="number" class="form-control" id="embedded_height" name="embedded_height" value="460" placeholder="@lang('app.embedded_width')">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">@lang('app.embedded_code'):</label>
-                        <textarea class="form-control" readonly id="embedded_code">{{'<iframe src="'.route('embedded_ad', $ad->slug).'" style="border:0;width:300px;height:460px;"></iframe>'}}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <iframe src="{{ route('embedded_ad', $ad->slug) }}" style="border:0;width:300px;height:460px;"></iframe>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
 @endsection
 
 @section('page-js')

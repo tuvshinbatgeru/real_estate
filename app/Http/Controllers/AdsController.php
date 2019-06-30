@@ -92,7 +92,10 @@ class AdsController extends Controller
         $categories = Category::all();
         $distances = Brand::all();
         $countries = Country::all();
-        $ads_images = Media::whereUserId($user_id)->whereAdId(0)->whereRef('ad')->get();
+
+        $ads_images = Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->get();
+
+        //dd($ads_images);
         
         $previous_states = State::where('country_id', old('country'))->get();
         $previous_cities = City::where('state_id', old('state'))->get();
@@ -179,7 +182,7 @@ class AdsController extends Controller
             'video_url'     => $video_url,
             'price_plan'    => $request->price_plan,
             'mark_ad_urgent' => $mark_ad_urgent,
-            'status'        => 0,
+            'status'        => 1,
             'user_id'       => $user_id,
         ];
 
@@ -200,7 +203,7 @@ class AdsController extends Controller
          */
         if ($created_ad){
             //Attach all unused media with this ad
-            Media::whereUserId($user_id)->whereAdId(0)->whereRef('ad')->update(['ad_id'=>$created_ad->id]);
+            Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->update(['ad_id'=>$created_ad->id]);
 
             /**
              * Payment transaction login here
@@ -563,6 +566,8 @@ class AdsController extends Controller
         $user_id = Auth::user()->id;
         $ads_images = Media::whereUserId($user_id)->whereAdId(0)->whereRef('ad')->get();
 
+        //dd($ads_count
+
         return view('admin.append_media', compact('ads_images'));
     }
 
@@ -699,14 +704,14 @@ class AdsController extends Controller
 
         //Get distances
         $distances = Brand::all();
-        $indore_ammenties = Category::whereCategoryType('indoor')->get();
-        $outdoor_ammenties = Category::whereCategoryType('outdoor')->get();
+        // $indore_ammenties = Category::whereCategoryType('indoor')->get();
+        // $outdoor_ammenties = Category::whereCategoryType('outdoor')->get();
         //Get Related Ads, add [->whereCountryId($ad->country_id)] for more specific results
         $related_ads = Ad::active()->whereUserId($ad_agent_id)->where('id', '!=',$ad->id)->with('city')->limit($limit_regular_ads)->orderByRaw('RAND()')->get();
 
         $agents = User::whereActiveStatus('1')->whereFeature('1')->whereUserType('user')->take(10)->orderBy('id', 'desc')->get();
 
-        return view($this->theme.'single_ad', compact('ad', 'title', 'distances', 'indore_ammenties', 'outdoor_ammenties', 'related_ads', 'agents'));
+        return view($this->theme.'single_ad', compact('ad', 'title', 'distances', 'related_ads', 'agents'));
     }
 
     public function embeddedAd($slug){

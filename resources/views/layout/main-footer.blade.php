@@ -1,4 +1,3 @@
-
 <div class="subscribe">
     <div class="container">
         <div class="row blue-input">
@@ -81,14 +80,6 @@
     NProgress.done();
 </script>
 <!-- Conditional page load script -->
-@if(request()->segment(1) === 'dashboard')
-    <script src="{{ asset('assets/plugins/metisMenu/dist/metisMenu.min.js') }}"></script>
-    <script>
-        $(function() {
-            $('#side-menu').metisMenu();
-        });
-    </script>
-@endif
 <script src="{{ asset('assets/lib/thumb/js/lightslider.js') }}"></script>
 <script src="{{ asset('assets/js/fitler.js') }}"></script>
 <script>
