@@ -12,6 +12,10 @@ class Category extends Model
         return $this->hasMany('App\Sub_Category');
     }
 
+    public function options(){
+        return $this->hasMany('App\CategoryOptions');
+    }
+
     public function brands(){
         return $this->hasMany(Brand::class);
     }

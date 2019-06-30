@@ -89,7 +89,6 @@
         });
     </script>
 @endif
-<script src="{{ asset('assets/js/main.js') }}"></script>
 <script src="{{ asset('assets/lib/thumb/js/lightslider.js') }}"></script>
 <script src="{{ asset('assets/js/fitler.js') }}"></script>
 <script>

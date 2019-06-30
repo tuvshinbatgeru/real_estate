@@ -74,17 +74,22 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="header">
+                <div class="header with-search">
                     <div class="logo">
-                        <img src="{{ asset('assets/img/logo.png') }}" alt="">
+                        <a href="/">
+                            <img src="{{ asset('assets/img/logo.png') }}" alt="">
+                        </a>
+                    </div>
+                    <div class="search-group">
+                        <input type="search" name="" id=""
+                            placeholder="Дүүрэг, Хороо болон хотхоны нэрийг оруулна уу!" />
                     </div>
                     <div class="group-button">
-                        <!-- <a href="login.html">
+                        <a href="login.html">
                             Нэвтрэх
-                        </a> -->
-                        <a href="" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect"
-                            data-toggle="modal" data-target="#exampleModal">
-                            Бүртгүүлэх / Нэвтрэх
+                        </a>
+                        <a href="" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect">
+                            Бүртгүүлэх
                         </a>
                     </div>
                 </div>

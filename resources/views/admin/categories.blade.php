@@ -1,10 +1,10 @@
-@extends('layout.main')
+@extends('layout.admin-layout')
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 
 @section('main')
 
-    <div class="container">
+    <div class="container" id="app">
 
         <div id="wrapper">
 
@@ -26,8 +26,7 @@
 
                         {{ Form::open(['class' => 'form-horizontal']) }}
 
-
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="category_type" class="col-sm-4 control-label">@lang('app.categories_type')</label>
                             <div class="col-sm-8">
                                 <select class="form-control select2icon" name="category_type">
@@ -35,7 +34,7 @@
                                     <option value="outdoor">@lang('app.outdoor')</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="form-group {{ $errors->has('category_name')? 'has-error':'' }}">
@@ -46,21 +45,27 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="`color_class" class="col-sm-4 control-label">@lang('app.select_color')</label>
+                        <div class="form-group {{ $errors->has('icon_idle')? 'has-error':'' }}">
+                            <label for="icon_idle" class="col-sm-4 control-label">@lang('app.icon_idle')</label>
                             <div class="col-sm-8">
-                                <input type="color" name="color_class" class="form-control" />
+                                <input type="text" class="form-control" id="icon_idle" value="{{ old('icon_idle') }}" name="icon_idle" placeholder="@lang('app.icon_idle')">
+                                {!! $errors->has('icon_idle')? '<p class="help-block">'.$errors->first('icon_idle').'</p>':'' !!}
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('description')? 'has-error':'' }}">
-                            <label for="description" class="col-sm-4 control-label">@lang('app.description')</label>
+                        <div class="form-group {{ $errors->has('icon_active')? 'has-error':'' }}">
+                            <label for="icon_active" class="col-sm-4 control-label">@lang('app.icon_active')</label>
                             <div class="col-sm-8">
-                                <textarea name="description" id="description" class="form-control" rows="6">{{ old('description') }}</textarea>
-                                {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
-
+                                <input type="text" class="form-control" id="icon_active" value="{{ old('icon_active') }}" name="icon_active" placeholder="@lang('app.icon_active')">
+                                {!! $errors->has('icon_active')? '<p class="help-block">'.$errors->first('icon_active').'</p>':'' !!}
                             </div>
                         </div>
+
+
+                        <label>Сонголт нэмэх</label>
+                        
+                        <option-list>
+                        </option-list>
 
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-8">

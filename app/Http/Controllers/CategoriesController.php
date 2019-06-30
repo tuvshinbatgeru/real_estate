@@ -43,18 +43,33 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'category_name' => 'required'
+            'category_name' => 'required',
+            'icon_idle' => 'required',
+            'icon_active' => 'required'
         ];
+
         $this->validate($request, $rules);
+
+        //dd($request->all());
 
         $data = [
             'category_name' => $request->category_name,
-            'category_type'   => $request->category_type,
-            'color_class'   => $request->color_class,
-            'description'   => $request->description,
+            'icon_idle'   => $request->icon_idle,
+            'icon_active'   => $request->icon_active,
         ];
 
-        Category::create($data);
+        $category = Category::create($data);
+
+        $options = [];
+        foreach($request->category_option as $option){
+            array_push($options, [
+                //'category_id' => $category->id,
+                'option' => $option
+            ]);
+        }
+
+        $category->options()->createMany($options);
+
         return back()->with('success', trans('app.category_created'));
     }
 
@@ -98,16 +113,18 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'category_name' => 'required'
+            'category_name' => 'required',
+            'icon_idle' => 'required',
+            'icon_active' => 'required'
         ];
         $this->validate($request, $rules);
 
         $data = [
             'category_name' => $request->category_name,
-            'category_type'   => $request->category_type,
-            'color_class'   => $request->color_class,
-            'description'   => $request->description,
+            'icon_idle'   => $request->icon_idle,
+            'icon_active'   => $request->icon_active,
         ];
+        
         Category::whereId($id)->update($data);
 
         return back()->with('success', trans('app.category_updated'));

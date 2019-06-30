@@ -32,7 +32,7 @@
                                                     </div>
                                                     <button class="btn waves-effect waves-light blue lighten-5"
                                                         type="submit" name="action">
-                                                        <a href="newFilter.html">
+                                                        <a href="/listing">
                                                             Хайх
                                                         </a>
                                                     </button>

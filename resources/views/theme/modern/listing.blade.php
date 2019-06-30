@@ -1,461 +1,1323 @@
-@extends('layout.main')
+@extends('layout.main-layout')
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 @section('main')
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-
-                <div class="bg-white">
-                    <div class="sidebar-filter-wrapper">
-
-                        @if($enable_monetize)
-                            {!! get_option('monetize_code_listing_sidebar_top') !!}
-                        @endif
-
-                        {{ Form::open([ 'method'=>'get', 'id' => 'listingFilterForm']) }}
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p class="listingSidebarLeftHeader">@lang('app.search')
-                                    <span id="loaderListingIcon" class="pull-right" style="display: none;"><i class="fa fa-spinner fa-spin"></i></span>
-                                </p>
+<div class="main-container">
+    <div class="contents">
+        <div class="new-filter">
+                <div class="container">
+                    <div class="customs">
+                        <div class="custom-basic-select">
+                            <div class="custom-select-title">
+                                M2, Үнэ
+                                <div class="selected-value"></div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="q" value="{{ request('q') }}" placeholder="@lang('app.search___')" />
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                <div class=" col-sm-6 col-xs-12">
-                                    <button class="btn btn-primary btn-block"><i class="fa fa-search"></i>  @lang('app.search')</button>
+                            <div class="custom-select-options">
+                                <div class="custom-select-item">
+                                    <ul>
+                                        <li data-id='0'>35 - 45 m2</li>
+                                        <li data-id='1'>35 - 45 m2</li>
+                                        <li data-id='2'>35 - 45 m2</li>
+                                        <li data-id='3'>35 - 45 m2</li>
+                                        <li data-id='4'>35 - 45 m2</li>
+                                        <li data-id='5'>35 - 45 m2</li>
+                                        <li data-id='6'>35 - 45 m2</li>
+                                        <li data-id='7'>35 - 45 m2</li>
+                                        <li data-id='8'>35 - 45 m2</li>
+                                    </ul>
+                                    <div class="options" data-id="0">
+                                        <div class="option" data-value='1-2 сая'>
+                                            1-2 сая
+                                        </div>
+                                        <div class="option" data-value='2-3 сая'>
+                                            2-3 сая
+                                        </div>
+                                        <div class="option" data-value='3-4 сая'>
+                                            3-4 сая
+                                        </div>
+                                        <div class="option" data-value='5-6 сая'>
+                                            5-6 сая
+                                        </div>
+                                    </div>
+                                    <div class="options" data-id="1">
+                                        <div class="option" data-value='10-20 сая'>
+                                            10-20 сая
+                                        </div>
+                                        <div class="option" data-value='20-30 сая'>
+                                            20-30 сая
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        {{ Form::close() }}
-
+                        <div class="custom-basic-select">
+                            <div class="custom-select-title">
+                                Дүүрэг, хороо
+                                <div class="selected-value"></div>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-select-item arrow">
+                                    <ul>
+                                        <li data-id='9'>Багануур</li>
+                                        <li data-id='10'>Багахангай</li>
+                                        <li data-id='11'>Баянгол</li>
+                                        <li data-id='12'>Баянзүрх</li>
+                                        <li data-id='13'>Налайх</li>
+                                        <li data-id='14'>Сонгинохайрхан</li>
+                                        <li data-id='15'>Сүхбаатар</li>
+                                        <li data-id='16'>Хан-Уул</li>
+                                        <li data-id='17'>Чингэлтэй</li>
+                                    </ul>
+                                    <div class="options" data-id="9">
+                                        <div class="option" data-value='1-р хороо'>
+                                            1-р хороо
+                                        </div>
+                                        <div class="option" data-value='2-р хороо'>
+                                            2-р хороо
+                                        </div>
+                                        <div class="option" data-value='3-р хороо'>
+                                            3-р хороо
+                                        </div>
+                                        <div class="option" data-value='4-р хороо'>
+                                            4-р хороо
+                                        </div>
+                                    </div>
+                                    <div class="options" data-id="10">
+                                        <div class="option" data-value='1-р хороо'>
+                                            1-р хороо
+                                        </div>
+                                        <div class="option" data-value='2-р хороо'>
+                                            2-р хороо
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-basic-select">
+                            <div class="custom-select-title">
+                                Байршил, Хотхон
+                                <div class="selected-value"></div>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-select-item arrow full">
+                                    <ul>
+                                        <li data-id='9'>Хүнсний 4 дэлгүүр</li>
+                                        <li data-id='10'>Мэргэжилтний 20</li>
+                                        <li data-id='11'>Оффицеруудын ордон</li>
+                                        <li data-id='12'>Баянзүрх</li>
+                                        <li data-id='13'>Налайх</li>
+                                        <li data-id='14'>Сонгинохайрхан</li>
+                                        <li data-id='15'>Сүхбаатар</li>
+                                        <li data-id='16'>Хан-Уул</li>
+                                        <li data-id='17'>Чингэлтэй</li>
+                                    </ul>
+                                    <div class="options" data-id="9">
+                                        <div class="option" data-value='Encanto town'>
+                                            Encanto town
+                                        </div>
+                                        <div class="option" data-value='River garden'>
+                                            River garden
+                                        </div>
+                                        <div class="option" data-value='Mandala town'>
+                                            Mandala town
+                                        </div>
+                                        <div class="option" data-value='Time squire'>
+                                            Time squire
+                                        </div>
+                                    </div>
+                                    <div class="options" data-id="10">
+                                        <div class="option" data-value='1-р хороо'>
+                                            1-р хороо
+                                        </div>
+                                        <div class="option" data-value='2-р хороо'>
+                                            2-р хороо
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-basic-select">
+                            <div class="custom-select-title">
+                                <div>
+                                    Координат
+                                    <!-- <span>Өгөгдөлийг энд оруулна уу!</span> -->
+                                </div>
+                                <div class="selected-value"></div>
+                            </div>
+                            <div class="custom-select-options">
+                                <!-- <div class="custom-select-item"> -->
+                                <div class="option" data-value='45.00021130, 106.2130'>
+                                    45.00021130, 106.2130
+                                </div>
+                                <div class="option" data-value='45 - 55 m2'>
+                                    45.00021130, 106.2130
+                                </div>
+                                <div class="option" data-value='55 - 65 m2'>
+                                    45.00021130, 106.2130
+                                </div>
+                                <div class="option" data-value='55 - 65 m2'>
+                                    45.00021130, 106.2130
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <div class="custom-basic-select">
+                            <div class="custom-select-title">
+                                Нүүж ороход бэлэн эсэх
+                                <div class="selected-value"></div>
+                            </div>
+                            <div class="custom-select-options">
+                                <!-- <div class="custom-select-item"> -->
+                                <div class="option" data-value='Хоног 0 бэлэн'>
+                                    Хоног 0 бэлэн
+                                </div>
+                                <div class="option" data-value='Хоног 14 арй боломжгүй'>
+                                    Хоног 14 арй боломжгүй
+                                </div>
+                                <div class="option" data-value='55 - 65 m2'>
+                                    Хоног 0 бэлэн
+                                </div>
+                                <div class="option" data-value='55 - 65 m2'>
+                                    Хоног 0 бэлэн
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
                     </div>
 
-                </div>
-
-
-                <div class="bg-white">
-                    <div class="sidebar-filter-wrapper">
-
-                        @if($enable_monetize)
-                            {!! get_option('monetize_code_listing_sidebar_top') !!}
-                        @endif
-
-                        {{ Form::open([ 'method'=>'get', 'id' => 'listingFilterForm']) }}
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p class="listingSidebarLeftHeader">@lang('app.advance_search')
-                                    <span id="loaderListingIcon" class="pull-right" style="display: none;"><i class="fa fa-spinner fa-spin"></i></span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="q" value="{{ request('q') }}" placeholder="@lang('app.search___')" />
-                        </div>
-
-                        <hr />
-
-                        <div class="form-group">
-                            <label>@lang('app.select_a_category')</label>
-                            <select class="form-control select2" name="type" multiple="multiple">
-                                <option value="">@lang('app.select_a_category')</option>
-                                <option value="apartment">@lang('app.apartment')</option>
-                                <option value="condos">@lang('app.condos')</option>
-                                <option value="house">@lang('app.house')</option>
-                                <option value="land">@lang('app.land')</option>
-                                <option value="commercial_space">@lang('app.commercial_space')</option>
-                                <option value="villa">@lang('app.villa')</option>
-                            </select>
-                        </div>
-
-                        <hr />
-                        <div class="form-group">
-                            <select class="form-control select2" name="country">
-                                <option value="">@lang('app.select_a_country')</option>
-
-                                @foreach($countries as $country)
-                                    <option value="{{ $country->id }}" {{ request('country') == $country->id ? 'selected' :'' }}>{{ $country->country_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="form-control select2" id="state_select" name="state">
-                                <option value=""> @lang('app.select_state') </option>
-                                @if($selected_countries)
-                                    @foreach($selected_countries->states as $state)
-                                        <option value="{{ $state->id }}" {{ request('state') ==  $state->id ? 'selected':'' }} >{{ $state->state_name }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="form-control select2" id="city_select" name="city">
-                                <option value=""> @lang('app.select_city') </option>
-                                @if($selected_states)
-                                    @foreach($selected_states->cities as $city)
-                                        <option value="{{ $city->id }}" {{ request('city') ==  $city->id ? 'selected':'' }} >{{ $city->city_name }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-
-                        <hr />
-                        <div class="form-group">
-                            <label>@lang('app.price_min_max')</label>
-
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <input type="number" class="form-control" name="min_price" value="{{ request('min_price') }}" placeholder="@lang('app.min_price')" />
+                    <div id="lightSlider" class="icon">
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="{{ asset('assets/img/icons/n1.png') }}" alt="">
+                                        <p>Байрлах <br /> давхар</p>
+                                    </div>
+                                    <div class="selected-value"></div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <input type="number" class="form-control" name="max_price" value="{{ request('max_price') }}" placeholder="@lang('app.max_price')" />
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='1 давхар'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='2 давхар'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='3 давхар'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='4 давхар'>
+                                            4
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <hr />
-                        <div class="form-group">
-                            <label>@lang('app.property_type')</label>
-
-                            <div class="checkbox">
-                                <label for="type_apartment" class="radio-inline">
-                                    <input type="radio" value="apartment" id="type_apartment" name="type"  {{ request('type') == 'apartment'? 'checked="checked"' : '' }}>
-                                    @lang('app.apartment')
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label for="type_condos" class="radio-inline">
-                                    <input type="radio" value="condos" id="type_condos" name="type"  {{ request('type') == 'condos'? 'checked="checked"' : '' }}>
-                                    @lang('app.condos')
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label for="type_house" class="radio-inline">
-                                    <input type="radio" value="house" id="type_house" name="type" {{ request('type') == 'house'? 'checked="checked"' : '' }}>
-                                    @lang('app.house')
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label for="type_land" class="radio-inline">
-                                    <input type="radio" value="land" id="type_land" name="type" {{ request('type') == 'land'? 'checked="checked"' : '' }}>
-                                    @lang('app.land')
-                                </label>
-                            </div>
-
-
-                            <div class="checkbox">
-                                <label for="type_commercial_space" class="radio-inline">
-                                    <input type="radio" value="commercial_space" id="type_commercial_space" name="type" {{ request('type') == 'commercial_space'? 'checked="checked"' : '' }}>
-                                    @lang('app.commercial_space')
-                                </label>
-                            </div>
-
-                            <div class="checkbox">
-                                <label for="type_villa" class="radio-inline">
-                                    <input type="radio" value="villa" id="type_villa" name="type" {{ request('type') == 'villa'? 'checked="checked"' : '' }}>
-                                    @lang('app.villa')
-                                </label>
-                            </div>
-
-                        </div>
-
-                        <hr />
-                        <div class="form-group">
-                            <div class="row">
-                                <div class=" col-sm-6 col-xs-12">
-                                    <button class="btn btn-primary btn-block"><i class="fa fa-search"></i>  @lang('app.filter')</button>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n2.png" alt="">
+                                        <p>Унтлагын <br /> өрөө</p>
+                                    </div>
+                                    <div class="selected-value"></div>
                                 </div>
-                                <div class=" col-sm-6 col-xs-12">
-                                    <a href="{{ route('listing') }}" class="btn btn-default btn-block"><i class="fa fa-refresh"></i>  @lang('app.reset')</a>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        {{ Form::close() }}
-                        <div class="clearfix"></div>
-
-                        @if($enable_monetize)
-                            {!! get_option('monetize_code_listing_sidebar_bottom') !!}
-                        @endif
-
-                    </div>
-
-                </div>
-
-                <div class="sidebar-widget">
-                    <h3>@lang('app.feature_agents')</h3>
-                    @foreach($agents as $agent)
-                        <div class="sidebar-feature-agents">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <a href="{{ route('listing', ['user_id'=>$agent->id]) }}">
-                                        <img src="{{ $agent->get_gravatar() }}" class="img-circle img-responsive" /> </a>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n3.png" alt="">
+                                        <p>Шүршүүр <br /> ванн</p>
+                                    </div>
+                                    <div class="selected-value"></div>
                                 </div>
-                                <div class="col-xs-9">
-                                    <a href="{{ route('listing', ['user_id'=>$agent->id]) }}">
-                                        <h5>{{ $agent->name }}</h5>
-                                        <p class="text-muted"><i class="fa fa-map-marker"></i> {{ $agent->get_address()}}</p>
-                                        <p class="text-muted"><i class="fa fa-building-o"></i> {{ $agent->ads->count() }} @lang('app.estates')
-                                            @if($agent->phone), <i class="fa fa-phone"></i> {{ $agent->phone }} @endif
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class=`"option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n4.png" alt="">
+                                        <p>Бие засах <br /> өрөө</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n5.png" alt="">
+                                        <p>Цонхны <br /> тоо</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n6.png" alt="">
+                                        <p>Барилгын <br /> хийцлэл</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n7.png" alt="">
+                                        <p>Шалны <br /> материал</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n8.png" alt="">
+                                        <p>Гадна <br /> хаалга</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n5.png" alt="">
+                                        <p>Цахилгаан <br /> шат</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n10.png" alt="">
+                                        <p>Хог <br /> хаяхад</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n11.png" alt="">
+                                        <p>Харуул <br /> хамгаалалт</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n12.png" alt="">
+                                        <p>Дулаан <br /> зогсоол</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n13.png" alt="">
+                                        <p>Тоглоомын <br /> талбай</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n14.png" alt="">
+                                        <p>Ногоон <br /> байгууламж</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n15.png" alt="">
+                                        <p>Автобусны <br /> буудал ойр</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n16.png" alt="">
+                                        <p>цэцэрлэг <br /> ойр</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n17.png" alt="">
+                                        <p>сургууль <br /> ойр</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <img src="assets/images/icons/n18.png" alt="">
+                                        <p>дэлгүүр <br /> ойр</p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options">
+                                    <div class="">
+                                        <div class="option" data-value='35 - 45 m2'>
+                                            1
+                                        </div>
+                                        <div class="option" data-value='45 - 55 m2'>
+                                            2
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            3
+                                        </div>
+                                        <div class="option" data-value='55 - 65 m2'>
+                                            4
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Баригдсан <br /> он
                                         </p>
-                                    </a>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='2001'>
+                                            2001
+                                        </div>
+                                        <div class="option" data-value='2002'>
+                                            2002
+                                        </div>
+                                        <div class="option" data-value='2003'>
+                                            2003
+                                        </div>
+                                        <div class="option" data-value='2004'>
+                                            2004
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
 
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Баригдсан <br /> он
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='2001'>
+                                            2001
+                                        </div>
+                                        <div class="option" data-value='2002'>
+                                            2002
+                                        </div>
+                                        <div class="option" data-value='2003'>
+                                            2003
+                                        </div>
+                                        <div class="option" data-value='2004'>
+                                            2004
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Зохион <br />байгуулалт
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Барилгын <br />үнэлгээ
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Барилгын <br />талбай
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Суурь <br /> хийцлэл
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Фасадны <br /> төрөл
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Таазны <br /> өндөр
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Цонхны <br /> материал
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Цонхны <br /> хэмжээ
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Балконы <br /> тоо
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Балконы <br /> төрөл
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Халаалтын <br /> шугам
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Усан <br /> хангамж
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Тэсвэртэй <br /> баллын хэмжээ
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Гаднах <br /> зогсоол
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Үйлчилгээний төв <br /> байгаа эсэх
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no-icon">
+                            <div class="custom-basic-select icon">
+                                <div class="custom-select-title">
+                                    <div class="icon-container">
+                                        <!-- <img src="assets/images/icons/n6.png" alt=""> -->
+                                        <p>
+                                            Барилгын <br /> явц
+                                        </p>
+                                    </div>
+                                    <div class="selected-value"></div>
+                                </div>
+
+                                <div class="custom-select-options single">
+                                    <div class="">
+                                        <div class="option" data-value='Төмөр бетон каркас'>
+                                            Төмөр бетон каркас
+                                        </div>
+                                        <div class="option" data-value='Бүрэн цутгамал'>
+                                            Бүрэн цутгамал
+                                        </div>
+                                        <div class="option" data-value='Угсармал'>
+                                            Угсармал
+                                        </div>
+                                        <div class="option" data-value='Модон'>
+                                            Модон
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="clear"></div>
+                    <div class="filter-footer-container">
+                        <div class="filter-footer">
+                            <div class="advanced-search" data-opens="0">
+                                <i class="fa fa-chevron-down"></i>
+                                <span>Нарийвчилсан хайлт</span>
+                            </div>
+                            <div>
+                                <b>{{ $ads->total() }}</b> хайлтын үр дүн байна
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-sm-12">
-
-                        <?php
-                        $allAdTab = route('listing').str_replace('/', '', str_replace(route('listing'), '', request()->fullUrlWithQuery(['adType'=>'all'])));
-                        $personalAdTab = route('listing').str_replace('/', '', str_replace(route('listing'), '', request()->fullUrlWithQuery(['adType'=>'personal'])));
-                        $businessAdTab = route('listing').str_replace('/', '', str_replace(route('listing'), '', request()->fullUrlWithQuery(['adType'=>'business'])));
-
-                        ?>
-
-                        <div class="listingTopFilterBar">
-                            <span class="totalFoundListingTop">@lang('app.total') <strong>{{ $ads->total() }}</strong> @lang('app.ads_founds') </span>
-
-                            <ul class="listingViewIcon pull-right">
-                                <li class="dropdown shortByListingLi">
-                                    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">@lang('app.short_by') <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ request()->fullUrlWithQuery(['shortBy'=>'price_high_to_low']) }}">@lang('app.price_high_to_low')</a></li>
-                                        <li><a href="{{ request()->fullUrlWithQuery(['shortBy'=>'price_low_to_high']) }}">@lang('app.price_low_to_high')</a></li>
-                                        <li><a href="{{ request()->fullUrlWithQuery(['shortBy'=>'latest']) }}">@lang('app.latest')</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0)" id="showGridView">
-                                        <i class="fa fa-th-large"></i> </a> </li>
-                                <li><a href="javascript:void(0)" id="showListView">
-                                        <i class="fa fa-list"></i> </a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                @if($enable_monetize)
-                    <div class="row">
-                        <div class="col-sm-12">
-                            {!! get_option('monetize_code_listing_above_premium_ads') !!}
-                        </div>
-                    </div>
-                @endif
-
+        <div class="row">
+            <div class="col-md-12">
                 <div class="ad-box-wrap">
-                    @if( ! request('user_id'))
-                        @if($premium_ads)
-                            @if($premium_ads->count() > 0)
-                                <div class="ad-box-premium-wrap">
-                                    <h3>@lang('app.premium_ads')</h3>
-                                    <div class="ad-box-grid-view" style="display: {{ session('grid_list_view') ? (session('grid_list_view') == 'grid'? 'block':'none') : 'block' }};">
-                                        <div class="row">
-                                            @foreach($premium_ads as $ad)
-                                                {{-- */ session('grid_list_view') ? (session('grid_list_view') == 'grid'? $ad->increase_impression() :'none') : $ad->increase_impression(); /*--}}
 
-                                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-{{$ad->price_plan}}">
-                                                        <div class="ads-thumbnail">
-                                                            <a href="{{ route('single_ad', $ad->slug) }}">
-                                                                <img itemprop="image"  src="{{ media_url($ad->feature_img) }}" class="img-responsive" alt="{{ $ad->title }}">
-                                                                 <span class="modern-img-indicator">
-                                                                     @if(! empty($ad->video_url))
-                                                                         <i class="fa fa-file-video-o"></i>
-                                                                     @else
-                                                                         <i class="fa fa-file-image-o"> {{ $ad->media_img->count() }}</i>
-                                                                     @endif
-                                                                 </span>
-                                                            </a>
+                    @if($ads->total() > 0)
+                        <div class="ad-box-grid-view" style="display: {{ session('grid_list_view') ? (session('grid_list_view') == 'grid'? 'block':'none') : 'block' }};">
+                            <div class="grid-five">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="grid-container">
+                                            @foreach($ads as $ad)
+                                                <div class="grid-item">
+                                                    <a href="">
+                                                        <div class="img-container">
+                                                            <img itemprop="image" width="100%" src="{{ media_url($ad->feature_img) }}" alt="{{ $ad->title }}" />
+
+                                                            <div class="heart">
+                                                                <i class="material-icons">
+                                                                    favorite_border
+                                                                </i>
+                                                            </div>
+                                                            <div class="beds">
+                                                                <i class="material-icons">
+                                                                    hotel
+                                                                </i>
+                                                                2
+                                                            </div>
+                                                            <div class="plans">
+                                                                <i class="material-icons">
+                                                                    domain
+                                                                </i> 7
+                                                            </div>
                                                         </div>
-                                                        <div class="caption">
-                                                            <h4><a href="{{ route('single_ad', $ad->slug) }}" title="{{ $ad->title }}"><span itemprop="name">{{ str_limit($ad->title, 40) }} </span></a></h4>
-
-                                                            <p class="price"> <span itemprop="price" content="{{$ad->price}}"> {{ themeqx_price_ng($ad) }} </span></p>
-
-                                                            <table class="table table-responsive property-box-info">
-
-                                                                @if($ad->city)
-                                                                    <tr>
-                                                                        <td> <a class="location text-muted" href="{{ route('listing', ['city' => $ad->city->id]) }}"> <i class="fa fa-map-marker"></i> {{ $ad->city->city_name }} </a>
-                                                                        </td>
-                                                                        <td> <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> {{ $ad->created_at->diffForHumans() }}</p> </td>
-                                                                    </tr>
-                                                                @endif
-
-                                                                <tr>
-                                                                    <td> <i class="fa fa-building"></i> {{ ucfirst($ad->type) }} </td>
-                                                                    <td><i class="fa fa-arrows-alt "></i>  {{ $ad->square_unit_space.' '.$ad->unit_type }}</td>
-                                                                </tr>
-
-                                                                @if($ad->beds)
-                                                                    <tr>
-                                                                        <td><i class="fa fa-bed"></i> {{ $ad->beds.' '.trans('app.bedrooms') }}</td>
-                                                                        <td> {{ $ad->floor.' '.trans('app.floor') }} </td>
-                                                                    </tr>
-                                                                @endif
-
-                                                            </table>
-
-                                                        </div>
-
-                                                        @if($ad->price_plan == 'premium')
-                                                            <div class="ribbon-wrapper-green"><div class="ribbon-green">{{ ucfirst($ad->price_plan) }}</div></div>
-                                                        @endif
-                                                        @if($ad->mark_ad_urgent == '1')
-                                                            <div class="ribbon-wrapper-red"><div class="ribbon-red">@lang('app.urgent')</div></div>
-                                                        @endif
-
-                                                    </div>
+                                                        <h3>City Apartment</h3>
+                                                        <p>{{ themeqx_price_ng($ad) }}</p>
+                                                        <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="ad-box-list-view" style="display: {{ session('grid_list_view') == 'list'? 'block':'none' }};">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered table-responsive">
-                                                @foreach($premium_ads as $ad)
-                                                    {{-- */ session('grid_list_view') == 'list'? $ad->increase_impression() :'none' /*--}}
-                                                    <tr class="ad-{{ $ad->price_plan }}">
-                                                        <td width="100">
-                                                            <img src="{{ media_url($ad->feature_img) }}" class="img-responsive" alt="">
-                                                            <span class="modern-img-indicator">
-                                                                @if(! empty($ad->video_url))
-                                                                    <i class="fa fa-file-video-o"></i>
-                                                                @else
-                                                                    <i class="fa fa-file-image-o"> {{ $ad->media_img->count() }}</i>
-                                                                @endif
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                            <h5><a href="{{ route('single_ad', $ad->slug) }}" >{{ $ad->title }}</a> </h5>
-                                                            <p class="text-muted">
-                                                                @if($ad->city)
-                                                                    <i class="fa fa-map-marker"></i> <a class="location text-muted" href="{{ route('listing', ['city'=>$ad->city->id]) }}"> {{ $ad->city->city_name }} </a>,
-                                                                @endif
-                                                                <i class="fa fa-clock-o"></i> {{ $ad->created_at->diffForHumans() }}
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <h5>{{ themeqx_price_ng($ad) }}</h5>
-                                                            @if($ad->price_plan == 'premium')
-                                                                <div class="ribbon-green-bar">{{ ucfirst($ad->price_plan) }}</div>
-                                                            @endif
-                                                            @if($ad->mark_ad_urgent == '1')
-                                                                <div class="ribbon-red-bar">@lang('app.urgent')</div>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endif
-                    @endif
-
-                    @if($enable_monetize)
-                        <div class="row">
-                            <div class="col-sm-12">
-                                {!! get_option('monetize_code_listing_above_regular_ads') !!}
-                            </div>
-                        </div>
-                    @endif
-
-                    @if($ads->total() > 0)
-
-                            <h3>@lang('app.listing_results')</h3>
-
-                        <div class="ad-box-grid-view" style="display: {{ session('grid_list_view') ? (session('grid_list_view') == 'grid'? 'block':'none') : 'block' }};">
-                            <div class="row">
-                                @foreach($ads as $ad)
-                                    <div class="col-md-4 col-sm-6 col-xs-12">
-                                        <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-{{$ad->price_plan}}">
-                                            <div class="ads-thumbnail">
-                                                <a href="{{ route('single_ad', $ad->slug) }}">
-                                                    <img itemprop="image"  src="{{ media_url($ad->feature_img) }}" class="img-responsive" alt="{{ $ad->title }}">
-
-
-                                                @if($ad->purpose)
-                                                        <span class="modern-sale-rent-indicator">
-                                                    {{ ucfirst($ad->purpose) }}
-                                                </span>
-                                                    @endif
-
-                                                    <span class="modern-img-indicator">
-                                                @if(! empty($ad->video_url))
-                                                            <i class="fa fa-file-video-o"></i>
-                                                        @else
-                                                            <i class="fa fa-file-image-o"> {{ $ad->media_img->count() }}</i>
-                                                        @endif
-                                            </span>
-                                                </a>
-                                            </div>
-                                            <div class="caption">
-                                                <h4><a href="{{ route('single_ad', $ad->slug) }}" title="{{ $ad->title }}"><span itemprop="name">{{ str_limit($ad->title, 40) }} </span></a></h4>
-
-                                                <p class="price"> <span itemprop="price" content="{{$ad->price}}"> {{ themeqx_price_ng($ad) }} </span></p>
-
-                                                <table class="table table-responsive property-box-info">
-
-                                                    @if($ad->city)
-                                                        <tr>
-                                                            <td> <a class="location text-muted" href="{{ route('listing', ['city' => $ad->city->id]) }}"> <i class="fa fa-map-marker"></i> {{ $ad->city->city_name }} </a>
-                                                            </td>
-                                                            <td> <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> {{ $ad->created_at->diffForHumans() }}</p> </td>
-                                                        </tr>
-                                                    @endif
-
-                                                    <tr>
-                                                        <td> <i class="fa fa-building"></i> {{ ucfirst($ad->type) }} </td>
-                                                        <td><i class="fa fa-arrows-alt "></i>  {{ $ad->square_unit_space.' '.$ad->unit_type }}</td>
-                                                    </tr>
-
-                                                    @if($ad->beds)
-                                                        <tr>
-                                                            <td><i class="fa fa-bed"></i> {{ $ad->beds.' '.trans('app.bedrooms') }}</td>
-                                                            <td> {{ $ad->floor.' '.trans('app.floor') }} </td>
-                                                        </tr>
-                                                    @endif
-
-                                                </table>
-
-                                            </div>
-
-                                            @if($ad->price_plan == 'premium')
-                                                <div class="ribbon-wrapper-green"><div class="ribbon-green">{{ ucfirst($ad->price_plan) }}</div></div>
-                                            @endif
-                                            @if($ad->mark_ad_urgent == '1')
-                                                <div class="ribbon-wrapper-red"><div class="ribbon-red">@lang('app.urgent')</div></div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endforeach
                             </div>
                         </div>
 
@@ -520,14 +1382,6 @@
                             <h2><i class="fa fa-info-circle"></i> @lang('app.search_not_found') </h2>
                         </div>
                     @endif
-
-                    @if($enable_monetize)
-                        <div class="row">
-                            <div class="col-sm-12">
-                                {!! get_option('monetize_code_listing_below_regular_ads') !!}
-                            </div>
-                        </div>
-                    @endif
                 </div>
 
 
@@ -538,9 +1392,8 @@
                 </div>
             </div>
         </div>
-
     </div>
-
+</div>
 @endsection
 
 

@@ -14,6 +14,8 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+//admin
+Vue.component('option-list', require('./components/OptionList.vue'));
 
 const app = new Vue({
     el: '#app'
