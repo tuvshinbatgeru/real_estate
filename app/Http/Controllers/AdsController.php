@@ -588,46 +588,46 @@ class AdsController extends Controller
         if ($request->type){
             $ads = $ads->whereType($request->type);
         }
-        if ($request->country){
-            $ads = $ads->whereCountryId($request->country);
-        }
-        if ($request->state){
-            $ads = $ads->whereStateId($request->state);
-        }
-        if ($request->city){
-            $ads = $ads->whereCityId($request->city);
-        }
-        if ($request->min_price){
-            $ads = $ads->where('price', '>=', $request->min_price);
-        }
-        if ($request->max_price){
-            $ads = $ads->where('price', '<=', $request->max_price);
-        }
-        if ($request->adType){
-            if ($request->adType == 'business') {
-                $ads = $ads->business();
-            }elseif ($request->adType == 'personal'){
-                $ads = $ads->personal();
-            }
-        }
-        if ($request->user_id){
-            $ads = $ads->whereUserId($request->user_id);
-        }
-        if ($request->shortBy){
-            switch ($request->shortBy){
-                case 'price_high_to_low':
-                    $ads = $ads->orderBy('price', 'desc');
-                    break;
-                case 'price_low_to_height':
-                    $ads = $ads->orderBy('price', 'asc');
-                    break;
-                case 'latest':
-                    $ads = $ads->orderBy('id', 'desc');
-                    break;
-            }
-        }else{
-            $ads = $ads->orderBy('id', 'desc');
-        }
+        // if ($request->country){
+        //     $ads = $ads->whereCountryId($request->country);
+        // }
+        // if ($request->state){
+        //     $ads = $ads->whereStateId($request->state);
+        // }
+        // if ($request->city){
+        //     $ads = $ads->whereCityId($request->city);
+        // }
+        // if ($request->min_price){
+        //     $ads = $ads->where('price', '>=', $request->min_price);
+        // }
+        // if ($request->max_price){
+        //     $ads = $ads->where('price', '<=', $request->max_price);
+        // }
+        // if ($request->adType){
+        //     if ($request->adType == 'business') {
+        //         $ads = $ads->business();
+        //     }elseif ($request->adType == 'personal'){
+        //         $ads = $ads->personal();
+        //     }
+        // }
+        // if ($request->user_id){
+        //     $ads = $ads->whereUserId($request->user_id);
+        // }
+        // if ($request->shortBy){
+        //     switch ($request->shortBy){
+        //         case 'price_high_to_low':
+        //             $ads = $ads->orderBy('price', 'desc');
+        //             break;
+        //         case 'price_low_to_height':
+        //             $ads = $ads->orderBy('price', 'asc');
+        //             break;
+        //         case 'latest':
+        //             $ads = $ads->orderBy('id', 'desc');
+        //             break;
+        //     }
+        // }else{
+        //     $ads = $ads->orderBy('id', 'desc');
+        // }
 
         $ads_per_page = get_option('ads_per_page');
         $ads = $ads->with('city');
@@ -663,14 +663,17 @@ class AdsController extends Controller
         $selected_categories = Category::find($request->category);
         $selected_sub_categories = Category::find($request->sub_category);
 
+        $filters = Category::with('options')->get();
+
         $selected_countries = Country::find($request->country);
         $selected_states = State::find($request->state);
         //dd($selected_countries->states);
 
         $agents = User::whereActiveStatus('1')->whereFeature('1')->whereUserType('user')->take(10)->orderBy('id', 'desc')->get();
 
+        //dd($filters);
         //return view($this->theme.'listing', compact('top_categories', 'ads', 'title', 'countries', 'selected_categories', 'selected_sub_categories', 'selected_countries', 'selected_states', 'premium_ads', 'agents'));
-        return view($this->theme.'listing', compact( 'ads', 'title', 'countries', 'selected_categories', 'selected_sub_categories', 'selected_countries', 'selected_states', 'premium_ads', 'agents'));
+        return view($this->theme.'listing', compact('filters', 'ads', 'title', 'countries', 'selected_categories', 'selected_sub_categories', 'selected_countries', 'selected_states', 'premium_ads', 'agents'));
     }
 
     /**

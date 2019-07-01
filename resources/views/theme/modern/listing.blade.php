@@ -186,34 +186,37 @@
                     </div>
 
                     <div id="lightSlider" class="icon">
-                        <div class="">
-                            <div class="custom-basic-select icon">
-                                <div class="custom-select-title">
-                                    <div class="icon-container">
-                                        <img src="{{ asset('assets/img/icons/n1.png') }}" alt="">
-                                        <p>Байрлах <br /> давхар</p>
+                        @foreach($filters as $filter)
+                            <div class="">
+                                <div class="custom-basic-select icon">
+                                    <div class="custom-select-title">
+                                        <div class="icon-container">
+                                            <img src="{{ asset('assets/img/icons/' . $filter->icon_active . '.png') }}" alt="">
+                                            <p>{{ $filter->category_name }}</p>
+                                        </div>
+                                        <div class="selected-value"></div>
                                     </div>
-                                    <div class="selected-value"></div>
-                                </div>
 
-                                <div class="custom-select-options">
-                                    <div class="">
-                                        <div class="option" data-value='1 давхар'>
-                                            1
-                                        </div>
-                                        <div class="option" data-value='2 давхар'>
-                                            2
-                                        </div>
-                                        <div class="option" data-value='3 давхар'>
-                                            3
-                                        </div>
-                                        <div class="option" data-value='4 давхар'>
-                                            4
+                                    <div class="custom-select-options">
+                                        <div class="">
+                                            <div class="option" data-value='1 давхар'>
+                                                1
+                                            </div>
+                                            <div class="option" data-value='2 давхар'>
+                                                2
+                                            </div>
+                                            <div class="option" data-value='3 давхар'>
+                                                3
+                                            </div>
+                                            <div class="option" data-value='4 давхар'>
+                                                4
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+                        
                         <div class="">
                             <div class="custom-basic-select icon">
                                 <div class="custom-select-title">

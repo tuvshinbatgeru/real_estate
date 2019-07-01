@@ -44,7 +44,7 @@ class CategoriesController extends Controller
     {
         $rules = [
             'category_name' => 'required',
-            'icon_idle' => 'required',
+            //'icon_idle' => 'required',
             'icon_active' => 'required'
         ];
 
@@ -54,7 +54,7 @@ class CategoriesController extends Controller
 
         $data = [
             'category_name' => $request->category_name,
-            'icon_idle'   => $request->icon_idle,
+            //'icon_idle'   => $request->icon_idle,
             'icon_active'   => $request->icon_active,
         ];
 

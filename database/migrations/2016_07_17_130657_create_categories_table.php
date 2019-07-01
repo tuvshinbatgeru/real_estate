@@ -17,7 +17,6 @@ class CreateCategoriesTable extends Migration
             $table->string('category_name')->nullable();
             $table->string('category_slug')->nullable();
             $table->string('fa_icon')->nullable();
-            $table->string('icon_idle');
             $table->string('icon_active');
             $table->enum('is_mandatory', ['Y','N'])->default('N');
             $table->enum('is_active', ['Y','N'])->default('Y');
