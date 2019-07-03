@@ -207,7 +207,16 @@
                             <div class="col-sm-12">
                                 @if($categories->count() > 0)
                                     @foreach($categories as $category)
-                                        <label> <input type="checkbox" value="{{ $category->id }}" name="amenities[{{$category->id}}]"> {{ $category->category_name }} </label>
+                                        <div class="form-group {{ $errors->has('square_unit_space')? 'has-error':'' }}">
+                                            <label for="square_unit_space" class="col-sm-4 control-label">{{ $category->category_name }}</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" name="category_option[]">
+                                                    @foreach($category->options as $option)
+                                                        <option value="{{ $category->id }}.{{ $option->id }}">{{ $option->option }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>                                        
                                     @endforeach
                                 @endif
                             </div>

@@ -89,7 +89,7 @@ class AdsController extends Controller
     {
         $user_id = Auth::user()->id;
         $title = trans('app.post_an_ad');
-        $categories = Category::all();
+        $categories = Category::with('options')->get();
         $distances = Brand::all();
         $countries = Country::all();
 
@@ -205,6 +205,18 @@ class AdsController extends Controller
             //Attach all unused media with this ad
             Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->update(['ad_id'=>$created_ad->id]);
 
+            $options = [];
+            foreach($request->category_option as $option){
+                $separators = explode(".", $option);
+                array_push($options, [
+                    'category_id' => $separators[0],
+                    'option_id' => $separators[1]
+                ]);
+            }
+
+            $created_ad->categories()->createMany($options);
+
+            //$created_ad->options
             /**
              * Payment transaction login here
              */
@@ -710,7 +722,7 @@ class AdsController extends Controller
         // $indore_ammenties = Category::whereCategoryType('indoor')->get();
         // $outdoor_ammenties = Category::whereCategoryType('outdoor')->get();
         //Get Related Ads, add [->whereCountryId($ad->country_id)] for more specific results
-        $related_ads = Ad::active()->whereUserId($ad_agent_id)->where('id', '!=',$ad->id)->with('city')->limit($limit_regular_ads)->orderByRaw('RAND()')->get();
+        $related_ads = Ad::active()->whereUserId($ad_agent_id)->where('id', '!=',$ad->id)->with('city')->limit($limit_regular_ads)->orderByRaw('RAND()')->take(5)->get();
 
         $agents = User::whereActiveStatus('1')->whereFeature('1')->whereUserType('user')->take(10)->orderBy('id', 'desc')->get();
 

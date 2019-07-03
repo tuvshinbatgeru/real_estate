@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.admin-layout')
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 

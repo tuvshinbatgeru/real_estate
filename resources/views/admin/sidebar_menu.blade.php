@@ -6,11 +6,12 @@
                 <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> @lang('app.dashboard')</a>
             </li>
 
-            @if($lUser->is_admin())
+            
+            {{-- @if($lUser->is_admin())
                 <li> 
                     <a href="{{route('ad_queries_listing')}}"><i class="fa"></i> @lang('app.ad_queries')</a>  
                 </li>    
-            @endif
+             @endif--}}
 
             <li>
                 <a href="#"><i class="fa"></i> @lang('app.my_ads')<span class="fa arrow"></span></a>
@@ -18,7 +19,6 @@
                     <li>  <a href="{{ route('my_ads') }}"> @lang('app.my_ads')</a> </li>
                     <li>  <a href="{{ route('create_ad') }}"> @lang('app.post_an_ad')</a> </li>
                     <li>  <a href="{{ route('pending_ads') }}"> @lang('app.pending_for_approval')</a> </li>
-                    <li>  <a href="{{ route('favorite_ads') }}"> @lang('app.favourite_ads')</a> </li>
                 </ul>
             </li>
 
@@ -34,8 +34,8 @@
                 </ul>
             </li>
 
-            <li> <a href="{{ route('pages') }}"><i class="fa"></i> @lang('app.pages')</a>  </li>
-            <li> <a href="{{ route('ad_reports') }}"><i class="fa"></i> @lang('app.ad_reports')</a>  </li>
+            {{-- <li> <a href="{{ route('pages') }}"><i class="fa"></i> @lang('app.pages')</a>  </li> --}}
+            {{-- <li> <a href="{{ route('ad_reports') }}"><i class="fa"></i> @lang('app.ad_reports')</a>  </li> --}}
             <li> <a href="{{ route('users') }}"><i class="fa"></i> @lang('app.users')</a>  </li>
 
             {{-- <li>
