@@ -293,7 +293,7 @@ class AdsController extends Controller
         }
 
         $countries = Country::all();
-        $ads_images = Media::whereUserId($user_id)->whereAdId(0)->whereRef('ad')->get();
+        $ads_images = Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->get();
 
         $previous_states = State::where('country_id', $ad->country_id)->get();
         $previous_cities = City::where('state_id', $ad->state_id)->get();
@@ -396,7 +396,7 @@ class AdsController extends Controller
          */
         if ($updated_ad){
             //Attach all unused media with this ad
-            Media::whereUserId($user_id)->whereAdId(0)->whereRef('ad')->update(['ad_id'=>$ad->id]);
+            Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->update(['ad_id'=>$ad->id]);
         }
 
         return redirect()->back()->with('success', trans('app.ad_updated'));
