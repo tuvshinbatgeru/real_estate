@@ -16,6 +16,7 @@ require('./bootstrap');
 Vue.component('example', require('./components/Example.vue'));
 //admin
 Vue.component('option-list', require('./components/OptionList.vue'));
+Vue.component('main-filter', require('./components/MainFilter.vue'));
 
 const app = new Vue({
     el: '#app'

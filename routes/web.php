@@ -23,6 +23,7 @@ Route::get('blog', ['as' => 'blog', 'uses'=>'PostController@blogIndex']);
 Route::get('blog/{slug}', ['as' => 'blog_single', 'uses'=>'PostController@blogSingle']);
 Route::get('blog/author/{id}', ['as' => 'author_blog_posts', 'uses'=>'PostController@authorPosts']);
 
+Route::get('category/all', 'CategoriesController@all');
 
 Route::get('listing', ['as' => 'listing', 'uses'=>'AdsController@listing']);
 Route::get('ad/{slug}', ['as' => 'single_ad', 'uses'=>'AdsController@singleAd']);
@@ -45,7 +46,6 @@ Route::post('password/reset/{token}', [ 'uses' => 'UserController@passwordResetP
 // Password reset routes...
 //Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 //Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
-
 
 Route::post('get-sub-category-by-category', ['as'=>'get_sub_category_by_category', 'uses' => 'AdsController@getSubCategoryByCategory']);
 Route::post('get-brand-by-category', ['as'=>'get_brand_by_category', 'uses' => 'AdsController@getBrandByCategory']);

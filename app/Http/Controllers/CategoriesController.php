@@ -24,6 +24,15 @@ class CategoriesController extends Controller
         return view('admin.categories', compact('title', 'categories'));
     }
 
+    public function all()
+    {
+        $categories = Category::all();
+        return response()->json([
+            'code' => 0,
+            'data' => $categories
+        ]); 
+    }
+
     /**
      * Show the form for creating a new resource.
      *
