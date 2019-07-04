@@ -20,25 +20,25 @@
                                         <b class="blue-color">мөрөөдлөө</b> биелүүлээрэй
                                     </h3>
                                     <div class="top-search blue-background">
-                                        <div class="row">
-                                            <div class="col s12">
-                                                <div class="row">
-                                                    <div class="input-field col s12">
-                                                        <i class="material-icons prefix">zoom_in</i>
-                                                        <input type="text" id="autocomplete-input" class="autocomplete">
-                                                        <label for="autocomplete-input"> Дүүрэг, Хороо болон хотхоны нэрийг
-                                                            оруулна уу
-                                                        </label>
+                                        <form action='/listing' method='get'>
+                                            <div class="row">
+                                                <div class="col s12">
+                                                    <div class="row">
+                                                        <div class="input-field col s12">
+                                                            <i class="material-icons prefix">zoom_in</i>
+                                                            <input type="text" name="q" id="autocomplete-input" class="autocomplete">
+                                                            <label for="autocomplete-input"> Дүүрэг, Хороо болон хотхоны нэрийг
+                                                                оруулна уу
+                                                            </label>
+                                                        </div>
+                                                        <button class="btn waves-effect waves-light blue lighten-5"
+                                                            type="submit">
+                                                                Хайх
+                                                        </button>
                                                     </div>
-                                                    <button class="btn waves-effect waves-light blue lighten-5"
-                                                        type="submit" name="action">
-                                                        <a href="/listing">
-                                                            Хайх
-                                                        </a>
-                                                    </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -185,32 +185,6 @@
 
                                     <div class="custom-basic-select">
                                         <div class="custom-select-title">
-                                            <div>
-                                                Координат
-                                                <!-- <span>Өгөгдөлийг энд оруулна уу!</span> -->
-                                            </div>
-                                            <div class="selected-value"></div>
-                                        </div>
-                                        <div class="custom-select-options">
-                                            <!-- <div class="custom-select-item"> -->
-                                            <div class="option" data-value='35 - 45 m2'>
-                                                35 - 45 m2
-                                            </div>
-                                            <div class="option" data-value='45 - 55 m2'>
-                                                35 - 45 m2
-                                            </div>
-                                            <div class="option" data-value='55 - 65 m2'>
-                                                35 - 45 m2
-                                            </div>
-                                            <div class="option" data-value='55 - 65 m2'>
-                                                35 - 45 m2
-                                            </div>
-                                            <!-- </div> -->
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-basic-select">
-                                        <div class="custom-select-title">
                                             Нүүж ороход бэлэн эсэх
                                             <div class="selected-value"></div>
                                         </div>
@@ -290,18 +264,26 @@
                     <div class="container">
                         <div class="row">
                             <div class="grid-container">
-                                <div class="grid-item">
-                                    <span class="tag">Шинэ</span>
-                                    <h3>City Apartment</h3>
-                                    <p>1,500,000₮</p>
-                                    <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
-                                </div>
-                                <div class="grid-item">
-                                    <span class="tag">Шинэ</span>
-                                    <h3>City Apartment</h3>
-                                    <p>1,500,000₮</p>
-                                    <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
-                                </div>
+                                @if(count($urgent_ads) > 0)
+                                    <a href="{{ route('single_ad', $urgent_ads[0]->slug) }}">
+                                        <div class="grid-item" style="background-image: url('{{ media_url($urgent_ads[0]->feature_img) }}');">
+                                            <span class="tag">Шинэ</span>
+                                            <h3>{{ $urgent_ads[0]->title }}</h3>
+                                            <p>{{ themeqx_price_ng($urgent_ads[0]) }}</p>
+                                            <span>{{ $urgent_ads[0]->square_unit_space.' '.$urgent_ads[0]->unit_type }}</span>                                                  
+                                        </div>
+                                    </a>
+                                @endif
+                                @if(count($urgent_ads) > 1)
+                                    <a href="{{ route('single_ad', $urgent_ads[1]->slug) }}">
+                                        <div class="grid-item" style="background-image: url('{{ media_url($urgent_ads[1]->feature_img) }}');">
+                                            <span class="tag">Шинэ</span>
+                                            <h3>{{ $urgent_ads[1]->title }}</h3>
+                                            <p>{{ themeqx_price_ng($urgent_ads[1]) }}</p>
+                                            <span>{{ $urgent_ads[1]->square_unit_space.' '.$urgent_ads[1]->unit_type }}</span>                                                  
+                                        </div>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -324,17 +306,17 @@
                                                     <i class="material-icons">
                                                         hotel
                                                     </i>
-                                                    2
+                                                    {{ $ad->beds }}
                                                 </div>
                                                 <div class="plans">
                                                     <i class="material-icons">
                                                         domain
-                                                    </i> 7
+                                                    </i> {{ $ad->floor }}
                                                 </div>
                                             </div>
                                             <h3>{{ $ad->title }}</h3>
                                             <p>{{ themeqx_price_ng($ad) }}</p>
-                                            <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
+                                            <span>{{ $ad->square_unit_space.' '.$ad->unit_type }}</span>
                                         </a>
                                     </div>
                                 @endforeach
@@ -346,18 +328,26 @@
                     <div class="container">
                         <div class="row">
                             <div class="grid-container">
-                                <div class="grid-item">
-                                    <span class="tag">Шинэ</span>
-                                    <h3>City Apartment</h3>
-                                    <p>1,500,000₮</p>
-                                    <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
-                                </div>
-                                <div class="grid-item">
-                                    <span class="tag">Шинэ</span>
-                                    <h3>City Apartment</h3>
-                                    <p>1,500,000₮</p>
-                                    <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
-                                </div>
+                                @if(count($urgent_ads) > 2)
+                                    <a href="{{ route('single_ad', $urgent_ads[2]->slug) }}">
+                                        <div class="grid-item" style="background-image: url('{{ media_url($urgent_ads[2]->feature_img) }}');">
+                                            <span class="tag">Шинэ</span>
+                                            <h2>{{ $urgent_ads[2]->title }}</h2>
+                                            <p>{{ themeqx_price_ng($urgent_ads[2]) }}</p>
+                                            <span>{{ $urgent_ads[2]->square_unit_space.' '.$urgent_ads[2]->unit_type }}</span>                                                  
+                                        </div>
+                                    </a>
+                                @endif
+                                @if(count($urgent_ads) > 3)
+                                    <a href="{{ route('single_ad', $urgent_ads[3]->slug) }}">
+                                        <div class="grid-item" style="background-image: url('{{ media_url($urgent_ads[3]->feature_img) }}');">
+                                            <span class="tag">Шинэ</span>
+                                            <h3>{{ $urgent_ads[3]->title }}</h3>
+                                            <p>{{ themeqx_price_ng($urgent_ads[3]) }}</p>
+                                            <span>{{ $urgent_ads[3]->square_unit_space.' '.$urgent_ads[3]->unit_type }}</span>                                                  
+                                        </div>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -367,6 +357,9 @@
                         <div class="row">
                             <div class="grid-container">
                                 @foreach($regular_ads as $ad)
+                                    @if($loop->iteration == 3)
+                                        <iframe width="100%" height="160" src="https://www.youtube.com/embed/isTXSavwoSk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    @endif
                                     <div class="grid-item">
                                         <a href="{{ route('single_ad', $ad->slug) }}">
                                             <div class="img-container">
@@ -380,17 +373,17 @@
                                                     <i class="material-icons">
                                                         hotel
                                                     </i>
-                                                    2
+                                                    {{ $ad->beds }}
                                                 </div>
                                                 <div class="plans">
                                                     <i class="material-icons">
                                                         domain
-                                                    </i> 7
+                                                    </i> {{ $ad->floor }}
                                                 </div>
                                             </div>
                                             <h3>{{ $ad->title }}</h3>
                                             <p>{{ themeqx_price_ng($ad) }}</p>
-                                            <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
+                                            <span>{{ $ad->square_unit_space.' '.$ad->unit_type }}</span>
                                         </a>
                                     </div>
                                 @endforeach

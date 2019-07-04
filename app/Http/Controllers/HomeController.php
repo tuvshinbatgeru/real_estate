@@ -23,7 +23,7 @@ class HomeController extends Controller
         $countries = Country::all();
         $premium_ads = Ad::activePremium()->with('city')->limit($limit_premium_ads)->orderBy('id', 'desc')->get();
         $regular_ads = Ad::activeRegular()->with('city')->limit($limit_regular_ads)->orderBy('id', 'desc')->get();
-        $urgent_ads = Ad::activeUrgent()->with('city')->limit($limit_urgent_ads)->orderBy('id', 'desc')->get();
+        $urgent_ads = Ad::activeUrgent()->with('city')->limit($limit_urgent_ads)->orderBy('id', 'desc')->take(4)->get();
         
         $posts = Post::whereType('post')->whereStatus('1')->limit(get_option('blog_post_amount_in_homepage'))->get();
 

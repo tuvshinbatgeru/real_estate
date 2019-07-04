@@ -138,31 +138,6 @@
                         </div>
                         <div class="custom-basic-select">
                             <div class="custom-select-title">
-                                <div>
-                                    Координат
-                                    <!-- <span>Өгөгдөлийг энд оруулна уу!</span> -->
-                                </div>
-                                <div class="selected-value"></div>
-                            </div>
-                            <div class="custom-select-options">
-                                <!-- <div class="custom-select-item"> -->
-                                <div class="option" data-value='45.00021130, 106.2130'>
-                                    45.00021130, 106.2130
-                                </div>
-                                <div class="option" data-value='45 - 55 m2'>
-                                    45.00021130, 106.2130
-                                </div>
-                                <div class="option" data-value='55 - 65 m2'>
-                                    45.00021130, 106.2130
-                                </div>
-                                <div class="option" data-value='55 - 65 m2'>
-                                    45.00021130, 106.2130
-                                </div>
-                                <!-- </div> -->
-                            </div>
-                        </div>
-                        <div class="custom-basic-select">
-                            <div class="custom-select-title">
                                 Нүүж ороход бэлэн эсэх
                                 <div class="selected-value"></div>
                             </div>
@@ -182,6 +157,9 @@
                                 </div>
                                 <!-- </div> -->
                             </div>
+                        </div>
+                        <div class="group-button">
+                            <button type="button" class="btn btn-primary">Хайх</button>
                         </div>
                     </div>
 
@@ -214,9 +192,6 @@
                     <div class="clear"></div>
                     <div class="filter-footer-container">
                         <div class="filter-footer">
-                            <div class="group-button">
-                                <button type="button" class="btn btn-primary">Хайх</button>
-                            </div>
                             <div class="advanced-search" data-opens="0">
                                 <i class="fa fa-chevron-down"></i>
                                 <span>Нарийвчилсан хайлт</span>
@@ -255,17 +230,17 @@
                                                                 <i class="material-icons">
                                                                     hotel
                                                                 </i>
-                                                                2
+                                                                {{ $ad->beds }}
                                                             </div>
                                                             <div class="plans">
                                                                 <i class="material-icons">
                                                                     domain
-                                                                </i> 7
+                                                                </i> {{ $ad->floor }}
                                                             </div>
                                                         </div>
-                                                        <h3>City Apartment</h3>
+                                                        <h3>{{ $ad->title }}</h3>
                                                         <p>{{ themeqx_price_ng($ad) }}</p>
-                                                        <span>34mk<sup>2</sup> - 75mk <sup>2</sup></span>
+                                                        <span>{{ $ad->square_unit_space.' '.$ad->unit_type }}</span>
                                                     </a>
                                                 </div>
                                             @endforeach
@@ -332,7 +307,7 @@
                         </div>
 
                     @else
-                        <div class="alert alert-warning">
+                        <div class="container" style="padding: 40px;">
                             <h2><i class="fa fa-info-circle"></i> @lang('app.search_not_found') </h2>
                         </div>
                     @endif

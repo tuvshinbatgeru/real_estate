@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.admin-layout')
 @section('title') Log-In | @parent @endsection
 
 @section('main')

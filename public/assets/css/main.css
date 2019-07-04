@@ -1310,11 +1310,23 @@ header.scrolled .header .group-button>.profile-logged .profile-dropdown {
     /* background: #0062ff; */
 }
 
+.map-info {
+    width: 100%;
+}
+
+.map-info .border {
+    border: solid 1px #ededed;
+    border-radius: 5px;
+    color: #637381;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
 .detail-info .border {
     border: solid 1px #ededed;
     border-radius: 5px;
     color: #637381;
-    padding: 30px 20px;
+    padding: 20px;
     margin-bottom: 20px;
 }
 

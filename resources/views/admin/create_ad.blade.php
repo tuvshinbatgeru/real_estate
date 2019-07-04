@@ -415,19 +415,19 @@
 
                                             <div class="price_input_group">
 
-                                                <label><input type="radio" value="regular" name="price_plan" data-price="{{ get_ads_price() }}"  />@lang('app.regular') </label> <br />
+                                                <label><input type="radio" value="regular" name="price_plan" data-price="{{ get_ads_price() }}"  />Энгийн </label> <br />
 
-                                                <label><input type="radio" value="premium" name="price_plan" data-price="{{ get_ads_price('premium') }}" />@lang('app.premium') </label>
+                                                <label><input type="radio" value="premium" name="price_plan" data-price="{{ get_ads_price('premium') }}" />Онцлох </label>
 
                                                 <hr />
                                                 <div class="addon-ad-charge">
-                                                    <label><input type="checkbox" class="mark_ad_urgent" name="mark_ad_urgent" value="1" data-price="{{ get_option('urgent_ads_price')  }}" /> @lang('app.mark_as_urgent') </label>
+                                                    <label><input type="checkbox" class="mark_ad_urgent" name="mark_ad_urgent" value="1" data-price="{{ get_option('urgent_ads_price')  }}" />Шуурхай </label>
                                                 </div>
 
-                                                <div class="well" id="price_summery" style="display: none;">
+                                                {{-- <div class="well" id="price_summery" style="display: none;">
                                                     @lang('app.payable_amount') :
                                                     <span id="payable_amount">{{ get_option('regular_ads_price') }}</span>
-                                                </div>
+                                                </div> --}}
 
 
                                                 {!! $errors->has('price_plan')? '<p class="help-block">'.$errors->first('price_plan').'</p>':'' !!}
@@ -436,7 +436,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group {{ $errors->has('payment_method')? 'has-error':'' }}">
+                                   {{--  <div class="form-group {{ $errors->has('payment_method')? 'has-error':'' }}">
                                         <label for="payment_method" class="col-sm-4 control-label">@lang('app.payment_method')</label>
                                         <div class="col-sm-8">
                                             <select class="form-control select2NoSearch" name="payment_method" id="payment_method">
@@ -449,7 +449,7 @@
                                             </select>
                                             {!! $errors->has('payment_method')? '<p class="help-block">'.$errors->first('payment_method').'</p>':'' !!}
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>

@@ -27,49 +27,40 @@
                 <div class="container">
                     <div class="detail-container">
                         <div class="detail-images">
+                            @if( ! empty($ad->video_url))
+                                <div style="border-radius: 10px; margin-bottom: 20px; overflow: hidden;">
+                                <?php
+                                $video_url = $ad->video_url;
+                                if (strpos($video_url, 'youtube') > 0) {
+                                    preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $video_url, $matches);
+                                    if ( ! empty($matches[1])){
+                                        echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/'.$matches[1].'" frameborder="0" allowfullscreen></iframe></div>';
+                                    }
+                                } elseif (strpos($video_url, 'vimeo') > 0) {
+                                    if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $video_url, $regs)) {
+                                        if (!empty($regs[3])){
+                                            echo '<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://player.vimeo.com/video/'.$regs[3].'" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+                                        }
+                                    }
+                                }
+                                ?>
+                                </div>
+                            @endif
+
                             @foreach($ad->media_img as $img)
                                 <img src="{{ media_url($img, true) }}" alt="{{ $ad->title }}" width="100%">
-                            @endforeach                            
+                            @endforeach      
+
+                            <div class="map-info">
+                                <div class="border">
+                                    <h3>Байршил</h3>
+                                    <div id="dvMap" style="width: 100%; height: 400px; margin: 20px 0;"></div>
+                                </div>
+                            </div>                      
                         </div>
                         <div class="detail-info">
                             <div class="border">
-                                <h3>Бүрдүүлэх бичиг баримтууд</h3>
-                                <ul>
-                                    <li>
-                                        <span>#</span> Зээлийн хүсэлт
-                                    </li>
-                                    <li>
-                                        <span>#</span> Иргэний үнэмлэх
-                                    </li>
-                                    <li>
-                                        <span>#</span> 1 хувь цээж зураг
-                                    </li>
-                                    <li>
-                                        <span>#</span> Оршин суугаа хорооны тодорхойлолт
-                                    </li>
-                                    <li>
-                                        <span>#</span> Нийгмийн даатгалын дэвтэр
-                                    </li>
-                                    <li>
-                                        <span>#</span> Ажлын газрын тодорхойлолт
-                                    </li>
-                                    <li>
-                                        <span>#</span> Хөдөлмөрийн гэрээ
-                                    </li>
-                                    <li>
-                                        <span>#</span> Хувиараа бизнес эрхэлдэг бол бизнесийн үйл ажиллагаатай
-                                        холбоотой бичиг баримтууд
-                                    </li>
-                                    <li>
-                                        <span>#</span> Өрхийн орлогыг баталгаажуулах бичиг баримт
-                                    </li>
-                                </ul>
-                                <a href="">
-                                    Дэлгэрэнгүй
-                                </a>
-                                <button data-toggle="modal" data-target="#loanmodal">Зээлийн хүсэлт</button>
-                            </div>
-                            <div class="border">
+                                <button data-toggle="modal" data-target="#loanmodal" style="margin-top: 0px; margin-bottom: 25px;">Зээлийн хүсэлт</button>
                                 <div class="name-price">
                                     <div class="name">
                                         <span>{{ $ad->title }}</span>
@@ -165,6 +156,43 @@
                                         Цонхны хэмжээ
                                     </div>
                                 </div>
+                            </div>
+                            <div class="border">
+                                <h3>Бүрдүүлэх бичиг баримтууд</h3>
+                                <ul>
+                                    <li>
+                                        <span>#</span> Зээлийн хүсэлт
+                                    </li>
+                                    <li>
+                                        <span>#</span> Иргэний үнэмлэх
+                                    </li>
+                                    <li>
+                                        <span>#</span> 1 хувь цээж зураг
+                                    </li>
+                                    <li>
+                                        <span>#</span> Оршин суугаа хорооны тодорхойлолт
+                                    </li>
+                                    <li>
+                                        <span>#</span> Нийгмийн даатгалын дэвтэр
+                                    </li>
+                                    <li>
+                                        <span>#</span> Ажлын газрын тодорхойлолт
+                                    </li>
+                                    <li>
+                                        <span>#</span> Хөдөлмөрийн гэрээ
+                                    </li>
+                                    <li>
+                                        <span>#</span> Хувиараа бизнес эрхэлдэг бол бизнесийн үйл ажиллагаатай
+                                        холбоотой бичиг баримтууд
+                                    </li>
+                                    <li>
+                                        <span>#</span> Өрхийн орлогыг баталгаажуулах бичиг баримт
+                                    </li>
+                                </ul>
+                                <a href="">
+                                    Дэлгэрэнгүй
+                                </a>
+                                <button data-toggle="modal" data-target="#loanmodal">Зээлийн хүсэлт</button>
                             </div>
                             <div class="border">
                                 <div class="agent-header">

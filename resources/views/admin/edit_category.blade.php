@@ -29,17 +29,8 @@
                         <div class="form-group {{ $errors->has('category_name')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.category_name')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="category_name" value="{{ old('category_name') ? old('category_name') : $edit_category->category_name }}" name="category_name" placeholder="@lang('app.category_name')<">
+                                <input type="text" class="form-control" id="category_name" value="{{ old('category_name') ? old('category_name') : $edit_category->category_name }}" name="category_name" placeholder="@lang('app.category_name')<" contenteditable="true">
                                 {!! $errors->has('category_name')? '<p class="help-block">'.$errors->first('category_name').'</p>':'' !!}
-
-                            </div>
-                        </div>
-
-                        <div class="form-group {{ $errors->has('icon_idle')? 'has-error':'' }}">
-                            <label for="icon_idle" class="col-sm-4 control-label">@lang('app.icon_idle')</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="icon_idle" value="{{ old('icon_idle') ? old('icon_idle') : $edit_category->icon_idle }}" name="icon_idle" placeholder="@lang('app.icon_idle')<">
-                                {!! $errors->has('icon_idle')? '<p class="help-block">'.$errors->first('icon_idle').'</p>':'' !!}
 
                             </div>
                         </div>

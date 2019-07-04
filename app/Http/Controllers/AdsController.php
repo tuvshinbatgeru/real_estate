@@ -592,11 +592,15 @@ class AdsController extends Controller
 
         $premium_ads = Ad::activePremium();
 
+        $query = "";
         if ($request->q){
             $ads = $ads->where(function($ads) use($request){
                 $ads->where('title','like', "%{$request->q}%")->orWhere('description','like', "%{$request->q}%");
             });
+
+            $query = $request->q;
         }
+
         if ($request->type){
             $ads = $ads->whereType($request->type);
         }
@@ -682,10 +686,9 @@ class AdsController extends Controller
         //dd($selected_countries->states);
 
         $agents = User::whereActiveStatus('1')->whereFeature('1')->whereUserType('user')->take(10)->orderBy('id', 'desc')->get();
-
         //dd($filters);
         //return view($this->theme.'listing', compact('top_categories', 'ads', 'title', 'countries', 'selected_categories', 'selected_sub_categories', 'selected_countries', 'selected_states', 'premium_ads', 'agents'));
-        return view($this->theme.'listing', compact('filters', 'ads', 'title', 'countries', 'selected_categories', 'selected_sub_categories', 'selected_countries', 'selected_states', 'premium_ads', 'agents'));
+        return view($this->theme.'listing', compact('query', 'filters', 'ads', 'title', 'countries', 'selected_categories', 'selected_sub_categories', 'selected_countries', 'selected_states', 'premium_ads', 'agents'));
     }
 
     /**

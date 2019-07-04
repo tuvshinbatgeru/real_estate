@@ -75,14 +75,22 @@
         <div class="container">
             <div class="row">
                 <div class="header with-search">
-                    <div class="logo">
-                        <a href="/">
+                    <a href="/">
+                        <div class="logo">
                             <img src="{{ asset('assets/img/logo.png') }}" alt="">
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                     <div class="search-group">
-                        <input type="search" name="" id=""
-                            placeholder="Дүүрэг, Хороо болон хотхоны нэрийг оруулна уу!" />
+                        <form action='/listing' method="get">
+                            @if(isset($query))
+                                <input type="search" name="q" value="{{ $query }}"
+                                placeholder="Дүүрэг, Хороо болон хотхоны нэрийг оруулна уу!" />
+                            @else
+                                <input type="search" name="q"
+                                placeholder="Дүүрэг, Хороо болон хотхоны нэрийг оруулна уу!" />
+                            @endif
+                            
+                        </form>
                     </div>
                     <div class="group-button">
                         <a href="login.html">
