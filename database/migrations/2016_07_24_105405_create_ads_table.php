@@ -17,7 +17,7 @@ class CreateAdsTable extends Migration
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
-            $table->enum('type', ['personal', 'business'])->nullable();
+            $table->enum('type', ['apartment', 'condos', 'house', 'land', 'commercial_space', 'villa'])->nullable();
             $table->decimal('price', 12,2)->nullable();
             $table->enum('is_negotiable', [0,1])->nullable();
             $table->string('purpose')->nullable();

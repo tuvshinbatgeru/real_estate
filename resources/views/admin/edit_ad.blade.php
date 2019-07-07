@@ -131,8 +131,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <select class="form-control select2NoSearch" name="price_unit">
-                                    <option value="sqft" {{ $ad->unit_type == 'sqft' ? 'selected':'' }} >@lang('app.square_feet')</option>
                                     <option value="sqmeter" {{ $ad->unit_type == 'sqmeter' ? 'selected':'' }} >@lang('app.square_meter')</option>
+                                    <option value="sqft" {{ $ad->unit_type == 'sqft' ? 'selected':'' }} >@lang('app.square_feet')</option>
                                     <option value="acre" {{ $ad->unit_type == 'acre' ? 'selected':'' }} >@lang('app.acre')</option>
                                     <option value="hector" {{ $ad->unit_type == 'hector' ? 'selected':'' }} >@lang('app.hector')</option>
                                 </select>
@@ -167,7 +167,7 @@
                                 {!! $errors->has('beds')? '<p class="help-block">'.$errors->first('beds').'</p>':'' !!}
                             </div>
                         </div>
-
+<!-- 
                         <div class="form-group {{ $errors->has('attached_bath')? 'has-error':'' }}">
                             <label for="attached_bath" class="col-sm-4 control-label">@lang('app.attached_bath')</label>
                             <div class="col-sm-8">
@@ -199,20 +199,29 @@
                                 <label><input type="checkbox" value="1" name="dining_space" @if($ad->dining_space == 1) checked="checked" @endif  /> @lang('app.dining_space') </label>
                                 <label><input type="checkbox" value="1" name="living_room"  @if($ad->living_room == 1) checked="checked" @endif /> @lang('app.living_room') </label>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <legend>@lang('app.amenities')</legend>
+                        <!-- <legend>@lang('app.amenities')</legend> -->
 
                         @php $saved_amenities = (array) unserialize($ad->amenities); @endphp
-                        <div class="form-group type_checkbox">
+                        <!-- <div class="form-group type_checkbox">
                             <div class="col-sm-12">
                                 @if($categories->count() > 0)
                                     @foreach($categories as $category)
-                                        <label> <input type="checkbox" value="{{ $category->id }}" name="amenities[{{$category->id}}]" @if(in_array($category->id ,$saved_amenities)) checked="checked" @endif > {{ $category->category_name }} </label>
+                                        <div class="form-group {{ $errors->has('square_unit_space')? 'has-error':'' }}">
+                                            <label for="square_unit_space" class="col-sm-4 control-label">{{ $category->category_name }}</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" name="category_option[]">
+                                                    @foreach($category->options as $option)
+                                                        <option value="{{ $category->id }}.{{ $option->id }}">{{ $option->option }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
                         @if($distances->count() > 0)
 
