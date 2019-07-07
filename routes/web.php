@@ -14,7 +14,7 @@
 Route::get('/', ['as' => 'home', 'uses'=>'HomeController@index']);
 Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
 
-Route::get('category', ['as' => 'category_all', 'uses' => ]);
+//Route::get('category', ['as' => 'category_all', 'uses' => ]);
 //Listing page
 Route::get('contact-us', ['as' => 'contact_us_page', 'uses'=>'HomeController@contactUs']);
 Route::post('contact-us', ['uses'=>'HomeController@contactUsPost']);
