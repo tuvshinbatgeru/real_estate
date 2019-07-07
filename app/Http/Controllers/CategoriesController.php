@@ -54,7 +54,8 @@ class CategoriesController extends Controller
         $rules = [
             'category_name' => 'required',
             //'icon_idle' => 'required',
-            'icon_active' => 'required'
+            'icon_active' => 'required',
+            'is_vertical' => 'required'
         ];
 
         $this->validate($request, $rules);
@@ -65,6 +66,7 @@ class CategoriesController extends Controller
             'category_name' => $request->category_name,
             //'icon_idle'   => $request->icon_idle,
             'icon_active'   => $request->icon_active,
+            'is_vertical' => $request->is_vertical
         ];
 
         $category = Category::create($data);
@@ -121,10 +123,12 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         $rules = [
             'category_name' => 'required',
             //'icon_idle' => 'required',
-            'icon_active' => 'required'
+            'icon_active' => 'required',
+            //'is_vertical' => 'required'
         ];
 
         $this->validate($request, $rules);
@@ -133,6 +137,7 @@ class CategoriesController extends Controller
             'category_name' => $request->category_name,
             //'icon_idle'   => $request->icon_idle,
             'icon_active'   => $request->icon_active,
+            'is_vertical' => $request->is_vertical ? 'Y' : 'N'
         ];
         
         Category::whereId($id)->update($data);

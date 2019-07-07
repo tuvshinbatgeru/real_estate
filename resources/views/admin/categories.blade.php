@@ -53,6 +53,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('is_vertical')? 'has-error':'' }}">
+                            <label for="is_vertical" class="col-sm-4 control-label">Хөндлөн эсэх </label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" class="form-control" id="is_vertical" value="{{ old('is_vertical') }}" name="is_vertical" placeholder="@lang('app.is_vertical')">
+                                {!! $errors->has('is_vertical')? '<p class="help-block">'.$errors->first('is_vertical').'</p>':'' !!}
+                            </div>
+                        </div>
+
 
                         <label>Сонголт нэмэх</label>
                         

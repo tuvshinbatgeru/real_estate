@@ -175,7 +175,7 @@
                                         <div class="selected-value"></div>
                                     </div>
 
-                                    <div class="custom-select-options">
+                                    <div class="custom-select-options {{ $filter->is_vertical == 'Y' ? 'single' : ''}}">
                                         <div class="">
                                             @foreach($filter->options as $option)
                                             <div class="option" data-value="{{ $option->option }}">
