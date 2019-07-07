@@ -97,7 +97,7 @@ class AdsController extends Controller
 
         //dd($ads_images);
         
-        $previous_states = State::where('country_id', old('country'))->get();
+        $previous_states = State::where('country_id', 146)->get();
         $previous_cities = City::where('state_id', old('state'))->get();
 
 
@@ -121,7 +121,7 @@ class AdsController extends Controller
             'ad_description'  => 'required',
             'type'  => 'required',
             'purpose'  => 'required',
-            'country'  => 'required',
+            //'country'  => 'required',
             'seller_name'  => 'required',
             'seller_email'  => 'required',
             'seller_phone'  => 'required',
@@ -171,7 +171,7 @@ class AdsController extends Controller
             'seller_name'   => $request->seller_name,
             'seller_email'  => $request->seller_email,
             'seller_phone'  => $request->seller_phone,
-            'country_id'    => $request->country,
+            'country_id'    => 146, //$request->country,
             'state_id'      => $request->state,
             'city_id'       => $request->city,
             'address'       => $request->address,
@@ -576,7 +576,7 @@ class AdsController extends Controller
     
     public function appendMediaImage(){
         $user_id = Auth::user()->id;
-        $ads_images = Media::whereUserId($user_id)->whereAdId(0)->whereRef('ad')->get();
+        $ads_images = Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->get();
 
         //dd($ads_count
 

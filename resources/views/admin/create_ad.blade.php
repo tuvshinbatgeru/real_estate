@@ -131,8 +131,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <select class="form-control select2NoSearch" name="price_unit">
-                                    <option value="sqft">@lang('app.square_feet')</option>
                                     <option value="sqmeter">@lang('app.square_meter')</option>
+                                    <option value="sqft">@lang('app.square_feet')</option>
                                     <option value="acre">@lang('app.acre')</option>
                                     <option value="hector">@lang('app.hector')</option>
                                 </select>
@@ -168,38 +168,38 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('attached_bath')? 'has-error':'' }}">
+                        <!-- <div class="form-group {{ $errors->has('attached_bath')? 'has-error':'' }}">
                             <label for="attached_bath" class="col-sm-4 control-label">@lang('app.attached_bath')</label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="attached_bath" value="{{ old('attached_bath') }}" name="attached_bath" placeholder="@lang('app.attached_bath')">
                                 {!! $errors->has('attached_bath')? '<p class="help-block">'.$errors->first('attached_bath').'</p>':'' !!}
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group {{ $errors->has('common_bath')? 'has-error':'' }}">
+                        <!-- <div class="form-group {{ $errors->has('common_bath')? 'has-error':'' }}">
                             <label for="common_bath" class="col-sm-4 control-label">@lang('app.common_bath')</label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="common_bath" value="{{ old('common_bath') }}" name="common_bath" placeholder="@lang('app.common_bath')">
                                 {!! $errors->has('common_bath')? '<p class="help-block">'.$errors->first('common_bath').'</p>':'' !!}
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group {{ $errors->has('balcony')? 'has-error':'' }}">
+                        <!-- <div class="form-group {{ $errors->has('balcony')? 'has-error':'' }}">
                             <label for="balcony" class="col-sm-4 control-label">@lang('app.balcony')</label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="balcony" value="{{ old('balcony') }}" name="balcony" placeholder="@lang('app.balcony')">
                                 {!! $errors->has('balcony')? '<p class="help-block">'.$errors->first('balcony').'</p>':'' !!}
                             </div>
-                        </div>
+                        </div> -->
 
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="additional_details" class="col-sm-4 control-label">@lang('app.additional_details')</label>
                             <div class="col-sm-8">
                                 <label><input type="checkbox" value="1" name="dining_space" /> @lang('app.dining_space') </label>
                                 <label><input type="checkbox" value="1" name="living_room" /> @lang('app.living_room') </label>
                             </div>
-                        </div>
+                        </div> -->
 
                         <legend>@lang('app.amenities')</legend>
 
@@ -288,7 +288,7 @@
 
                         <legend>@lang('app.location_info')</legend>
 
-                        <div class="form-group  {{ $errors->has('country')? 'has-error':'' }}">
+                        <!-- <div class="form-group  {{ $errors->has('country')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.country')</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="country">
@@ -299,7 +299,7 @@
                                 </select>
                                 {!! $errors->has('country')? '<p class="help-block">'.$errors->first('country').'</p>':'' !!}
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group  {{ $errors->has('state')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.state')</label>

@@ -13,6 +13,8 @@
 
 Route::get('/', ['as' => 'home', 'uses'=>'HomeController@index']);
 Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
+
+Route::get('category', ['as' => 'category_all', 'uses' => ]);
 //Listing page
 Route::get('contact-us', ['as' => 'contact_us_page', 'uses'=>'HomeController@contactUs']);
 Route::post('contact-us', ['uses'=>'HomeController@contactUsPost']);
@@ -22,8 +24,6 @@ Route::get('page/{slug}', ['as' => 'single_page', 'uses'=>'PostController@showPa
 Route::get('blog', ['as' => 'blog', 'uses'=>'PostController@blogIndex']);
 Route::get('blog/{slug}', ['as' => 'blog_single', 'uses'=>'PostController@blogSingle']);
 Route::get('blog/author/{id}', ['as' => 'author_blog_posts', 'uses'=>'PostController@authorPosts']);
-
-Route::get('category/all', 'CategoriesController@all');
 
 Route::get('listing', ['as' => 'listing', 'uses'=>'AdsController@listing']);
 Route::get('ad/{slug}', ['as' => 'single_ad', 'uses'=>'AdsController@singleAd']);

@@ -4,6 +4,8 @@
 @section('main')
 <div class="main-container">
     <div class="contents">
+        <main-filter>
+        </main-filter>
         <div class="new-filter">
                 <div class="container">
                     <div class="customs">

@@ -30,7 +30,7 @@
                         <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_not_published_warning')</div>
                     @endif
 
-                    <h2 class="ad-title"><a href="{{ route('single_ad', $ad->slug) }}">{{ $ad->title }}</a>  </h2>
+                    <h2 class="ad-title"><a href="{{ route('`single_ad', $ad->slug) }}">{{ $ad->title }}</a>  </h2>
                     <div class="ads-detail-meta">
                         <p class="text-muted">
 
