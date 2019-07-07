@@ -305,6 +305,7 @@
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.state')</label>
                             <div class="col-sm-8">
                                 <select class="form-control select2" id="state_select" name="state">
+                                    <option value='сонгох' />
                                     @if($previous_states->count() > 0)
                                         @foreach($previous_states as $state)
                                             <option value="{{ $state->id }}" {{ old('state') == $state->id ? 'selected' :'' }}>{{ $state->state_name }}</option>
