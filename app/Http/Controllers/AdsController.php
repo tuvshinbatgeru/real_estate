@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\AdsCategory;
 use App\Brand;
 use App\Category;
 use App\City;
@@ -34,6 +35,29 @@ class AdsController extends Controller
         $ads = Ad::with('city', 'country', 'state')->whereStatus(1)->orderBy('id', 'desc')->paginate(20);
 
         return view('admin.all_ads', compact('title', 'ads'));
+    }
+
+    public function all(Request $request) {
+        if($request->filter) {
+            $optionIds = [];
+            foreach ($request->filter as $filter) {
+                $curFilter = json_decode($filter);
+                array_push($optionIds, $curFilter->option_id);
+            }
+
+            $filtered_ads = AdsCategory::with('ad.feature_img')->whereIn('option_id', $optionIds)->paginate(15);
+
+            return response()->json([
+                'code' => 0,
+                'result' => $filtered_ads
+            ]);
+        }
+
+        $ads = Ad::with('feature_img')->paginate(15);
+        return response()->json([
+            'code' => 0,
+            'result' => $ads
+        ]); 
     }
 
     public function adminPendingAds()
@@ -209,12 +233,15 @@ class AdsController extends Controller
             foreach($request->category_option as $option){
                 $separators = explode(".", $option);
                 array_push($options, [
+                    'ads_id' => $created_ad->id,
                     'category_id' => $separators[0],
                     'option_id' => $separators[1]
                 ]);
             }
 
-            $created_ad->categories()->createMany($options);
+            //\Log::info($options);
+            AdsCategory::insert($options);
+            //$created_ad->categories()->createMany($options);
 
             //$created_ad->options
             /**

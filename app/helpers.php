@@ -267,7 +267,7 @@ function themeqx_price($price = 0){
 function themeqx_price_ng($ad){
     $price = $ad->price;
     $negotiable = $ad->is_negotiable;
-    $purpose = ($ad->purpose == 'rent') ? ' /month':'';
+    $purpose = ($ad->purpose == 'rent') ? ' /month' : '';
 
     $ng = $negotiable ? ' ('.trans('app.negotiable').') ' : '';
     $show_price = '';

@@ -14,7 +14,7 @@
 Route::get('/', ['as' => 'home', 'uses'=>'HomeController@index']);
 Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
 
-//Route::get('category', ['as' => 'category_all', 'uses' => ]);
+Route::get('/category/all', 'CategoriesController@all');
 //Listing page
 Route::get('contact-us', ['as' => 'contact_us_page', 'uses'=>'HomeController@contactUs']);
 Route::post('contact-us', ['uses'=>'HomeController@contactUsPost']);
@@ -69,6 +69,7 @@ Route::group(['prefix'=>'login'], function(){
 
 });
 
+//Route::get('/all', 'CategoriesController@all');
 Route::resource('user', 'UserController');
 
 //Dashboard Route

@@ -1,173 +1,93 @@
 <template>
-    <div class="new-filter">
-        <div class="container">
-            <div class="customs">
-                <div class="custom-basic-select">
-                    <div class="custom-select-title">
-                        M2, Үнэ
-                        <div class="selected-value"></div>
-                    </div>
-                    <div class="custom-select-options">
-                        <div class="custom-select-item">
-                            <ul>
-                                <li data-id='0'>35 - 45 m2</li>
-                                <li data-id='1'>35 - 45 m2</li>
-                                <li data-id='2'>35 - 45 m2</li>
-                                <li data-id='3'>35 - 45 m2</li>
-                                <li data-id='4'>35 - 45 m2</li>
-                                <li data-id='5'>35 - 45 m2</li>
-                                <li data-id='6'>35 - 45 m2</li>
-                                <li data-id='7'>35 - 45 m2</li>
-                                <li data-id='8'>35 - 45 m2</li>
-                            </ul>
-                            <div class="options" data-id="0">
-                                <div class="option" data-value='1-2 сая'>
-                                    1-2 сая
+    <div>
+        <div class="new-filter">
+            <div class="container">
+                <div id="lightSlider" class="icon">
+                    <div v-for="cur in filter" @click="toggleFilter(cur)">
+                        <div class="custom-basic-select icon">
+                            <div class="custom-select-title">
+                                <div class="icon-container">
+                                    <img :src="'/assets/img/icons/' + cur.icon_active + '.png'" alt="">
+                                    <p>{{ cur.category_name }}</p>
                                 </div>
-                                <div class="option" data-value='2-3 сая'>
-                                    2-3 сая
-                                </div>
-                                <div class="option" data-value='3-4 сая'>
-                                    3-4 сая
-                                </div>
-                                <div class="option" data-value='5-6 сая'>
-                                    5-6 сая
+                                <div class="selected-value" v-if="cur.selected_option.is_selected">
+                                    {{ cur.selected_option.data.option }}
                                 </div>
                             </div>
-                            <div class="options" data-id="1">
-                                <div class="option" data-value='10-20 сая'>
-                                    10-20 сая
-                                </div>
-                                <div class="option" data-value='20-30 сая'>
-                                    20-30 сая
+
+                            <div 
+                                class="custom-select-options" 
+                                :class="{ single: cur.is_vertical == 'Y'}"
+                                v-show="cur.selected_option.is_open"
+                            >
+                                <div class="">
+                                    <div @click="setFilter(cur, option)" v-for="option in cur.options" class="option" :data-value="option.option">
+                                        {{ option.option }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="custom-basic-select">
-                    <div class="custom-select-title">
-                        Дүүрэг, хороо
-                        <div class="selected-value"></div>
-                    </div>
-                    <div class="custom-select-options">
-                        <div class="custom-select-item arrow">
-                            <ul>
-                                <li data-id='9'>Багануур</li>
-                                <li data-id='10'>Багахангай</li>
-                                <li data-id='11'>Баянгол</li>
-                                <li data-id='12'>Баянзүрх</li>
-                                <li data-id='13'>Налайх</li>
-                                <li data-id='14'>Сонгинохайрхан</li>
-                                <li data-id='15'>Сүхбаатар</li>
-                                <li data-id='16'>Хан-Уул</li>
-                                <li data-id='17'>Чингэлтэй</li>
-                            </ul>
-                            <div class="options" data-id="9">
-                                <div class="option" data-value='1-р хороо'>
-                                    1-р хороо
-                                </div>
-                                <div class="option" data-value='2-р хороо'>
-                                    2-р хороо
-                                </div>
-                                <div class="option" data-value='3-р хороо'>
-                                    3-р хороо
-                                </div>
-                                <div class="option" data-value='4-р хороо'>
-                                    4-р хороо
-                                </div>
-                            </div>
-                            <div class="options" data-id="10">
-                                <div class="option" data-value='1-р хороо'>
-                                    1-р хороо
-                                </div>
-                                <div class="option" data-value='2-р хороо'>
-                                    2-р хороо
-                                </div>
-                            </div>
+
+                <div class="clear"></div>
+                <div class="filter-footer-container">
+                    <div class="filter-footer">
+                        <div class="advanced-search" data-opens="0">
+                            <i class="fa fa-chevron-down"></i>
+                            <span>Нарийвчилсан хайлт</span>
                         </div>
-                    </div>
-                </div>
-                <div class="custom-basic-select">
-                    <div class="custom-select-title">
-                        Байршил, Хотхон
-                        <div class="selected-value"></div>
-                    </div>
-                    <div class="custom-select-options">
-                        <div class="custom-select-item arrow full">
-                            <ul>
-                                <li data-id='9'>Хүнсний 4 дэлгүүр</li>
-                                <li data-id='10'>Мэргэжилтний 20</li>
-                                <li data-id='11'>Оффицеруудын ордон</li>
-                                <li data-id='12'>Баянзүрх</li>
-                                <li data-id='13'>Налайх</li>
-                                <li data-id='14'>Сонгинохайрхан</li>
-                                <li data-id='15'>Сүхбаатар</li>
-                                <li data-id='16'>Хан-Уул</li>
-                                <li data-id='17'>Чингэлтэй</li>
-                            </ul>
-                            <div class="options" data-id="9">
-                                <div class="option" data-value='Encanto town'>
-                                    Encanto town
-                                </div>
-                                <div class="option" data-value='River garden'>
-                                    River garden
-                                </div>
-                                <div class="option" data-value='Mandala town'>
-                                    Mandala town
-                                </div>
-                                <div class="option" data-value='Time squire'>
-                                    Time squire
-                                </div>
-                            </div>
-                            <div class="options" data-id="10">
-                                <div class="option" data-value='1-р хороо'>
-                                    1-р хороо
-                                </div>
-                                <div class="option" data-value='2-р хороо'>
-                                    2-р хороо
-                                </div>
-                            </div>
+                        <div>
+                            <b>1</b> хайлтын үр дүн байна
                         </div>
-                    </div>
-                </div>
-                <div class="custom-basic-select">
-                    <div class="custom-select-title">
-                        Нүүж ороход бэлэн эсэх
-                        <div class="selected-value"></div>
-                    </div>
-                    <div class="custom-select-options">
-                        <!-- <div class="custom-select-item"> -->
-                        <div class="option" data-value='Хоног 0 бэлэн'>
-                            Хоног 0 бэлэн
-                        </div>
-                        <div class="option" data-value='Хоног 14 арй боломжгүй'>
-                            Хоног 14 арй боломжгүй
-                        </div>
-                        <div class="option" data-value='55 - 65 m2'>
-                            Хоног 0 бэлэн
-                        </div>
-                        <div class="option" data-value='55 - 65 m2'>
-                            Хоног 0 бэлэн
-                        </div>
-                        <!-- </div> -->
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ad-box-wrap">
+                    <div class="ad-box-grid-view">
+                        <div class="grid-five">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="grid-container">
+                                        <div class="grid-item" v-for="ad in ads.data">
+                                            <a :href="'ad/' + ad.slug">
+                                                <div class="img-container">
+                                                    <img 
+                                                        itemprop="image" 
+                                                        width="100%" 
+                                                        :src="'uploads/images/thumbs/' + ad.feature_img.media_name"
+                                                        :alt="ad.title"
+                                                    />
 
-            <div id="lightSlider" class="icon">
-                
-            </div>
-
-            <div class="clear"></div>
-            <div class="filter-footer-container">
-                <div class="filter-footer">
-                    <div class="advanced-search" data-opens="0">
-                        <i class="fa fa-chevron-down"></i>
-                        <span>Нарийвчилсан хайлт</span>
-                    </div>
-                    <div>
-                        <b>1</b> хайлтын үр дүн байна
+                                                    <div class="heart">
+                                                        <i class="material-icons">
+                                                            favorite_border
+                                                        </i>
+                                                    </div>
+                                                    <div class="beds">
+                                                        <i class="material-icons">
+                                                            hotel
+                                                        </i>
+                                                        {{ ad.beds }}
+                                                    </div>
+                                                    <div class="plans">
+                                                        <i class="material-icons">
+                                                            domain
+                                                        </i> {{ ad.floor }}
+                                                    </div>
+                                                </div>
+                                                <h3>{{ ad.title }}</h3>
+                                                <p>{{ themeqx_price_ng(ad) }}</p>
+                                                <span>{{ ad.square_unit_space + ' ' + ad.unit_type }}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -177,22 +97,120 @@
 
 <script>
     import axios from 'axios'
+    import _ from 'lodash'
     export default {
         data() {
             return {
-                filter: []
+                filter: [],
+                ads: {
+                    fetching: false,
+                    data: [],
+                    pages: 1,
+                    total: 0
+                }
             }
         },
         mounted() {
             this.getFilter()
+            this.getDatas()
         },
         methods: {
+            toggleFilter(category) {
+                let index = _.findIndex(this.filter, (cur) => {
+                    return cur.id == category.id
+                })
+
+                this.filter.forEach((cur) => {
+                    if(cur.id == category.id) {
+                        cur.selected_option.is_open = !cur.selected_option.is_open
+                    } else 
+                        cur.selected_option.is_open = false
+                })
+            },
+            setFilter(category, option) {
+                let index = _.findIndex(this.filter, (cur) => {
+                    return cur.id == category.id
+                })
+
+                this.filter[index].selected_option.data = option
+                this.filter[index].selected_option.is_selected = true
+                this.filter[index].selected_option.is_open = true
+
+                this.getDatas()
+            },
             getFilter() {
                 axios
-                  .get('/')
-                  .then(res => {
-                    console.log(res)
-                  })
+              .get('api/category/all')
+              .then(res => {
+                let filter = []
+                res.data.data.forEach((cur) => {
+                    filter.push(Object.assign(cur, {
+                        selected_option: {
+                            is_selected: false,
+                            is_open: false,
+                            data: {},
+                        }
+                    }))
+                })
+                this.filter = filter
+              })
+            },
+            getDatas() {
+                let query = {}
+                let filterParams = []
+                this.filter.forEach((cur) => {
+                    if(cur.selected_option.is_selected) {
+                        filterParams.push({
+                            category_id: cur.id,
+                            option_id: cur.selected_option.data.id
+                        })
+                    }
+                })
+
+                //console.log(filterParams)
+
+                axios
+                .get('api/ads', {
+                    params: {
+                        filter: filterParams
+                    }
+                })
+                .then(res => {
+                    let { data, total } = res.data.result
+                    let ads = []
+
+                    data.forEach((cur) => {
+                        if(cur.ad) {
+                            ads.push(cur.ad)
+                        } else {
+                            ads.push(cur)
+                        }
+                    })
+
+                    this.ads = {
+                        fetching: false,
+                        data: ads,
+                        pages: 1,
+                        total,
+                    }
+                })
+            },
+            currencyFormat(num) {
+              return parseFloat(num).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+              //return num.toFixed(2)
+            },
+            themeqx_price_ng(ad) {
+                let price = ad.price;
+                let negotiable = ad.is_negotiable;
+                let purpose = (ad.purpose == 'rent') ? ' /month' : '';
+
+                let show_price = '';
+                
+                if (price > 0) {
+                    show_price = 'MNT ' + this.currencyFormat(price);
+                }
+
+                return show_price + purpose;
             }
         }
     }
