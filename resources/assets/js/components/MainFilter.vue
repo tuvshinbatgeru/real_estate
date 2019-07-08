@@ -113,10 +113,7 @@
             }
         },
         mounted() {
-            $("#lightSlider").lightSlider({
-                pager: false,
-                autoWidth: false
-            });
+            this.callSlider()
             this.getFilter()
             this.getDatas()
         },
@@ -159,10 +156,7 @@
                     }))
                 })
                 this.filter = filter
-                $("#lightSlider").lightSlider({
-                    pager: false,
-                    autoWidth: false
-                });
+                this.callSlider()
               })
             },
             getDatas() {
@@ -204,6 +198,13 @@
                         total,
                     }
                 })
+            },
+            callSlider() {
+                alert('wow')
+                $("#lightSlider").lightSlider({
+                    pager: false,
+                    autoWidth: true
+                });
             },
             currencyFormat(num) {
               return parseFloat(num).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
