@@ -19,8 +19,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $title = trans('app.categories');
-        $categories = Category::all();
-
+        $categories = Category::where('value_type', 'chooser')->get();
         return view('admin.categories', compact('title', 'categories'));
     }
 
@@ -53,7 +52,7 @@ class CategoriesController extends Controller
     {
         $rules = [
             'category_name' => 'required',
-            'icon_active' => 'required',
+            //'icon_active' => 'required',
             'type' => 'required',
             'value_type' => 'required'
         ];

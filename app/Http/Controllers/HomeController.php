@@ -27,7 +27,20 @@ class HomeController extends Controller
         
         $posts = Post::whereType('post')->whereStatus('1')->limit(get_option('blog_post_amount_in_homepage'))->get();
 
-        return view($this->theme.'index', compact( 'premium_ads', 'regular_ads','urgent_ads', 'countries', 'sliders', 'posts'));
+        $youtube_ads = [
+            'https://www.youtube.com/embed/BgHyoARZPyg',
+            'https://www.youtube.com/embed/RsupKN7rT1o',
+            'https://www.youtube.com/embed/BtpHVJwdv7M',
+            'https://www.youtube.com/embed/q3pxLWSC1vo',
+            'https://www.youtube.com/embed/LKHcR7pPqSQ',
+            'https://www.youtube.com/embed/zBCbbXlVOhs',
+            'https://www.youtube.com/embed/yEkxTNytPNM',
+            'https://www.youtube.com/embed/wHYobkYPJ-A',
+        ];
+
+        //dd($youtube_ads[1]);
+
+        return view($this->theme.'index', compact( 'premium_ads', 'regular_ads','urgent_ads', 'countries', 'sliders', 'posts', 'youtube_ads'));
     }
 
     public function contactUs(){

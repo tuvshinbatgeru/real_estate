@@ -88,10 +88,10 @@ class Ad extends Model
             $location .= $this->address.", ";
         if($this->city != '')
             $location .= "<a href='".route('listing', ['city' => $this->city->id])."'> {$this->city->city_name}</a>, ";
-        if($this->state != '')
-            $location .= "<a href='".route('listing', ['state' => $this->state->id])."'> {$this->state->state_name}</a>, ";
-        if($this->country != '')
-            $location .= "<a href='".route('listing', ['country' => $this->country->id])."'> {$this->country->country_name}</a>";
+        // if($this->state != '')
+        //     $location .= "<a href='".route('listing', ['state' => $this->state->id])."'> {$this->state->state_name}</a>, ";
+        // if($this->country != '')
+        //     $location .= "<a href='".route('listing', ['country' => $this->country->id])."'> {$this->country->country_name}</a>";
         return $location;
     }
 

@@ -149,8 +149,8 @@
                         <div class="row">
                             <div class="grid-container">
                                 @foreach($regular_ads as $ad)
-                                    @if($loop->iteration == 3)
-                                        <iframe width="100%" height="160" src="https://www.youtube.com/embed/isTXSavwoSk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    @if($loop->iteration % 3 == 0 && count($youtube_ads) >= (($loop->iteration / 3) - 1) && isset($youtube_ads[($loop->iteration / 3) - 1]))
+                                        <iframe width="100%" height="160" src="{{ $youtube_ads[($loop->iteration / 3) - 1] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     @endif
                                     <div class="grid-item">
                                         <a href="{{ route('single_ad', $ad->slug) }}">

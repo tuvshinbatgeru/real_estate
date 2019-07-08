@@ -7,8 +7,8 @@
                         <div class="custom-basic-select icon">
                             <div class="custom-select-title">
                                 <div class="icon-container">
-                                    <img :src="'/assets/img/icons/' + cur.icon_active + '.png'" alt="">
-                                    <p>{{ cur.category_name }}</p>
+                                    <img v-if="cur.type == 'icon'" :src="'/assets/img/icons/' + cur.icon_active + '.png'" alt="">
+                                    <p v-html="filterName(cur.category_name)"></p>
                                 </div>
                                 <div class="selected-value" v-if="cur.selected_option.is_selected">
                                     {{ cur.selected_option.data.option }}
@@ -98,6 +98,8 @@
 <script>
     import axios from 'axios'
     import _ from 'lodash'
+    require('./lightslider.min')
+
     export default {
         data() {
             return {
@@ -111,6 +113,9 @@
             }
         },
         mounted() {
+            $("#lightSlider").lightSlider({
+                pager: false
+            });
             this.getFilter()
             this.getDatas()
         },
@@ -202,6 +207,19 @@
             featuredImage(ad) {
                 if(ad.feature_img == null) return ''
                 return 'uploads/images/thumbs/' + ad.feature_img.media_name
+            },
+            filterName(name) {
+                let cur = name.trim().split(' ')
+                let fixed_name = ''
+                cur.forEach((str, index) => {
+                    if(index != 0 && index == cur.length - 1) {
+                        fixed_name += '<br />' + (str)
+                    } else {
+                        fixed_name += (' ' + str)
+                    }
+                    
+                })
+                return fixed_name
             },
             themeqx_price_ng(ad) {
                 let price = ad.price;

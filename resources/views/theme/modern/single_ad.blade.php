@@ -65,8 +65,10 @@
                                     <div class="name">
                                         <span>{{ $ad->title }}</span>
                                         <p>{{ themeqx_price_ng($ad) }}</p>
-                                        <b>34м2 - 75м2 / 3 өрөө байр</b><br />
-                                        <b>Баянзүрх дүүрэг, 2-р хороо, 34А байр, 7 давхар</b>
+                                        <b>
+                                            <span>{{ $ad->square_unit_space . ($ad->unit_type == 'sqmeter' ? 'м2' : $ad->unit_type) }} / {{ $ad->beds }} өрөө байр</span>
+                                        </b><br />
+                                        
                                         <b>{!! $ad->full_address() !!}</b>
                                     </div>
                                     <div class="icons">
@@ -189,7 +191,7 @@
                                         <span>#</span> Өрхийн орлогыг баталгаажуулах бичиг баримт
                                     </li>
                                 </ul>
-                                <a href="">
+                                <a href="" data-toggle="modal" data-target="#docsmodal" style="text-decoration: underline !important;">
                                     Дэлгэрэнгүй
                                 </a>
                                 <button data-toggle="modal" class="loan-trigger" data-target="#loanmodal">Зээлийн хүсэлт</button>
@@ -368,6 +370,171 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="docsmodal" tabindex="-1" role="dialog" aria-labelledby="docsmodalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog big" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <div class="profile-container">
+                        <div class="profile-document">
+                            <h3>
+                                Та мөрөөдлийн байраа авахад юу бүрдүүлэх талаармэдэхгүй байвал анхаарлаа
+                                хандуулаарай
+                            </h3>
+                            <div class="doc-items">
+                                <div class="four">
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc1.png') }}" >
+                                        <b>Иргэний үнэмлэх </b>
+                                        <p>
+                                            Эх хувийг нотариатаар гэрчлүүлсэн хувилбарын хамт.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc2.png') }}">
+                                        <b>1 хувь цээж зураг</b>
+                                        <p>
+                                            Хамтран зээл гаргуулах бол мөн адил хамтрагчийн цээж зураг.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc3.png') }}">
+                                        <b>Оршин суугаа хорооны тодорхойлолт</b>
+                                        <p>
+                                            Төрийн үйлчилгээний цахим машин буюу ТҮЦ машинаас авах боломжтой.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc4.png') }}">
+                                        <b>Нийгмийн даатгал төлсөн эсэх тодорхойлолт </b>
+                                        <p>
+                                            Төрийн үйлчилгээний цахим машин буюу ТҮЦ машинаас авах боломжтой.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="three">
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc5.png') }}">
+                                        <b>Ажлын газрын тодорхойлолт</b>
+                                        <p>
+                                            Албан тушаал, ажилласан жил, цалингийн хэмжээ, нэмэгдэл урамшууллыг
+                                            тусгах.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc6.png') }}">
+                                        <b>Хөдөлмөрийн гэрээ</b>
+                                        <p>
+
+                                            Ажил олгогч танд гаргаж өгөх ёстой.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc7.png') }}">
+                                        <b>Хувиараа бизнес эрхэлдэг бол бизнесийн үйл ажиллагаатай холбоотой
+                                            бичиг
+                                            баримтууд</b>
+                                        <p>
+                                            Бизнесийн үйл ажиллагааг тайлбарласан товч материал, сүүлийн 1-2
+                                            жилийн
+                                            санхүүгийн мэдээлэл бүхий бичиг баримт.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="two">
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc8.png') }}">
+                                        <b>Өрхийн орлогыг баталгаажуулах бичиг баримт Банкны гүйлгээний хуулга
+                                            гэх
+                                            мэт нотлох баримтууд</b>
+                                        <p>
+                                            Өрхийн гишүүний цалингийн тодорхойлолт. Өрхийн гишүүн нь хувиараа
+                                            бизнес
+                                            эрхлэгч бол No.6 тай адил бичиг баримт.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc9.png') }}">
+                                        <b>Өрхийн гишүүдийн нэр дээр УБЕГазраас орон сууц үл хөдлөх хөрөнгө
+                                            эзэмшдэг
+                                            эсэх лавлагаа</b>
+                                        <p>
+                                            Төрийн үйлчилгээний цахим машин буюу ТҮЦ машинаас авах боломжтой.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc10.png') }}">
+                                        <b>Гэрлэлтийн гэрчилгээний хуулбар эсвэл гэрлэсэн эсэх лавлагаа</b>
+                                        <p>
+                                            Төрийн үйлчилгээний цахим машин буюу ТҮЦ машинаас авах боломжтой.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc11.png') }}">
+                                        <b>Бусад банк, ББСБ-д төлөх зээлийн үлдэгдэлтэй бол тухайн зээлийн
+                                            гэрээ,
+                                            зээлийн дансны хуулга</b>
+                                        <p>
+                                            Төрийн үйлчилгээний цахим машин буюу ТҮЦ машинаас авах боломжтой.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc12.png') }}">
+                                        <b>Зээлийн барьцаанд тавигдсан эсэх талаарх үл хөдлөх хөрөнгийн
+                                            лавлагаа</b>
+                                        <p>
+
+                                            Төрийн үйлчилгээний цахим машин буюу ТҮЦ машинаас авах боломжтой.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc13.png') }}" />
+                                        <b>ШШГЕГ-аас өр, төлбөртэй эсэх талаарх тодорхойлолт</b>
+                                        <p>
+                                            Төрийн үйлчилгээний цахим машин буюу ТҮЦ машинаас авах боломжтой.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc14.png') }}" />
+                                        <b>Барьцаанд тавих үл хөдлөх хөрөнгө байгаа бол түүний гэрчилгээ</b>
+                                        <p>
+                                            Зээлийн хүсэлт гаргахад барьцаанд тавих үл хөдлөх байгаа бол, тухайн
+                                            үл
+                                            хөдлөхийн гэрчилгээний эх хувь.
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc15.png') }}" />
+                                        <b>Урьдчилгаа төлбөрийн баримт Банкны гүйлгээний хуулга гэх мэт нотлох
+                                            баримтууд</b>
+                                        <p>
+                                            Урьдчилгаа төлсөн мөнгөн дүнгийн баримт
+                                        </p>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc16.png') }}" />
+                                        <b>Шинээр ашиглалтад орсон барилгаас худалдан авах бол орон сууцны
+                                            захиалгын
+                                            гэрээ</b>
+                                    </div>
+                                    <div class="doc-item">
+                                        <img src="{{ asset('assets/img/doc17.png') }}" />
+                                        <b>Хуучин орон сууц худалдан авах бол орон сууц худалдах худалдан авах
+                                            гэрээ, орон сууцны өмчлөх эрхийн гэрчилгээний хуулбар, барьцаанд буй
+                                            эсэх УБЕГазрын лавлагаа</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
