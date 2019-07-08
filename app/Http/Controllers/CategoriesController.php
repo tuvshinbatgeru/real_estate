@@ -53,33 +53,35 @@ class CategoriesController extends Controller
     {
         $rules = [
             'category_name' => 'required',
-            //'icon_idle' => 'required',
             'icon_active' => 'required',
-            //'is_vertical' => 'required'
+            'type' => 'required',
+            'value_type' => 'required'
         ];
 
         $this->validate($request, $rules);
 
-        //dd($request->all());
-
         $data = [
             'category_name' => $request->category_name,
-            //'icon_idle'   => $request->icon_idle,
             'icon_active'   => $request->icon_active,
-            'is_vertical' => $request->is_vertical ? 'Y' : 'N'
+            'is_vertical' => $request->is_vertical ? 'Y' : 'N',
+            'description' => $request->description,
+            'type' => $request->type,
+            'value_type' => $request->value_type,
         ];
 
         $category = Category::create($data);
 
-        $options = [];
-        foreach($request->category_option as $option){
-            array_push($options, [
-                //'category_id' => $category->id,
-                'option' => $option
-            ]);
-        }
+        if($request->value_type == 'chooser') {
+            $options = [];
+            foreach($request->category_option as $option){
+                array_push($options, [
+                    //'category_id' => $category->id,
+                    'option' => $option
+                ]);
+            }
 
-        $category->options()->createMany($options);
+            $category->options()->createMany($options);
+        }
 
         return back()->with('success', trans('app.category_created'));
     }

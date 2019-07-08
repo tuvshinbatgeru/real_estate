@@ -1,13 +1,3 @@
-<div class="subscribe">
-    <div class="container">
-        <div class="row blue-input">
-            <div class="input-field col s12">
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Утасны дугаараа оруулаад бүртгүүлээрэй</label>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="footer-menus">
     <div class="container">
         <div class="row">

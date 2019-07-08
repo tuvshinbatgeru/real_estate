@@ -210,11 +210,16 @@
                                         <div class="form-group {{ $errors->has('square_unit_space')? 'has-error':'' }}">
                                             <label for="square_unit_space" class="col-sm-4 control-label">{{ $category->category_name }}</label>
                                             <div class="col-sm-8">
-                                                <select class="form-control" name="category_option[]">
-                                                    @foreach($category->options as $option)
-                                                        <option value="{{ $category->id }}.{{ $option->id }}">{{ $option->option }}</option>
-                                                    @endforeach
-                                                </select>
+
+                                                @if($category->value_type == 'chooser')
+                                                    <select class="form-control" name="category_option[]">
+                                                        @foreach($category->options as $option)
+                                                            <option value="{{ $category->id }}.{{ $option->id }}">{{ $option->option }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @else
+                                                    <input type="text" class="form-control" name="category_option[]" placeholder="Утга оруулах">
+                                                @endif
                                             </div>
                                         </div>                                        
                                     @endforeach
