@@ -55,7 +55,7 @@ class CategoriesController extends Controller
             'category_name' => 'required',
             //'icon_idle' => 'required',
             'icon_active' => 'required',
-            'is_vertical' => 'required'
+            //'is_vertical' => 'required'
         ];
 
         $this->validate($request, $rules);
@@ -66,7 +66,7 @@ class CategoriesController extends Controller
             'category_name' => $request->category_name,
             //'icon_idle'   => $request->icon_idle,
             'icon_active'   => $request->icon_active,
-            'is_vertical' => $request->is_vertical
+            'is_vertical' => $request->is_vertical ? 'Y' : 'N'
         ];
 
         $category = Category::create($data);
