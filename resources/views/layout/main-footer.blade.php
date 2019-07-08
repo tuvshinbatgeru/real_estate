@@ -67,8 +67,6 @@
     NProgress.done();
 </script>
 <!-- Conditional page load script -->
-<script src="{{ asset('assets/lib/thumb/js/lightslider.js') }}"></script>
-<script src="{{ asset('assets/js/fitler.js') }}"></script>
 <script>
     var toastr_options = {closeButton : true};
 </script>
