@@ -158,6 +158,9 @@
                     }))
                 })
                 this.filter = filter
+                $("#lightSlider").lightSlider({
+                    pager: false
+                });
               })
             },
             getDatas() {
