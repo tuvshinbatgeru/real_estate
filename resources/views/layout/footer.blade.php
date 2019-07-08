@@ -1,4 +1,3 @@
-
 <div class="subscribe">
     <div class="container">
         <div class="row blue-input">
@@ -68,28 +67,16 @@
     <p>@lang('app.loading')...</p>
 </div>
 
-
-<script src="{{ asset('assets/js/vendor/jquery-1.11.2.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('assets/select2-3.5.3/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/nprogress/nprogress.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <script type="text/javascript">
     NProgress.start();
     NProgress.done();
 </script>
 <!-- Conditional page load script -->
-@if(request()->segment(1) === 'dashboard')
-    <script src="{{ asset('assets/plugins/metisMenu/dist/metisMenu.min.js') }}"></script>
-    <script>
-        $(function() {
-            $('#side-menu').metisMenu();
-        });
-    </script>
-@endif
-<script src="{{ asset('assets/js/main.js') }}"></script>
 <script src="{{ asset('assets/lib/thumb/js/lightslider.js') }}"></script>
 <script src="{{ asset('assets/js/fitler.js') }}"></script>
 <script>
@@ -105,6 +92,9 @@
     $(document).on('click', '.ghuranti', function(){
         $('.themeqx-demo-chooser-wrap').toggleClass('open');
     });
+    // $(document).ready(function(){
+    //     $('select').formSelect();
+    // });
 </script>
 
 </body>

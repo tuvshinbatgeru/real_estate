@@ -68,12 +68,9 @@
 </div>
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/jquery-1.11.2.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('assets/select2-3.5.3/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/nprogress/nprogress.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <script type="text/javascript">
     NProgress.start();
@@ -95,6 +92,9 @@
     $(document).on('click', '.ghuranti', function(){
         $('.themeqx-demo-chooser-wrap').toggleClass('open');
     });
+    // $(document).ready(function(){
+    //     $('select').formSelect();
+    // });
 </script>
 
 </body>

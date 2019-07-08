@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-    <script src="{{ asset('js/app.js') }}"></script>
+    
     <!-- Font awesome 4.4.0 -->
     <link rel="stylesheet" href="{{ asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <!-- load page specific css -->
@@ -40,30 +40,13 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/filter.css') }}">
-    <!-- Conditional page load script -->
-    @if(request()->segment(1) === 'dashboard')
-        <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/metisMenu/dist/metisMenu.min.css') }}">
-        @endif
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    @yield('page-css')
 
-                <!-- main style.css -->
-
-        <?php $default_style = get_option('default_style'); ?>
-        @if($default_style == 'default')
-            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-        @else
-            <link rel="stylesheet" href="{{ asset("assets/css/style-{$default_style}.css") }}">
-        @endif
-
-        @yield('page-css')
-
-        @if(get_option('additional_css'))
-            <style type="text/css">
-                {{ get_option('additional_css') }}
-            </style>
-        @endif
-
-        <script src="{{ asset('assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -83,7 +66,7 @@
                             Нэвтрэх
                         </a> -->
                         <a href="" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect"
-                            data-toggle="modal" data-target="#exampleModal">
+                                data-toggle="modal" data-target="#exampleModal">
                             Бүртгүүлэх / Нэвтрэх
                         </a>
                     </div>

@@ -195,7 +195,7 @@
                     </button>
                     <div class="modal-body">
                         <div class="modal-top">
-                            <img src="assets/images/logo.png" alt="">
+                            <img src="{{ asset('assets/img/logo.png') }}" alt="">
                             <p>
                                 Сайн байна уу!<br />
                                 Эрхэм хэрэглэгч та дэлгэрэнгүй мэдээлэл<br />
@@ -203,26 +203,26 @@
                             </p>
                         </div>
                         <div class="modal-middle">
-                            <div class="gmail-button mdl-button">
-                                <img src="assets/images/gmail.png" height="20px"/> <span>gmail</span>
-                            </div>
-                            <div class="facebook-button mdl-button">
-                                <img src="assets/images/facebook.png" height="20px"/> <span>facebook</span>
-                            </div>
+                            <a class="gmail-button mdl-button" href="{{ route('google_redirect') }}">
+                                <img src="{{ asset('assets/img/gmail.png') }}" height="20px"/> <span>gmail</span>
+                            </a>
+                            <a class="facebook-button mdl-button" href="{{ route('facebook_redirect') }}">
+                                <img src="{{ asset('assets/img/facebook.png') }}" height="20px"/> <span>facebook</span>
+                            </a>
                         </div>
 
                         <div class="divide-or">
                             <span>Эсвэл</span>
                         </div>
 
-                        <form class="modal-form">
-                            <input type="text" placeholder="Мэйл хаяг" />
-                            <input type="password" placeholder="Нууц үг" />
+                        {{ Form::open(['class'=> 'modal-form', 'autocomplete'=> 'off', 'url' => '/login']) }}
+                            <input type="text" placeholder="Мэйл хаяг" name="email" value="{{ old('email') }}" />
+                            <input type="password" placeholder="Нууц үг" name="password" />
                             <div class="form-button">
-                                <button>Нэвтрэх</button>
+                                <button type="submit">Нэвтрэх</button>
                                 <button>Бүртгүүлэх</button>
                             </div>
-                        </form>
+                        {{ Form::close() }}
 
                     </div>
                 </div>

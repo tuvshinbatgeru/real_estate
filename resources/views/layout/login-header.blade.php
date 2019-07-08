@@ -40,7 +40,6 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/filter.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     @yield('page-css')
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -52,42 +51,6 @@
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-
-<div class="main-header">
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="header with-search">
-                    <a href="/">
-                        <div class="logo">
-                            <img src="{{ asset('assets/img/logo.png') }}" alt="">
-                        </div>
-                    </a>
-                    <div class="search-group">
-                        <form action='/listing' method="get">
-                            @if(isset($query))
-                                <input type="search" name="q" value="{{ $query }}"
-                                placeholder="Дүүрэг, Хороо болон хотхоны нэрийг оруулна уу!" />
-                            @else
-                                <input type="search" name="q"
-                                placeholder="Дүүрэг, Хороо болон хотхоны нэрийг оруулна уу!" />
-                            @endif
-                            
-                        </form>
-                    </div>
-                    <div class="group-button">
-                        <a href="/login">
-                            Нэвтрэх
-                        </a>
-                        <a href="/login" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect">
-                            Бүртгүүлэх
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-</div>
 
 {{-- <div class="header-nav-top">
     <div class="container">

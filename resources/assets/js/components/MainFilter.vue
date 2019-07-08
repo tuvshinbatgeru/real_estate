@@ -38,7 +38,7 @@
                             <span>Нарийвчилсан хайлт</span>
                         </div>
                         <div>
-                            <b>1</b> хайлтын үр дүн байна
+                            <b>{{ ads.total }}</b> хайлтын үр дүн байна
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                                     <img 
                                                         itemprop="image" 
                                                         width="100%" 
-                                                        :src="'uploads/images/thumbs/' + ad.feature_img.media_name"
+                                                        :src="featuredImage(ad)"
                                                         :alt="ad.title"
                                                     />
 
@@ -198,6 +198,10 @@
             currencyFormat(num) {
               return parseFloat(num).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
               //return num.toFixed(2)
+            },
+            featuredImage(ad) {
+                if(ad.feature_img == null) return ''
+                return 'uploads/images/thumbs/' + ad.feature_img.media_name
             },
             themeqx_price_ng(ad) {
                 let price = ad.price;

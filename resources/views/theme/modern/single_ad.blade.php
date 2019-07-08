@@ -60,7 +60,7 @@
                         </div>
                         <div class="detail-info">
                             <div class="border">
-                                <button data-toggle="modal" data-target="#loanmodal" style="margin-top: 0px; margin-bottom: 25px;">Зээлийн хүсэлт</button>
+                                <button class="loan-trigger" data-toggle="modal" data-target="#loanmodal" style="margin-top: 0px; margin-bottom: 25px;">Зээлийн хүсэлт</button>
                                 <div class="name-price">
                                     <div class="name">
                                         <span>{{ $ad->title }}</span>
@@ -192,7 +192,7 @@
                                 <a href="">
                                     Дэлгэрэнгүй
                                 </a>
-                                <button data-toggle="modal" data-target="#loanmodal">Зээлийн хүсэлт</button>
+                                <button data-toggle="modal" class="loan-trigger" data-target="#loanmodal">Зээлийн хүсэлт</button>
                             </div>
                             <div class="border">
                                 <div class="agent-header">
@@ -217,6 +217,157 @@
                             </div>
 
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loanmodal" tabindex="-1" role="dialog" aria-labelledby="loanmodalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog big" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <div class="col-md-12" id="loan">
+
+                        <div class="profile-container step1">
+                            <div class="form-step">
+                                <div class="steps">
+                                    <div class="step active">
+                                        1
+                                    </div>
+                                    <div class="step">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-top">
+                                <img src="{{ asset('assets/img/loan.png') }}">
+                                <p>
+                                    <b style="color: #000; font-size: 17px;">Баяр хүргэе</b><br />
+                                    Та зээл авах боломжтой бөгөөд нэмэлт мэдээллүүдийг бөглөсөнөөр манай
+                                    зээлийн<br />
+                                    үйлчилгээнд хамрагдахад илүү хялбар болох болно.
+                                </p>
+                            </div>
+                            <div class="profile-form " data-step='1'>
+                                <div class="row">
+                                    <form class="custom-form col s12 loan">
+                                        <div class="row">
+                                            <div class="input-field col s4">
+                                                <i class="material-icons prefix">₮</i>
+                                                <input id="icon_prefix" type="text" class="validate"
+                                                    value="159,000,000">
+                                                <label for="icon_prefix">Зээлийн хэмжээ</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <i class="material-icons prefix">%</i>
+                                                <input id="icon_telephone" type="tel" class="validate"
+                                                    value="₮ 39,000,000">
+                                                <label for="icon_telephone"> Урьдчилгаа</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <select>
+                                                    <option value="1">Тийм</option>
+                                                    <option value="2">Үгүй</option>
+                                                </select>
+                                                <label>Нийгмийн даатгал</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s4">
+                                                <i class="material-icons prefix">₮</i>
+                                                <input id="icon_prefix" type="text" class="validate" value="1,500,000">
+                                                <label for="icon_prefix">Өрхийн орлого</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <i class="material-icons prefix">₮</i>
+                                                <input id="icon_telephone" type="tel" class="validate"
+                                                    value="₮ 700,000">
+                                                <label for="icon_telephone">Өрхийн зарлага</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <select>
+                                                    <option value="1">Тийм</option>
+                                                    <option value="2">Үгүй</option>
+                                                </select>
+                                                <label>Зээлтэй эсэх</label>
+                                            </div>
+                                        </div>
+                                        <a class="active loan-step">Үргэлжлүүлэх</a>
+                                        <!-- <button>Цуцлах</button> -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-container step2">
+                            <div class="form-step">
+                                <div class="steps">
+                                    <div class="step">
+                                        1
+                                    </div>
+                                    <div class="step active">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-top">
+                                <img src="{{ asset('assets/img/loan2.png') }}">
+                                <p>
+                                    Та хувийн мэдээллээ үнэн зөв бөглөнө үү
+                                </p>
+                            </div>
+                            <div class="profile-form " data-step='1'>
+                                <div class="row">
+                                    <form class="custom-form col s12 loan">
+                                        <div class="row">
+                                            <div class="input-field col s4">
+                                                <input id="icon_prefix" type="text" class="validate" value="Баярцогт">
+                                                <label for="icon_prefix">Овог</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <input id="icon_telephone" type="tel" class="validate" value="Мандах">
+                                                <label for="icon_telephone">Нэр</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <input id="icon_telephone" type="tel" class="validate"
+                                                    value="НХ99880099">
+                                                <label for="icon_telephone">Регистерийн дугаар</label>
+                                            </div>
+                                        </div>
+                                        <a class="active loan-step1">Үргэлжлүүлэх</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-container step3">
+                            <div class="form-step">
+                                <div class="steps">
+                                    <div class="step">
+                                        1
+                                    </div>
+                                    <div class="step">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-top">
+                                <img src="{{ asset('assets/img/loan3.png') }}">
+                                <p>
+                                    Таны зээлийн хүсэлт амжилттай илгээгдсэн. <br />
+                                    Хүсэлтийн хариу 7-14 хоногийн дараа ирэх ба <br />
+                                    танд мэйлээр мэдэгдэх болно.
+
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -271,157 +422,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="loanmodal" tabindex="-1" role="dialog" aria-labelledby="loanmodalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog big" role="document">
-                <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="modal-body">
-                        <div class="col-md-12" id="loan">
-
-                            <div class="profile-container step1">
-                                <div class="form-step">
-                                    <div class="steps">
-                                        <div class="step active">
-                                            1
-                                        </div>
-                                        <div class="step">
-                                            2
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="profile-top">
-                                    <img src="assets/images/loan.png">
-                                    <p>
-                                        <b style="color: #000; font-size: 17px;">Баяр хүргэе</b><br />
-                                        Та зээл авах боломжтой бөгөөд нэмэлт мэдээллүүдийг бөглөсөнөөр манай
-                                        зээлийн<br />
-                                        үйлчилгээнд хамрагдахад илүү хялбар болох болно.
-                                    </p>
-                                </div>
-                                <div class="profile-form " data-step='1'>
-                                    <div class="row">
-                                        <form class="custom-form col s12 loan">
-                                            <div class="row">
-                                                <div class="input-field col s4">
-                                                    <i class="material-icons prefix">₮</i>
-                                                    <input id="icon_prefix" type="text" class="validate"
-                                                        value="159,000,000">
-                                                    <label for="icon_prefix">Зээлийн хэмжээ</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <i class="material-icons prefix">%</i>
-                                                    <input id="icon_telephone" type="tel" class="validate"
-                                                        value="₮ 39,000,000">
-                                                    <label for="icon_telephone"> Урьдчилгаа</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <select>
-                                                        <option value="1">Тийм</option>
-                                                        <option value="2">Үгүй</option>
-                                                    </select>
-                                                    <label>Нийгмийн даатгал</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col s4">
-                                                    <i class="material-icons prefix">₮</i>
-                                                    <input id="icon_prefix" type="text" class="validate" value="1,500,000">
-                                                    <label for="icon_prefix">Өрхийн орлого</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <i class="material-icons prefix">₮</i>
-                                                    <input id="icon_telephone" type="tel" class="validate"
-                                                        value="₮ 700,000">
-                                                    <label for="icon_telephone">Өрхийн зарлага</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <select>
-                                                        <option value="1">Тийм</option>
-                                                        <option value="2">Үгүй</option>
-                                                    </select>
-                                                    <label>Зээлтэй эсэх</label>
-                                                </div>
-                                            </div>
-                                            <a class="active loan-step">Үргэлжлүүлэх</a>
-                                            <!-- <button>Цуцлах</button> -->
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="profile-container step2">
-                                <div class="form-step">
-                                    <div class="steps">
-                                        <div class="step">
-                                            1
-                                        </div>
-                                        <div class="step active">
-                                            2
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="profile-top">
-                                    <img src="assets/images/loan2.png">
-                                    <p>
-                                        Та хувийн мэдээллээ үнэн зөв бөглөнө үү
-                                    </p>
-                                </div>
-                                <div class="profile-form " data-step='1'>
-                                    <div class="row">
-                                        <form class="custom-form col s12 loan">
-                                            <div class="row">
-                                                <div class="input-field col s4">
-                                                    <input id="icon_prefix" type="text" class="validate" value="Баярцогт">
-                                                    <label for="icon_prefix">Овог</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <input id="icon_telephone" type="tel" class="validate" value="Мандах">
-                                                    <label for="icon_telephone">Нэр</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <input id="icon_telephone" type="tel" class="validate"
-                                                        value="НХ99880099">
-                                                    <label for="icon_telephone">Регистерийн дугаар</label>
-                                                </div>
-                                            </div>
-                                            <a class="active loan-step1">Үргэлжлүүлэх</a>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="profile-container step3">
-                                <div class="form-step">
-                                    <div class="steps">
-                                        <div class="step">
-                                            1
-                                        </div>
-                                        <div class="step">
-                                            2
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="profile-top">
-                                    <img src="assets/images/loan3.png">
-                                    <p>
-                                        Таны зээлийн хүсэлт амжилттай илгээгдсэн. <br />
-                                        Хүсэлтийн хариу 7-14 хоногийн дараа ирэх ба <br />
-                                        танд мэйлээр мэдэгдэх болно.
-
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
@@ -472,6 +472,30 @@
     </script>
     <script>
         $(document).ready(function(){
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems, options);
+            })
+
+            $('.loan-trigger').on('click', function(e) {
+                $('.step1').show();
+                $('.step2').hide();
+                $('.step3').hide();
+            })
+
+            $('.loan-step').on('click', function (e) {
+                e.preventDefault();
+                $('.step1').hide();
+                $('.step2').show();
+            });
+
+            $('.loan-step1').on('click', function (e) {
+                e.preventDefault();
+                $('.step2').hide();
+                $('.step3').show();
+                $('.steps').hide();
+            });
+
             $(".themeqx_new_regular_ads_wrap").owlCarousel({
                 loop:true,
                 margin:10,
