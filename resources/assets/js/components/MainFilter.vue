@@ -114,7 +114,8 @@
         },
         mounted() {
             $("#lightSlider").lightSlider({
-                pager: false
+                pager: false,
+                autoWidth: false
             });
             this.getFilter()
             this.getDatas()
@@ -159,7 +160,8 @@
                 })
                 this.filter = filter
                 $("#lightSlider").lightSlider({
-                    pager: false
+                    pager: false,
+                    autoWidth: false
                 });
               })
             },
