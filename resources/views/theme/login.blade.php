@@ -1,4 +1,4 @@
-@extends('layout.admin-layout')
+@extends('layout.main-layout')
 @section('title') Log-In | @parent @endsection
 
 @section('main')
@@ -8,6 +8,43 @@
             <div class="col-sm-6 col-sm-offset-3 col-xs-12">
 
                 <div class="login">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="modal-top">
+                                    <img src="assets/images/logo.png" alt="">
+                                    <p>
+                                        Сайн байна уу!<br />
+                                        Эрхэм хэрэглэгч та дэлгэрэнгүй мэдээлэл<br />
+                                        авахыг хүсвэл нэвтэрч орно уу.
+                                    </p>
+                                </div>
+                                <div class="modal-middle">
+                                    <div class="gmail-button mdl-button">
+                                        <img src="assets/images/gmail.png" height="20px"/> <span>gmail</span>
+                                    </div>
+                                    <div class="facebook-button mdl-button">
+                                        <img src="assets/images/facebook.png" height="20px"/> <span>facebook</span>
+                                    </div>
+                                </div>
+
+                                <div class="divide-or">
+                                    <span>Эсвэл</span>
+                                </div>
+
+                                <form class="modal-form">
+                                    <input type="text" placeholder="Мэйл хаяг" />
+                                    <input type="password" placeholder="Нууц үг" />
+                                    <div class="form-button">
+                                        <button>Нэвтрэх</button>
+                                        <button>Бүртгүүлэх</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
                     <h3 class="authTitle">Логин | <a href="{{ route('user.create') }}">Бүртгүүлэх</a></h3>
 
                     @if(get_option('enable_social_login') == 1)

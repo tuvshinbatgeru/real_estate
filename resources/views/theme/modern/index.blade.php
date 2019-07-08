@@ -184,6 +184,50 @@
                     </div>
                 </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-body">
+                        <div class="modal-top">
+                            <img src="assets/images/logo.png" alt="">
+                            <p>
+                                Сайн байна уу!<br />
+                                Эрхэм хэрэглэгч та дэлгэрэнгүй мэдээлэл<br />
+                                авахыг хүсвэл нэвтэрч орно уу.
+                            </p>
+                        </div>
+                        <div class="modal-middle">
+                            <div class="gmail-button mdl-button">
+                                <img src="assets/images/gmail.png" height="20px"/> <span>gmail</span>
+                            </div>
+                            <div class="facebook-button mdl-button">
+                                <img src="assets/images/facebook.png" height="20px"/> <span>facebook</span>
+                            </div>
+                        </div>
+
+                        <div class="divide-or">
+                            <span>Эсвэл</span>
+                        </div>
+
+                        <form class="modal-form">
+                            <input type="text" placeholder="Мэйл хаяг" />
+                            <input type="password" placeholder="Нууц үг" />
+                            <div class="form-button">
+                                <button>Нэвтрэх</button>
+                                <button>Бүртгүүлэх</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
