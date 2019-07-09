@@ -44,6 +44,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('description')? 'has-error':'' }}">
+                            <label for="description" class="col-sm-4 control-label">@lang('app.description') /optional/</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="description" value="{{ old('description') ? old('description') : $edit_category->description }}" name="description" placeholder="@lang('app.description')">
+                                {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('is_vertical')? 'has-error':'' }}">
                             <label for="is_vertical" class="col-sm-4 control-label">Хөндлөн эсэх </label>
                             <div class="col-sm-8">
@@ -56,6 +64,17 @@
                                     name="is_vertical" placeholder="@lang('app.is_vertical')"
                                 >
                                 {!! $errors->has('is_vertical')? '<p class="help-block">'.$errors->first('is_vertical').'</p>':'' !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('type')? 'has-error':'' }}">
+                            <label for="type" class="col-sm-4 control-label">Төрөл сонгох</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="type" id="type">
+                                    <option value="main" {{ $edit_category->type == 'main' ? 'selected':'' }}>Main</option>
+                                    <option value="icon" {{ $edit_category->type == 'icon' ? 'selected':'' }}>Icon</option>
+                                    <option value="detail" {{ $edit_category->type == 'detail' ? 'selected':'' }}>Detail</option>
+                                </select>
                             </div>
                         </div>
 

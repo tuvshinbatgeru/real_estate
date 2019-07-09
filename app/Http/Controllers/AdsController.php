@@ -136,6 +136,7 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $user_id = Auth::user()->id;
         $ads_price_plan = get_option('ads_price_plan');
 
@@ -232,11 +233,13 @@ class AdsController extends Controller
             $options = [];
             foreach($request->category_option as $option){
                 $separators = explode(".", $option);
-                array_push($options, [
-                    'ads_id' => $created_ad->id,
-                    'category_id' => $separators[0],
-                    'option_id' => $separators[1]
-                ]);
+                if(count($separators) >= 2) {
+                    array_push($options, [
+                        'ads_id' => $created_ad->id,
+                        'category_id' => $separators[0],
+                        'option_id' => $separators[1]
+                    ]);    
+                }
             }
 
             //\Log::info($options);

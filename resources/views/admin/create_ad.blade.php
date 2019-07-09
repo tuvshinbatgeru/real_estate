@@ -218,7 +218,7 @@
                                                         @endforeach
                                                     </select>
                                                 @else
-                                                    <input type="text" class="form-control" name="category_option[]" placeholder="Утга оруулах">
+                                                    <input type="text" value={{ $category->id }} class="form-control" name="category_option[]" placeholder="Утга оруулах">
                                                 @endif
                                             </div>
                                         </div>                                        

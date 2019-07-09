@@ -108,6 +108,8 @@ class CategoriesController extends Controller
         $title = trans('app.edit_category');
         $edit_category = Category::find($id);
 
+        //dd($edit_category);
+
         if ( ! $edit_category)
             return redirect(route('parent_categories'))->with('error', trans('app.request_url_not_found'));
 
@@ -128,7 +130,9 @@ class CategoriesController extends Controller
         $rules = [
             'category_name' => 'required',
             //'icon_idle' => 'required',
-            'icon_active' => 'required',
+            //'icon_active' => 'required',
+            'type' => 'required',
+            'value_type' => 'required'
             //'is_vertical' => 'required'
         ];
 
@@ -138,7 +142,10 @@ class CategoriesController extends Controller
             'category_name' => $request->category_name,
             //'icon_idle'   => $request->icon_idle,
             'icon_active'   => $request->icon_active,
-            'is_vertical' => $request->is_vertical ? 'Y' : 'N'
+            'is_vertical' => $request->is_vertical ? 'Y' : 'N',
+            'description' => $request->description,
+            'type' => $request->type,
+            'value_type' => $request->value_type,
         ];
         
         Category::whereId($id)->update($data);
