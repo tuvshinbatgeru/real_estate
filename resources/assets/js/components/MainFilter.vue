@@ -81,7 +81,7 @@
                                                 </div>
                                                 <h3>{{ ad.title }}</h3>
                                                 <p>{{ themeqx_price_ng(ad) }}</p>
-                                                <span>{{ ad.square_unit_space + ' ' + ad.unit_type }}</span>
+                                                <span>{{ ad.square_unit_space + ' ' + (ad.unit_type == 'sqmeter' ? 'м2' : ad.unit_type) }}</span>
                                             </a>
                                         </div>
                                     </div>

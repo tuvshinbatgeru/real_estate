@@ -62,7 +62,7 @@
                                             <span class="tag">Шинэ</span>
                                             <h3>{{ $urgent_ads[0]->title }}</h3>
                                             <p>{{ themeqx_price_ng($urgent_ads[0]) }}</p>
-                                            <span>{{ $urgent_ads[0]->square_unit_space.' '.$urgent_ads[0]->unit_type }}</span>                                                  
+                                            <span>{{ $urgent_ads[0]->square_unit_space.' '.($urgent_ads[0]->unit_type == 'sqmeter' ? 'м2' : $urgent_ads[0]->unit_type) }}</span>                                                  
                                         </div>
                                     </a>
                                 @endif
@@ -72,7 +72,7 @@
                                             <span class="tag">Шинэ</span>
                                             <h3>{{ $urgent_ads[1]->title }}</h3>
                                             <p>{{ themeqx_price_ng($urgent_ads[1]) }}</p>
-                                            <span>{{ $urgent_ads[1]->square_unit_space.' '.$urgent_ads[1]->unit_type }}</span>                                                  
+                                            <span>{{ $urgent_ads[1]->square_unit_space.' '.($urgent_ads[1]->unit_type == 'sqmeter' ? 'м2' : $urgent_ads[1]->unit_type) }}</span>                                                  
                                         </div>
                                     </a>
                                 @endif
@@ -108,7 +108,7 @@
                                             </div>
                                             <h3>{{ $ad->title }}</h3>
                                             <p>{{ themeqx_price_ng($ad) }}</p>
-                                            <span>{{ $ad->square_unit_space.' '.$ad->unit_type }}</span>
+                                            <span>{{ $ad->square_unit_space.' '.($ad->unit_type == 'sqmeter' ? 'м2' : $ad->unit_type) }}</span>
                                         </a>
                                     </div>
                                 @endforeach
@@ -126,7 +126,7 @@
                                             <span class="tag">Шинэ</span>
                                             <h2>{{ $urgent_ads[2]->title }}</h2>
                                             <p>{{ themeqx_price_ng($urgent_ads[2]) }}</p>
-                                            <span>{{ $urgent_ads[2]->square_unit_space.' '.$urgent_ads[2]->unit_type }}</span>                                                  
+                                            <span>{{ $urgent_ads[2]->square_unit_space.' '.($urgent_ads[2]->unit_type == 'sqmeter' ? 'м2' : $urgent_ads[2]->unit_type) }}</span>                                                  
                                         </div>
                                     </a>
                                 @endif
@@ -136,7 +136,7 @@
                                             <span class="tag">Шинэ</span>
                                             <h3>{{ $urgent_ads[3]->title }}</h3>
                                             <p>{{ themeqx_price_ng($urgent_ads[3]) }}</p>
-                                            <span>{{ $urgent_ads[3]->square_unit_space.' '.$urgent_ads[3]->unit_type }}</span>                                                  
+                                            <span>{{ $urgent_ads[3]->square_unit_space.' '. ($urgent_ads[3]->unit_type == 'sqmeter' ? 'м2' : $urgent_ads[3]->unit_type) }}</span>                                                  
                                         </div>
                                     </a>
                                 @endif
@@ -175,7 +175,7 @@
                                             </div>
                                             <h3>{{ $ad->title }}</h3>
                                             <p>{{ themeqx_price_ng($ad) }}</p>
-                                            <span>{{ $ad->square_unit_space.' '.$ad->unit_type }}</span>
+                                            <span>{{ $ad->square_unit_space.' '. ($ad->unit_type == 'sqmeter' ? 'м2' : $ad->unit_type) }}</span>
                                         </a>
                                     </div>
                                 @endforeach
