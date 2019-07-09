@@ -48,7 +48,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>'
     <script src="{{ asset('assets/lib/thumb/js/lightslider.js') }}"></script>
-    <script src="{{ asset('assets/js/fitler.js') }}"></script>'
 </head>
 <body>
 <!--[if lt IE 8]>

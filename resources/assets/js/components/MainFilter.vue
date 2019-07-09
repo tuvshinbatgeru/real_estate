@@ -2,6 +2,137 @@
     <div>
         <div class="new-filter">
             <div class="container">
+                <div class="customs">
+                    <div class="custom-basic-select">
+                        <div class="custom-select-title" @click="togglePriceFilter()">
+                            M2, Үнэ
+                            <div class="selected-value">
+                            {{ size_filters.selected_option.data ? (size_filters.selected_option.data + ' м2 / ') : '' }}
+                            {{ price_filters.selected_option.data }} {{ price_filters.selected_option.data ? ' сая': '' }}
+                            </div>
+                        </div>
+                        <div class="custom-select-options" v-show="price_filters.selected_option.is_open">
+                            <div class="custom-select-item">
+                                <ul>
+                                    <li data-id='0' v-for='size in size_filters.data' @click="setSizeFilter(size)">{{ size }} м2</li>
+                                </ul>
+                                <div class="options" data-id="0">
+                                    <div class="option" @click="setPriceFilter(price)" :data-value="price + ' сая'" v-for='price in price_filters.data'>
+                                        {{ price }} сая
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-basic-select">
+                        <div class="custom-select-title">
+                            Дүүрэг, хороо
+                            <div class="selected-value"></div>
+                        </div>
+                        <div class="custom-select-options" style="display: none">
+                            <div class="custom-select-item arrow">
+                                <ul>
+                                    <li data-id='9'>Багануур</li>
+                                    <li data-id='10'>Багахангай</li>
+                                    <li data-id='11'>Баянгол</li>
+                                    <li data-id='12'>Баянзүрх</li>
+                                    <li data-id='13'>Налайх</li>
+                                    <li data-id='14'>Сонгинохайрхан</li>
+                                    <li data-id='15'>Сүхбаатар</li>
+                                    <li data-id='16'>Хан-Уул</li>
+                                    <li data-id='17'>Чингэлтэй</li>
+                                </ul>
+                                <div class="options" data-id="9">
+                                    <div class="option" data-value='1-р хороо'>
+                                        1-р хороо
+                                    </div>
+                                    <div class="option" data-value='2-р хороо'>
+                                        2-р хороо
+                                    </div>
+                                    <div class="option" data-value='3-р хороо'>
+                                        3-р хороо
+                                    </div>
+                                    <div class="option" data-value='4-р хороо'>
+                                        4-р хороо
+                                    </div>
+                                </div>
+                                <div class="options" data-id="10">
+                                    <div class="option" data-value='1-р хороо'>
+                                        1-р хороо
+                                    </div>
+                                    <div class="option" data-value='2-р хороо'>
+                                        2-р хороо
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-basic-select">
+                        <div class="custom-select-title">
+                            Байршил, Хотхон
+                            <div class="selected-value"></div>
+                        </div>
+                        <div class="custom-select-options" style="display: none">
+                            <div class="custom-select-item arrow full">
+                                <ul>
+                                    <li data-id='9'>Хүнсний 4 дэлгүүр</li>
+                                    <li data-id='10'>Мэргэжилтний 20</li>
+                                    <li data-id='11'>Оффицеруудын ордон</li>
+                                    <li data-id='12'>Баянзүрх</li>
+                                    <li data-id='13'>Налайх</li>
+                                    <li data-id='14'>Сонгинохайрхан</li>
+                                    <li data-id='15'>Сүхбаатар</li>
+                                    <li data-id='16'>Хан-Уул</li>
+                                    <li data-id='17'>Чингэлтэй</li>
+                                </ul>
+                                <div class="options" data-id="9">
+                                    <div class="option" data-value='Encanto town'>
+                                        Encanto town
+                                    </div>
+                                    <div class="option" data-value='River garden'>
+                                        River garden
+                                    </div>
+                                    <div class="option" data-value='Mandala town'>
+                                        Mandala town
+                                    </div>
+                                    <div class="option" data-value='Time squire'>
+                                        Time squire
+                                    </div>
+                                </div>
+                                <div class="options" data-id="10">
+                                    <div class="option" data-value='1-р хороо'>
+                                        1-р хороо
+                                    </div>
+                                    <div class="option" data-value='2-р хороо'>
+                                        2-р хороо
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-basic-select">
+                        <div class="custom-select-title">
+                            Нүүж ороход бэлэн эсэх
+                            <div class="selected-value"></div>
+                        </div>
+                        <div class="custom-select-options" style="display: none">
+                            <!-- <div class="custom-select-item"> -->
+                            <div class="option" data-value='Хоног 0 бэлэн'>
+                                Хоног 0 бэлэн
+                            </div>
+                            <div class="option" data-value='Хоног 14 арй боломжгүй'>
+                                Хоног 14 арй боломжгүй
+                            </div>
+                            <div class="option" data-value='55 - 65 m2'>
+                                Хоног 0 бэлэн
+                            </div>
+                            <div class="option" data-value='55 - 65 m2'>
+                                Хоног 0 бэлэн
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
                 <div id="lightSlider" class="icon">
                     <div v-for="cur in filter" @click="toggleFilter(cur)">
                         <div class="custom-basic-select icon">
@@ -110,6 +241,20 @@
         data() {
             return {
                 filter: [],
+                size_filters: {
+                    data: ['50-60', '60-70', '70-80', '80-90', '90-100', '100-110', '110-120', '120-130', '130-140', '140-150'],
+                    selected_option: {
+                        is_open: false,
+                        data: '',
+                    }
+                },
+                price_filters: {
+                    data: ['1-2', '2-3', '3-4', '4-5', '5-6'],
+                    selected_option: {
+                        is_open: false,
+                        data: '',
+                    }
+                },
                 ads: {
                     fetching: false,
                     data: [],
@@ -124,6 +269,9 @@
             this.getDatas()
         },
         methods: {
+            togglePriceFilter() {
+                this.price_filters.selected_option.is_open = !this.price_filters.selected_option.is_open
+            },
             toggleFilter(category) {
                 let index = _.findIndex(this.filter, (cur) => {
                     return cur.id == category.id
@@ -135,6 +283,18 @@
                     } else 
                         cur.selected_option.is_open = false
                 })
+            },
+            setSizeFilter(data) {
+                this.size_filters.selected_option.data = data
+                this.size_filters.selected_option.is_open = false
+
+                this.getDatas()
+            },
+            setPriceFilter(data) {
+                this.price_filters.selected_option.data = data
+                this.price_filters.selected_option.is_open = false
+
+                this.getDatas()
             },
             setFilter(category, option) {
                 let index = _.findIndex(this.filter, (cur) => {
@@ -166,7 +326,6 @@
               })
             },
             getDatas() {
-                let query = {}
                 let filterParams = []
                 this.filter.forEach((cur) => {
                     if(cur.selected_option.is_selected) {
@@ -177,13 +336,25 @@
                     }
                 })
 
-                //console.log(filterParams)
+                let query = {
+                    filter: filterParams
+                }
+
+                if(this.price_filters.selected_option.data) {
+                    Object.assign(query, {
+                        'price_interval': this.price_filters.selected_option.data
+                    })
+                }
+
+                if(this.size_filters.selected_option.data) {
+                    Object.assign(query, {
+                        'size_interval': this.size_filters.selected_option.data
+                    })
+                }
 
                 axios
                 .get('api/ads', {
-                    params: {
-                        filter: filterParams
-                    }
+                    params: query
                 })
                 .then(res => {
                     let { data, total } = res.data.result

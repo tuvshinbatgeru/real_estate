@@ -47,16 +47,37 @@ class AdsController extends Controller
 
             $filtered_ads = AdsCategory::with('ad.feature_img')->whereIn('option_id', $optionIds)->paginate(15);
 
+            if($request->price_interval) {
+                // $price = explode("-", $request->price_interval);
+                // AdsCategory::with(['ad.feature_img' => function ($q) use($SpecificID) {
+                //     $q->whereHas('types', function($q) use($SpecificID) {
+                //         $q->whereBetween('price_per_unit.id', $price)
+                //     });
+                // }])    
+            }
+            
+
             return response()->json([
                 'code' => 0,
                 'result' => $filtered_ads
             ]);
         }
 
-        $ads = Ad::with('feature_img')->paginate(15);
+        $query = Ad::with('feature_img');
+
+        if($request->price_interval) {
+            $price = explode("-", $request->price_interval);
+            $query->whereBetween('price_per_unit', $price);    
+        }
+
+        if($request->size_interval) {
+            $size = explode("-", $request->size_interval);
+            $query->whereBetween('square_unit_space', $size);    
+        }
+        
         return response()->json([
             'code' => 0,
-            'result' => $ads
+            'result' => $query->paginate(15)
         ]); 
     }
 
