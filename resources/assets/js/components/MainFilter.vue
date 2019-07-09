@@ -91,6 +91,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-12"v-if="ads.total == 0" style="height: 800px;">
+                <div class="container">
+                    <p>Хайлтын нөхцөлд таарах үл хөдлөх олдсонгүй</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
