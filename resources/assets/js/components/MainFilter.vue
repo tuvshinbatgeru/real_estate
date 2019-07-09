@@ -200,10 +200,9 @@
                 })
             },
             callSlider() {
-                alert('wow')
                 $("#lightSlider").lightSlider({
                     pager: false,
-                    autoWidth: true
+                    autoWidth: false
                 });
             },
             currencyFormat(num) {
