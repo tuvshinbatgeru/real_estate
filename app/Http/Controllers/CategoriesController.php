@@ -19,13 +19,13 @@ class CategoriesController extends Controller
     public function index()
     {
         $title = trans('app.categories');
-        $categories = Category::where('value_type', 'chooser')->get();
+        $categories = Category::all();
         return view('admin.categories', compact('title', 'categories'));
     }
 
     public function all()
     {
-        $categories = Category::with('options')->get();
+        $categories = Category::with('options')->where('value_type', 'chooser')->get();
         return response()->json([
             'code' => 0,
             'data' => $categories
