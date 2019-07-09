@@ -68,11 +68,11 @@ function rebuildSlider() {
 }
 
 function initSelectOptions() {
-  $(".options").each(function(index, value) {
-    if ($(this).data("id") === 0) {
-      $(this).show();
-    }
-  });
+  // $(".options").each(function(index, value) {
+  //   if ($(this).data("id") === 0) {
+  //     $(this).show();
+  //   }
+  // });
 }
 
 $(function() {
@@ -83,7 +83,6 @@ $(function() {
   }
 
   $(".advanced-search").click(function() {
-    console.log($(this).data("opens"));
     if ($(window).width() <= 1024) {
       if ($(this).data("opens") === 0) {
         slider.destroy();
@@ -128,42 +127,42 @@ $(function() {
     }
   });
 
-  initSelectOptions();
-  var $selectTitle = $(".custom-select-title");
-  var $option = $(".custom-select-options .option");
-  var $firstOptions = $(".custom-select-item ul li");
+  // initSelectOptions();
+  // var $selectTitle = $(".custom-select-title");
+  // var $option = $(".custom-select-options .option");
+  // var $firstOptions = $(".custom-select-item ul li");
 
-  $selectTitle.each(function(index, value) {
-    $(this).on("click", function() {
-      var $open = $(this)
-        .siblings(".custom-select-options")
-        .addClass("open");
-      $open.fadeToggle("fast");
-    });
-  });
+  // $selectTitle.each(function(index, value) {
+  //   $(this).on("click", function() {
+  //     var $open = $(this)
+  //       .siblings(".custom-select-options")
+  //       .addClass("open");
+  //     $open.fadeToggle("fast");
+  //   });
+  // });
 
-  $option.on("click", function() {
-    var selectedOption = $(this).data("value");
-    $(this)
-      .parents(".custom-select-options")
-      .siblings(".custom-select-title")
-      .find(".selected-value")
-      .html(selectedOption);
-    $(this)
-      .parents(".custom-select-options")
-      .hide();
-    // console.log(selectedOption);
-  });
+  // $option.on("click", function() {
+  //   var selectedOption = $(this).data("value");
+  //   $(this)
+  //     .parents(".custom-select-options")
+  //     .siblings(".custom-select-title")
+  //     .find(".selected-value")
+  //     .html(selectedOption);
+  //   $(this)
+  //     .parents(".custom-select-options")
+  //     .hide();
+  //   // console.log(selectedOption);
+  // });
 
-  $firstOptions.each(function(index, value) {
-    $(this).on("click", function() {
-      var selectedId = $(this).data("id");
-      $(".options").hide();
-      $(".options").each(function(index, value) {
-        if ($(this).data("id") === selectedId) {
-          $(this).show();
-        }
-      });
-    });
-  });
+  // $firstOptions.each(function(index, value) {
+  //   $(this).on("click", function() {
+  //     var selectedId = $(this).data("id");
+  //     $(".options").hide();
+  //     $(".options").each(function(index, value) {
+  //       if ($(this).data("id") === selectedId) {
+  //         $(this).show();
+  //       }
+  //     });
+  //   });
+  // });
 });

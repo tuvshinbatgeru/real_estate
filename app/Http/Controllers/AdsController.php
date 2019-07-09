@@ -53,7 +53,7 @@ class AdsController extends Controller
                 //     $q->whereHas('types', function($q) use($SpecificID) {
                 //         $q->whereBetween('price_per_unit.id', $price)
                 //     });
-                // }])    
+                // }])
             }
             
 
