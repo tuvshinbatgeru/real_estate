@@ -202,7 +202,8 @@
             callSlider() {
                 $("#lightSlider").lightSlider({
                     pager: false,
-                    autoWidth: false
+                    autoWidth: false,
+                    item: 8,
                 });
             },
             currencyFormat(num) {
