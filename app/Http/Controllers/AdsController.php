@@ -38,6 +38,8 @@ class AdsController extends Controller
     }
 
     public function all(Request $request) {
+        $query = Ad::with('feature_img');
+
         if($request->filter) {
             $optionIds = [];
             foreach ($request->filter as $filter) {
@@ -45,25 +47,9 @@ class AdsController extends Controller
                 array_push($optionIds, $curFilter->option_id);
             }
 
-            $filtered_ads = AdsCategory::with('ad.feature_img')->whereIn('option_id', $optionIds)->paginate(15);
-
-            if($request->price_interval) {
-                // $price = explode("-", $request->price_interval);
-                // AdsCategory::with(['ad.feature_img' => function ($q) use($SpecificID) {
-                //     $q->whereHas('types', function($q) use($SpecificID) {
-                //         $q->whereBetween('price_per_unit.id', $price)
-                //     });
-                // }])
-            }
-            
-
-            return response()->json([
-                'code' => 0,
-                'result' => $filtered_ads
-            ]);
+            $adsIds = AdsCategory::whereIn('option_id', $optionIds)->pluck('ads_id')->toArray();
+            $query->whereIn('id', $adsIds);
         }
-
-        $query = Ad::with('feature_img');
 
         if($request->price_interval) {
             $price = explode("-", $request->price_interval);
@@ -74,10 +60,14 @@ class AdsController extends Controller
             $size = explode("-", $request->size_interval);
             $query->whereBetween('square_unit_space', $size);    
         }
+
+        $result = $query->paginate(15);
+
+        \Log::info($result);
         
         return response()->json([
             'code' => 0,
-            'result' => $query->paginate(15)
+            'result' => $result
         ]); 
     }
 
