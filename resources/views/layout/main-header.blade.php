@@ -59,7 +59,11 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="header with-search">
+                @if(Auth::check())
+                    <div class="header with-search logged">
+                @else
+                    <div class="header with-search">
+                @endif
                     <a href="/">
                         <div class="logo">
                             <img src="{{ asset('assets/img/logo.png') }}" alt="">
@@ -77,14 +81,63 @@
                             
                         </form>
                     </div>
-                    <div class="group-button">
-                        <a href="/login">
-                            Нэвтрэх
-                        </a>
-                        <a href="/login" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect">
-                            Бүртгүүлэх
-                        </a>
-                    </div>
+                    @if(Auth::check())
+                        <div class="group-button">
+                            <a class="btn-floating" href='wish-list'>
+                                <i class="material-icons">favorite_border</i>
+                            </a>
+                            <div class="btn-floating blue-border profile-logged">
+                                <i class="material-icons blue-background">person_outline</i>
+                                <div class="profile-dropdown">
+                                    <ul>
+                                        <li>
+                                            <i class="material-icons blue-background">person_outline</i>
+                                            <span>zaya@gmail.com</span>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                Профайл
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="loan-request.html">
+                                                Зээлийн хүсэлт
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                Таалагдсан
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                Агентууд
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                Бүртдүүлэх материалууд
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('logout') }}">
+                                                Системээс гарах
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="group-button">
+                            <a href="/login">
+                                Нэвтрэх
+                            </a>
+                            <a href="/login" class="blue-background blue-border mdl-button--raised mdl-js-ripple-effect">
+                                Бүртгүүлэх
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
