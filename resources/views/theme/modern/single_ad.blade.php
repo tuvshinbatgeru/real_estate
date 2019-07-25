@@ -164,41 +164,6 @@
 
                                 <loan-calculator amount="{{ $ad->price }}">
                                 </loan-calculator>
-
-                                <ul>
-                                    <li>
-                                        <span>#</span> Зээлийн хүсэлт
-                                    </li>
-                                    <li>
-                                        <span>#</span> Иргэний үнэмлэх
-                                    </li>
-                                    <li>
-                                        <span>#</span> 1 хувь цээж зураг
-                                    </li>
-                                    <li>
-                                        <span>#</span> Оршин суугаа хорооны тодорхойлолт
-                                    </li>
-                                    <li>
-                                        <span>#</span> Нийгмийн даатгалын дэвтэр
-                                    </li>
-                                    <li>
-                                        <span>#</span> Ажлын газрын тодорхойлолт
-                                    </li>
-                                    <li>
-                                        <span>#</span> Хөдөлмөрийн гэрээ
-                                    </li>
-                                    <li>
-                                        <span>#</span> Хувиараа бизнес эрхэлдэг бол бизнесийн үйл ажиллагаатай
-                                        холбоотой бичиг баримтууд
-                                    </li>
-                                    <li>
-                                        <span>#</span> Өрхийн орлогыг баталгаажуулах бичиг баримт
-                                    </li>
-                                </ul>
-                                <a href="" data-toggle="modal" data-target="#docsmodal" style="text-decoration: underline !important;">
-                                    Дэлгэрэнгүй
-                                </a>
-                                <button data-toggle="modal" class="loan-trigger" data-target="#loanmodal">Зээлийн хүсэлт</button>
                             </div>
                             <div class="border">
                                 <h3>Бүрдүүлэх бичиг баримтууд</h3>
