@@ -17,6 +17,7 @@ Vue.component('example', require('./components/Example.vue'));
 //admin
 Vue.component('option-list', require('./components/OptionList.vue'));
 Vue.component('main-filter', require('./components/MainFilter.vue'));
+Vue.component('loan-calculator', require('./components/LoanCalculator.vue'));
 
 const app = new Vue({
     el: '#app'
