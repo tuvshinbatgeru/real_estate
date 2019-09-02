@@ -23,8 +23,13 @@
             </li>
 
             @if($lUser->is_admin())
+            
             <li> <a href="{{ route('parent_categories') }}"><i class="fa"></i> @lang('app.categories')</a>  </li>
+            <li> <a href="/dashboard/menus"><i class="fa"></i> @lang('app.menus')</a>  </li>
+            <li> <a href="/dashboard/menus/categories"><i class="fa"></i> Бүлэг тохируулах</a>  </li>
             <li> <a href="{{ route('admin_brands') }}"><i class="fa"></i> @lang('app.brands')</a>  </li>
+            
+
             <li>
                 <a href="#"><i class="fa"></i> @lang('app.ads')<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -48,15 +53,14 @@
                 <!-- /.nav-second-level -->
             </li> --}}
 
-            <li>
+            {{-- <li>
                 <a href="#"><i class="fa"></i> @lang('app.locations')<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li> <a href="{{ route('country_list') }}"> @lang('app.countries')</a> </li>
                     <li> <a href="{{ route('state_list') }}"> @lang('app.states')</a> </li>
                     <li> <a href="{{ route('city_list') }}"> @lang('app.cities')</a> </li>
                 </ul>
-                <!-- /.nav-second-level -->
-            </li>
+            </li> --}}
 
             {{-- <li> <a href="{{ route('contact_messages') }}"><i class="fa"></i> @lang('app.contact_messages')</a>  </li> --}}
             {{-- <li> <a href="{{ route('monetization') }}"><i class="fa"></i> @lang('app.monetization')</a>  </li> --}}
