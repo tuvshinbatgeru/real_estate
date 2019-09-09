@@ -31,6 +31,10 @@ class Ad extends Model
         return $this->belongsToMany('App\AdsCategory', 'ads_categories', 'ads_id', 'category_id');
     }
 
+    public function point_of_interests() {
+        return $this->belongsToMany('App\Poi', 'ads_poi', 'ads_id', 'poi_id');
+    }
+
     public function sub_category(){
         return $this->belongsTo(Sub_Category::class);
     }

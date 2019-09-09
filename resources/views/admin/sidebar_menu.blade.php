@@ -26,8 +26,9 @@
             
             <li> <a href="{{ route('parent_categories') }}"><i class="fa"></i> @lang('app.categories')</a>  </li>
             <li> <a href="/dashboard/menus"><i class="fa"></i> @lang('app.menus')</a>  </li>
-            <li> <a href="/dashboard/menus/categories"><i class="fa"></i> Бүлэг тохируулах</a>  </li>
-            <li> <a href="{{ route('admin_brands') }}"><i class="fa"></i> @lang('app.brands')</a>  </li>
+            <li> <a href="/dashboard/menus/categories"><i class="fa"></i> 
+            Бүлэг тохируулах</a>  </li>
+            <li> <a href="/dashboard/poi"><i class="fa"></i> Байршил тохируулах</a>  </li>
             
 
             <li>

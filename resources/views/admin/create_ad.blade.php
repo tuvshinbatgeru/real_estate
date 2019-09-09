@@ -27,6 +27,27 @@
 
                         <legend>@lang('app.ad_info')</legend>
 
+                        <div class="form-group {{ $errors->has('purpose')? 'has-error':'' }}">
+                            <label for="purpose" class="col-sm-4 control-label">@lang('app.purpose')</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="purpose" id="purpose">
+                                    <option value="sale" {{ old('purpose') == 'sale' ? 'selected':'' }}>@lang('app.sale')</option>
+                                    <option value="rent" {{ old('purpose') == 'rent' ? 'selected':'' }}>@lang('app.rent')</option>
+                                </select>
+                                {!! $errors->has('purpose')? '<p class="help-block">'.$errors->first('purpose').'</p>':'' !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('menu_id')? 'has-error':'' }}">
+                            <label for="menu_id" class="col-sm-4 control-label">@lang('app.sub_purpose')</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="menu_id" id="menu_id">
+                                    
+                                </select>
+                                {!! $errors->has('menu_id')? '<p class="help-block">'.$errors->first('menu_id').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('ad_title')? 'has-error':'' }}">
                             <label for="ad_title" class="col-sm-4 control-label">@lang('app.property_name')</label>
                             <div class="col-sm-8">
@@ -43,56 +64,6 @@
                                 <textarea name="ad_description" class="form-control" rows="8">{{ old('ad_description') }}</textarea>
                                 {!! $errors->has('ad_description')? '<p class="help-block">'.$errors->first('ad_description').'</p>':'' !!}
                                 <p class="text-info"> @lang('app.ad_description_info_text')</p>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-group required {{ $errors->has('type')? 'has-error':'' }}">
-                            <label class="col-md-4 control-label">@lang('app.property_type') </label>
-                            <div class="col-md-8">
-                                <label for="type_apartment" class="radio-inline">
-                                    <input type="radio" value="apartment" id="type_apartment" name="type"  {{ old('type') == 'apartment'? 'checked="checked"' : '' }}>
-                                    @lang('app.apartment')
-                                </label>
-
-                                <label for="type_condos" class="radio-inline">
-                                    <input type="radio" value="condos" id="type_condos" name="type"  {{ old('type') == 'condos'? 'checked="checked"' : '' }}>
-                                    @lang('app.condos')
-                                </label>
-
-                                <label for="type_house" class="radio-inline">
-                                    <input type="radio" value="house" id="type_house" name="type" {{ old('type') == 'house'? 'checked="checked"' : '' }}>
-                                    @lang('app.house')
-                                </label>
-
-                                <label for="type_land" class="radio-inline">
-                                    <input type="radio" value="land" id="type_land" name="type" {{ old('type') == 'land'? 'checked="checked"' : '' }}>
-                                    @lang('app.land')
-                                </label>
-
-                                <label for="type_commercial_space" class="radio-inline">
-                                    <input type="radio" value="commercial_space" id="type_commercial_space" name="type" {{ old('type') == 'commercial_space'? 'checked="checked"' : '' }}>
-                                    @lang('app.commercial_space')
-                                </label>
-
-                                <label for="type_villa" class="radio-inline">
-                                    <input type="radio" value="villa" id="type_villa" name="type" {{ old('type') == 'villa'? 'checked="checked"' : '' }}>
-                                    @lang('app.villa')
-                                </label>
-
-                                {!! $errors->has('type')? '<p class="help-block">'.$errors->first('type').'</p>':'' !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group {{ $errors->has('purpose')? 'has-error':'' }}">
-                            <label for="purpose" class="col-sm-4 control-label">@lang('app.purpose')</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select2NoSearch" name="purpose" id="purpose">
-                                    <option value="sale" {{ old('purpose') == 'sale' ? 'selected':'' }}>@lang('app.sale')</option>
-                                    <option value="rent" {{ old('purpose') == 'rent' ? 'selected':'' }}>@lang('app.rent')</option>
-                                </select>
-                                {!! $errors->has('purpose')? '<p class="help-block">'.$errors->first('purpose').'</p>':'' !!}
                             </div>
                         </div>
 
@@ -224,6 +195,34 @@
                                         </div>                                        
                                     @endforeach
                                 @endif
+                            </div>
+                        </div>
+
+                        <legend>@lang('app.brand') сонгох</legend>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table table-bordered">
+                                    @foreach($point_of_interests as $poi)
+                                        <tr>
+                                            <td>
+                                                {{ $loop->iteration }}
+                                            </td>
+                                            <td>
+                                                <div class="clearfix">
+                                                    <strong>{{ $poi->place_name }}</strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    type="checkbox" 
+                                                    name="point_of_interests[]"
+                                                    value="{{ $poi->id }}"
+                                                />
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
                             </div>
                         </div>
 
@@ -403,8 +402,6 @@
 
 
                         @if(get_option('ads_price_plan') != 'all_ads_free')
-
-
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -615,6 +612,16 @@
             }
         }
 
+        function fillMenuList(menus) {
+            var options = ''
+
+            menus.forEach((menu) => {
+                options += `<option value="${menu.id}" selected>${menu.name}</option>`
+            })
+
+            $('#menu_id').html(options);
+        }
+
         $(document).ready(function(){
             $('[name="category"]').change(function(){
                 var category_id = $(this).val();
@@ -655,6 +662,18 @@
                     }
                 });
             });
+
+            $('[name="purpose"]').change(function() {
+                //alert($(this).val());
+                const type = $(this).val()
+                $.ajax({
+                    type: 'GET',
+                    url: `/menu/search?type=${type}`,
+                    success: function(data) {
+                        fillMenuList(data.menus)
+                    }
+                })
+            })
 
             $('[name="state"]').change(function(){
                 var state_id = $(this).val();

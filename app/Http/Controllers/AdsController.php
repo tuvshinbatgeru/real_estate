@@ -9,6 +9,7 @@ use App\Category;
 use App\City;
 use App\Country;
 use App\Media;
+use App\Poi;
 use App\Payment;
 use App\Report_ad;
 use App\State;
@@ -50,6 +51,12 @@ class AdsController extends Controller
             $adsIds = AdsCategory::whereIn('option_id', $optionIds)->pluck('ads_id')->toArray();
             $query->whereIn('id', $adsIds);
         }
+
+//         select B.* from (
+// select ads_id, count(1) as cnt from ads_categories where option_id in (40)
+// group by ads_id
+// ) as A inner join ads as B on A.ads_id = B.id 
+// where cnt = 1 AND B.slug = 'sdfg'
 
         if($request->price_interval) {
             $price = explode("-", $request->price_interval);
@@ -126,6 +133,7 @@ class AdsController extends Controller
         $title = trans('app.post_an_ad');
         $categories = Category::with('options')->get();
         $distances = Brand::all();
+        $point_of_interests = Poi::all();
         $countries = Country::all();
 
         $ads_images = Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->get();
@@ -136,7 +144,7 @@ class AdsController extends Controller
         $previous_cities = City::where('state_id', old('state'))->get();
 
 
-        return view('admin.create_ad', compact('title', 'categories', 'countries', 'ads_images', 'distances', 'previous_states', 'previous_cities'));
+        return view('admin.create_ad', compact('title', 'categories', 'countries', 'ads_images', 'distances', 'previous_states', 'previous_cities', 'point_of_interests'));
     }
 
     /**
@@ -151,12 +159,12 @@ class AdsController extends Controller
         $user_id = Auth::user()->id;
         $ads_price_plan = get_option('ads_price_plan');
 
-
         $rules = [
             'ad_title'  => 'required',
             'ad_description'  => 'required',
-            'type'  => 'required',
+            'point_of_interests' => 'required',
             'purpose'  => 'required',
+            'menu_id'  => 'required',
             //'country'  => 'required',
             'seller_name'  => 'required',
             'seller_email'  => 'required',
@@ -184,6 +192,7 @@ class AdsController extends Controller
 
         $data = [
             'title'         => $request->ad_title,
+            'menu_id'       => $request->menu_id,
             'slug'          => $slug,
             'description'   => $request->ad_description,
             'type'          => $request->type,
@@ -255,6 +264,7 @@ class AdsController extends Controller
 
             //\Log::info($options);
             AdsCategory::insert($options);
+            $created_ad->point_of_interests()->sync($request->point_of_interests);
             //$created_ad->categories()->createMany($options);
 
             //$created_ad->options

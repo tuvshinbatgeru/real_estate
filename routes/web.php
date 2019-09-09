@@ -15,6 +15,7 @@ Route::get('/', ['as' => 'home', 'uses'=>'HomeController@index']);
 Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
 
 Route::get('/category/all', 'CategoriesController@all');
+Route::get('/menu/search', 'MenuController@getMenusByType');
 Route::get('/wish-list', 'WishController@index');
 //Listing page
 Route::get('contact-us', ['as' => 'contact_us_page', 'uses'=>'HomeController@contactUs']);
@@ -76,6 +77,7 @@ Route::resource('user', 'UserController');
 Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
     Route::get('/menus/categories', 'MenuController@categories');
     Route::resource('/menus', 'MenuController');
+    Route::resource('/poi', 'PoiController');
     Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@dashboard']);
     Route::group(['middleware'=>'only_admin_access'], function(){
         Route::group(['prefix'=>'settings'], function(){

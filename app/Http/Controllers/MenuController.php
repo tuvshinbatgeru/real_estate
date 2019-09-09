@@ -24,6 +24,20 @@ class MenuController extends Controller
         return view('admin.menu.index', compact('title', 'menus', 'type'));
     }
 
+    public function getMenusByType(Request $request)
+    {
+        $type = 'sale';
+        if($request->type) {
+            $type = $request->type;
+        }
+
+        $menus = Menu::where('main_type', $type)->get();
+        return response()->json([
+            'code' => 0,
+            'menus' => $menus
+        ]);
+    }
+
     public function categories(Request $request) 
     {
         $title = "Ангилалд бүлэг тохируулах";

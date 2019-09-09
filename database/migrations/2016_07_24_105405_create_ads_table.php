@@ -14,13 +14,14 @@ class CreateAdsTable extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('purpose')->nullable();
+            $table->integer('menu_id')->unsigned()->index();
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->enum('type', ['apartment', 'condos', 'house', 'land', 'commercial_space', 'villa'])->nullable();
             $table->decimal('price', 12,2)->nullable();
             $table->enum('is_negotiable', [0,1])->nullable();
-            $table->string('purpose')->nullable();
             $table->decimal('price_per_unit', 12,2)->nullable();
             $table->string('unit_type')->nullable();
             $table->string('square_unit_space')->nullable();

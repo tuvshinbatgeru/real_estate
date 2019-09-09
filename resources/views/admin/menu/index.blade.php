@@ -29,6 +29,7 @@
                         </div>
                     </div> <!-- /.row -->
                 @endif
+                <br />
 
                 @include('admin.flash_msg')
 
