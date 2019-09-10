@@ -53,8 +53,8 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li> --}}
-
-            {{-- <li>
+{{-- 
+            <li>
                 <a href="#"><i class="fa"></i> @lang('app.locations')<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li> <a href="{{ route('country_list') }}"> @lang('app.countries')</a> </li>

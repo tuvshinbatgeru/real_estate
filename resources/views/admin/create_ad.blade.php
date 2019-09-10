@@ -226,7 +226,7 @@
                             </div>
                         </div>
 
-                        @if($distances->count() > 0)
+                        {{-- @if($distances->count() > 0)
 
                             <legend>@lang('app.distances')</legend>
 
@@ -241,7 +241,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @endif
+                        @endif --}}
 
                         <legend>@lang('app.image')</legend>
 
@@ -623,6 +623,17 @@
         }
 
         $(document).ready(function(){
+
+            //alert('reade')
+            //const type = $(this).val()
+            $.ajax({
+                type: 'GET',
+                url: `/menu/search?type=sale`,
+                success: function(data) {
+                    fillMenuList(data.menus)
+                }
+            })
+
             $('[name="category"]').change(function(){
                 var category_id = $(this).val();
                 $('#brand_loader').show();

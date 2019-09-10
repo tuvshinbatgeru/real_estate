@@ -22,9 +22,28 @@ class PoiController extends Controller
     {
         $title = trans('app.point_of_interest');
         $point_of_interests = Poi::with('districts')->get();
-        $districts = City::whereStateId(2481)->select('id', 'city_name')->get();
+
+        $districts = City::select('id', 'city_name')->get();
+
+        //dd($districts);
 
         return view('admin.point_of_interest.index', compact('title', 'point_of_interests', 'districts'));
+    }
+
+    public function districts() {
+        $districts = City::select('id', 'city_name')->get();
+        return response()->json(['districts' => $districts]);
+    }
+
+    public function byDistrict(Request $request) {
+        $rules = [
+            'district' => 'required',
+        ];
+
+        $this->validate($request, $rules);
+
+        $district = City::find($request->district);
+        return response()->json(['pois' => $district->pois]);
     }
 
     public function all()
@@ -43,7 +62,8 @@ class PoiController extends Controller
      */
     public function create()
     {
-        $districts = City::whereStateId(2481)->select('id', 'city_name')->get();
+        //$districts = City::whereStateId(2481)->select('id', 'city_name')->get();
+        $districts = City::select('id', 'city_name')->get();
         return view('admin.point_of_interest.create', compact('districts'));
     }
 

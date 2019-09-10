@@ -16,6 +16,8 @@ Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeCon
 
 Route::get('/category/all', 'CategoriesController@all');
 Route::get('/menu/search', 'MenuController@getMenusByType');
+Route::get('/poi/districts', 'PoiController@districts');
+Route::get('/poi/by_district', 'PoiController@byDistrict');
 Route::get('/wish-list', 'WishController@index');
 //Listing page
 Route::get('contact-us', ['as' => 'contact_us_page', 'uses'=>'HomeController@contactUs']);

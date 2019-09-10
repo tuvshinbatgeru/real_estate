@@ -12,4 +12,9 @@ class City extends Model
     public function state(){
         return $this->belongsTo(State::class);
     }
+
+    public function pois()
+    {
+    	return $this->belongsToMany('App\Poi', 'district_poi', 'district_id', 'poi_id');
+    }
 }

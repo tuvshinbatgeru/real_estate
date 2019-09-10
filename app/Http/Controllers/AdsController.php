@@ -17,8 +17,10 @@ use App\Sub_Category;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -39,43 +41,94 @@ class AdsController extends Controller
     }
 
     public function all(Request $request) {
-        $query = Ad::with('feature_img');
-
         if($request->filter) {
             $optionIds = [];
+            $options = '';
+
+            $len = count($request->filter);
+            $i = 0;
+
             foreach ($request->filter as $filter) {
                 $curFilter = json_decode($filter);
                 array_push($optionIds, $curFilter->option_id);
+                $options = $options . $curFilter->option_id;
+
+                if($i < $len - 1) {
+                    $options = $options . ',';
+                }
+
+                $i++;
             }
 
-            $adsIds = AdsCategory::whereIn('option_id', $optionIds)->pluck('ads_id')->toArray();
-            $query->whereIn('id', $adsIds);
+            $stringBuilder = 'select B.*, C.* from (
+                    select ads_id, count(1) as cnt from ads_categories where option_id in (:options)
+                    group by ads_id
+            ) as A 
+            inner join ads as B on A.ads_id = B.id
+            left outer join media as C on C.ad_id = B.id
+            where cnt = :cnt';
+
+            if($request->menu_id) {
+                $stringBuilder = $stringBuilder . ' AND B.menu_id = ' . $request->menu_id;
+            }
+
+            if($request->purpose) {
+                $stringBuilder = $stringBuilder . ' AND B.purpose = "' . $request->purpose . '"';  
+            }
+
+            //dd($stringBuilder);
+
+            $query = DB::select(DB::raw($stringBuilder), [
+                'options' => $options,
+                'cnt' => count($optionIds)
+            ]);
+
+            $result = $this->arrayPaginator($query, $request);
+        } else {
+            $query = Ad::with('feature_img');
+            if($request->menu_id) {
+                $query->where('menu_id', $request->menu_id);
+            }
+
+            if($request->purpose) {
+                $query->where('purpose', $request->purpose);
+            }
+
+            $result = $query->paginate(15);
+
+            //dd($result);
         }
 
-//         select B.* from (
-// select ads_id, count(1) as cnt from ads_categories where option_id in (40)
-// group by ads_id
-// ) as A inner join ads as B on A.ads_id = B.id 
-// where cnt = 1 AND B.slug = 'sdfg'
+        // if($request->price_interval) {
+        //     $price = explode("-", $request->price_interval);
+        //     $query->whereBetween('price_per_unit', $price);    
+        // }
 
-        if($request->price_interval) {
-            $price = explode("-", $request->price_interval);
-            $query->whereBetween('price_per_unit', $price);    
-        }
+        // if($request->size_interval) {
+        //     $size = explode("-", $request->size_interval);
+        //     $query->whereBetween('square_unit_space', $size);    
+        // }
 
-        if($request->size_interval) {
-            $size = explode("-", $request->size_interval);
-            $query->whereBetween('square_unit_space', $size);    
-        }
+        //dd($query);
 
-        $result = $query->paginate(15);
+        //$result = $query->paginate(15);
 
-        \Log::info($result);
+        //\Log::info($result);
         
         return response()->json([
             'code' => 0,
             'result' => $result
         ]); 
+    }
+
+    public function arrayPaginator($array, $request)
+    {
+        $page = isset($request->page) ? $request->page : 1;
+        $perPage = 15;
+        $offset = ($page * $perPage) - $perPage;
+
+        return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
+            ['path' => $request->url(), 'query' => $request->query()]);
     }
 
     public function adminPendingAds()

@@ -216,11 +216,11 @@
                                     </div>
                                 </div>
                                 <div class="agent-image">
-                                    @foreach($related_ads as $rad)
+                                    {{-- @foreach($related_ads as $rad)
                                         <a href="{{ route('single_ad', $rad->slug) }}">
                                             <img height="100" width="100" style="object-fit: cover;" src="{{ media_url($rad->feature_img) }}">
                                         </a>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                             </div>
 
@@ -230,6 +230,38 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+            <div class="row">
+                @foreach($related_ads as $rad)
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <div itemscope itemtype="http://schema.org/Product" class="ads-item-thumbnail ad-box-{{$rad->price_plan}}">
+                            <div class="ads-thumbnail">
+                                <a href="{{ route('single_ad', $rad->slug) }}">
+                                    <img itemprop="image"  src="{{ media_url($rad->feature_img) }}" class="img-responsive" alt="{{ $rad->title }}">
+                                </a>
+                            </div>
+                            <div class="caption">
+                                <h4><a href="{{ route('single_ad', $rad->slug) }}" title="{{ $rad->title }}"><span itemprop="name">{{ str_limit($rad->title, 40) }} </span></a></h4>
+                                
+                                @if($rad->city)
+                                    <a class="location text-muted" href="{{ route('listing', ['city' => $rad->city->id]) }}"> <i class="fa fa-location-arrow"></i> {{ $rad->city->city_name }} </a>
+                                @endif
+
+                                <p class="date-posted text-muted"> <i class="fa fa-clock-o"></i> {{ $rad->created_at->diffForHumans() }}</p>
+                                <p class="price"> <span itemprop="price" content="{{$rad->price}}"> {{ themeqx_price_ng($rad) }} </span></p>
+                                <link itemprop="availability" href="http://schema.org/InStock" />
+                            </div>
+
+                            @if($rad->price_plan == 'premium')
+                                <div class="label-premium" data-toggle="tooltip" data-placement="top" title="{{ ucfirst($rad->price_plan) }} ad"><i class="fa fa-star-o"></i> </div>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
 
     <!-- Modal -->
     <div class="modal fade" id="loanmodal" tabindex="-1" role="dialog" aria-labelledby="loanmodalLabel"

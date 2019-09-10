@@ -34,6 +34,15 @@ a:hover {
     color: #000;
 }
 
+.custon-button-link {
+    color: #0062ff !important;
+}
+
+.custon-button-link:hover {
+    color: red !important;
+    text-decoration: underline;
+}
+
 input:not([type]):focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),

@@ -2,8 +2,48 @@
     <div>
         <div class="new-filter">
             <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn" :class="category == 'sale' ? 'btn-primary' : 'btn-light'" @click="setCategory('sale')">ХУДАЛДАНА</button>
+                        <button type="button" class="btn" :class="category == 'rent' ? 'btn-primary' : 'btn-light'" @click="setCategory('rent')">ТҮРЭЭСЛҮҮЛНЭ</button>
+                    </div>
+                </div>
+
                 <div class="customs">
                     <div class="custom-basic-select">
+                        <div class="custom-select-title" @click="toggleMenuFilter()">
+                            Ангилал
+                            <div class="selected-value">{{ selected_menu.name }}</div>
+                        </div>
+                        <div class="custom-select-options" v-show="isOpenMenu">
+                            <div class="option" v-for="menu in menus" @click="setMenu(menu)">
+                                {{ menu.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-basic-select">
+                        <div class="custom-select-title" @click="toggleDistrict()">
+                            Дүүрэг
+                            <div class="selected-value">{{ selected_district.city_name }}</div>
+                        </div>
+                        <div class="custom-select-options" v-show="isOpenDistrics">
+                            <div class="option" v-for="district in districts" @click="setDistricts(district)">
+                                {{ district.city_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-basic-select">
+                        <div class="custom-select-title" @click="togglePoi()">
+                            Байршил, Хотхон
+                            <div class="selected-value">{{ selected_poi.place_name }}</div>
+                        </div>
+                        <div class="custom-select-options" v-show="isOpenPoi">
+                            <div class="option" v-for="poi in pois" @click="setPoi(poi)">
+                                {{ poi.place_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="custom-basic-select">
                         <div class="custom-select-title" @click="togglePriceFilter()">
                             M2, Үнэ
                             <div class="selected-value">
@@ -23,115 +63,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="custom-basic-select">
-                        <div class="custom-select-title">
-                            Дүүрэг, хороо
-                            <div class="selected-value"></div>
-                        </div>
-                        <div class="custom-select-options" style="display: none">
-                            <div class="custom-select-item arrow">
-                                <ul>
-                                    <li data-id='9'>Багануур</li>
-                                    <li data-id='10'>Багахангай</li>
-                                    <li data-id='11'>Баянгол</li>
-                                    <li data-id='12'>Баянзүрх</li>
-                                    <li data-id='13'>Налайх</li>
-                                    <li data-id='14'>Сонгинохайрхан</li>
-                                    <li data-id='15'>Сүхбаатар</li>
-                                    <li data-id='16'>Хан-Уул</li>
-                                    <li data-id='17'>Чингэлтэй</li>
-                                </ul>
-                                <div class="options" data-id="9">
-                                    <div class="option" data-value='1-р хороо'>
-                                        1-р хороо
-                                    </div>
-                                    <div class="option" data-value='2-р хороо'>
-                                        2-р хороо
-                                    </div>
-                                    <div class="option" data-value='3-р хороо'>
-                                        3-р хороо
-                                    </div>
-                                    <div class="option" data-value='4-р хороо'>
-                                        4-р хороо
-                                    </div>
-                                </div>
-                                <div class="options" data-id="10">
-                                    <div class="option" data-value='1-р хороо'>
-                                        1-р хороо
-                                    </div>
-                                    <div class="option" data-value='2-р хороо'>
-                                        2-р хороо
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="custom-basic-select">
-                        <div class="custom-select-title">
-                            Байршил, Хотхон
-                            <div class="selected-value"></div>
-                        </div>
-                        <div class="custom-select-options" style="display: none">
-                            <div class="custom-select-item arrow full">
-                                <ul>
-                                    <li data-id='9'>Хүнсний 4 дэлгүүр</li>
-                                    <li data-id='10'>Мэргэжилтний 20</li>
-                                    <li data-id='11'>Оффицеруудын ордон</li>
-                                    <li data-id='12'>Баянзүрх</li>
-                                    <li data-id='13'>Налайх</li>
-                                    <li data-id='14'>Сонгинохайрхан</li>
-                                    <li data-id='15'>Сүхбаатар</li>
-                                    <li data-id='16'>Хан-Уул</li>
-                                    <li data-id='17'>Чингэлтэй</li>
-                                </ul>
-                                <div class="options" data-id="9">
-                                    <div class="option" data-value='Encanto town'>
-                                        Encanto town
-                                    </div>
-                                    <div class="option" data-value='River garden'>
-                                        River garden
-                                    </div>
-                                    <div class="option" data-value='Mandala town'>
-                                        Mandala town
-                                    </div>
-                                    <div class="option" data-value='Time squire'>
-                                        Time squire
-                                    </div>
-                                </div>
-                                <div class="options" data-id="10">
-                                    <div class="option" data-value='1-р хороо'>
-                                        1-р хороо
-                                    </div>
-                                    <div class="option" data-value='2-р хороо'>
-                                        2-р хороо
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="custom-basic-select">
-                        <div class="custom-select-title">
-                            Нүүж ороход бэлэн эсэх
-                            <div class="selected-value"></div>
-                        </div>
-                        <div class="custom-select-options" style="display: none">
-                            <!-- <div class="custom-select-item"> -->
-                            <div class="option" data-value='Хоног 0 бэлэн'>
-                                Хоног 0 бэлэн
-                            </div>
-                            <div class="option" data-value='Хоног 14 арй боломжгүй'>
-                                Хоног 14 арй боломжгүй
-                            </div>
-                            <div class="option" data-value='55 - 65 m2'>
-                                Хоног 0 бэлэн
-                            </div>
-                            <div class="option" data-value='55 - 65 m2'>
-                                Хоног 0 бэлэн
-                            </div>
-                            <!-- </div> -->
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div id="lightSlider" class="icon">
                     <div v-for="cur in filter" @click="toggleFilter(cur)">
@@ -240,7 +172,17 @@
     export default {
         data() {
             return {
+                category: 'sale',
                 filter: [],
+                isOpenMenu: false,
+                isOpenDistrics: false,
+                isOpenPoi: false,
+                pois: [],
+                menus: [],
+                selected_poi: {},
+                selected_menu: {},
+                selected_district: {},
+                districts: [],
                 size_filters: {
                     data: ['50-60', '60-70', '70-80', '80-90', '90-100', '100-110', '110-120', '120-130', '130-140', '140-150'],
                     selected_option: {
@@ -265,12 +207,23 @@
         },
         mounted() {
             this.callSlider()
+            this.getMenus()
             this.getFilter()
             this.getDatas()
+            this.getDistricts()
         },
         methods: {
             togglePriceFilter() {
                 this.price_filters.selected_option.is_open = !this.price_filters.selected_option.is_open
+            },
+            toggleMenuFilter() {
+                this.isOpenMenu = !this.isOpenMenu
+            },
+            toggleDistrict() {
+                this.isOpenDistrics = !this.isOpenDistrics
+            },
+            togglePoi() {
+                this.isOpenPoi = !this.isOpenPoi
             },
             toggleFilter(category) {
                 let index = _.findIndex(this.filter, (cur) => {
@@ -296,6 +249,26 @@
 
                 this.getDatas()
             },
+            setMenu(menu) {
+                this.selected_menu = menu
+                this.isOpenMenu = false
+                this.getDatas()
+            },
+            setCategory(category) {
+                this.category = category
+                this.getMenus()
+                this.getDatas()
+            },
+            setDistricts(district) {
+                this.selected_district = district
+                this.isOpenDistrics = false
+                this.getPois()
+            },
+            setPoi(poi) {
+                this.selected_poi = poi
+                this.isOpenPoi = false
+                this.getDatas()
+            },
             setFilter(category, option) {
                 let index = _.findIndex(this.filter, (cur) => {
                     return cur.id == category.id
@@ -307,8 +280,32 @@
 
                 this.getDatas()
             },
+            getPois() {
+              axios
+              .get(`poi/by_district?district=${this.selected_district.id}`)
+              .then(res => {
+                this.pois = res.data.pois
+                this.selected_poi = {}
+              })
+            },
+            getDistricts() {
+              axios
+              .get('poi/districts')
+              .then(res => {
+                this.districts = res.data.districts
+                this.selected_district = {}
+              })
+            },
+            getMenus() {
+              axios
+              .get(`menu/search?type=${this.category}`)
+              .then(res => {
+                this.menus = res.data.menus
+                this.selected_menu = {}
+              })
+            },
             getFilter() {
-                axios
+              axios
               .get('api/category/all')
               .then(res => {
                 let filter = []
@@ -340,6 +337,12 @@
                     filter: filterParams
                 }
 
+                if(this.category) {
+                    Object.assign(query, {
+                        'purpose': this.category
+                    })
+                }
+
                 if(this.price_filters.selected_option.data) {
                     Object.assign(query, {
                         'price_interval': this.price_filters.selected_option.data
@@ -352,11 +355,23 @@
                     })
                 }
 
+                if(!_.isEmpty(this.selected_poi)) {
+                    Object.assign(query, {
+                        'poi_id': this.selected_poi.id
+                    })
+                }
+
+                if(!_.isEmpty(this.selected_menu)) {
+                    Object.assign(query, {
+                        'menu_id': this.selected_menu.id
+                    })
+                }
+
                 axios
                 .get('api/ads', {
                     params: query
                 })
-                .then(res => {
+                .then(res => {                    
                     let { data, total } = res.data.result
                     let ads = []
 
@@ -388,7 +403,12 @@
               //return num.toFixed(2)
             },
             featuredImage(ad) {
-                if(ad.feature_img == null) return ''
+                if(ad.feature_img == null) {
+                    if(ad.media_name != null) {
+                        return 'uploads/images/thumbs/' + ad.media_name
+                    }
+                    return ''
+                }
                 return 'uploads/images/thumbs/' + ad.feature_img.media_name
             },
             filterName(name) {
