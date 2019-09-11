@@ -65,8 +65,17 @@ class AdsController extends Controller
                     group by ads_id
             ) as A 
             inner join ads as B on A.ads_id = B.id
-            left outer join media as C on C.ad_id = B.id
-            where cnt = :cnt';
+            left outer join media as C on C.ad_id = B.id';
+
+            if($request->poi_id) {
+                $stringBuilder = $stringBuilder . ' inner join ads_poi as D on D.ads_id = B.id';
+            }
+
+            $stringBuilder = $stringBuilder . ' where cnt = :cnt';
+
+            if($request->poi_id) {
+                $stringBuilder = $stringBuilder . ' AND D.poi_id = ' . $request->poi_id;
+            }
 
             if($request->menu_id) {
                 $stringBuilder = $stringBuilder . ' AND B.menu_id = ' . $request->menu_id;
@@ -76,16 +85,23 @@ class AdsController extends Controller
                 $stringBuilder = $stringBuilder . ' AND B.purpose = "' . $request->purpose . '"';  
             }
 
-            //dd($stringBuilder);
-
             $query = DB::select(DB::raw($stringBuilder), [
                 'options' => $options,
-                'cnt' => count($optionIds)
+                'cnt' => count($optionIds),
             ]);
 
             $result = $this->arrayPaginator($query, $request);
         } else {
             $query = Ad::with('feature_img');
+
+            if($request->poi_id) {
+                $poi = $request->poi_id;
+                //dd($poi);
+                $query->whereHas('point_of_interests', function ($q) use ($poi) {
+                    $q->where('poi_id', $poi);
+                });
+            }
+
             if($request->menu_id) {
                 $query->where('menu_id', $request->menu_id);
             }

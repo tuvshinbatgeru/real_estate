@@ -42,8 +42,15 @@ class PoiController extends Controller
 
         $this->validate($request, $rules);
 
-        $district = City::find($request->district);
-        return response()->json(['pois' => $district->pois]);
+        $query = Poi::where('searchable', 'Y');
+        $district = $request->district;
+
+        $query->whereHas('districts', function ($q) use ($district) {
+            $q->where('district_id', $district);
+        });
+
+        $pois = $query->get();
+        return response()->json(['pois' => $pois]);
     }
 
     public function all()
