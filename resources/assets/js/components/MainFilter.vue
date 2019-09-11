@@ -252,11 +252,14 @@
             setMenu(menu) {
                 this.selected_menu = menu
                 this.isOpenMenu = false
+                this.getFilter()
                 this.getDatas()
             },
             setCategory(category) {
                 this.category = category
+                this.selected_menu = {}
                 this.getMenus()
+                this.getFilter()
                 this.getDatas()
             },
             setDistricts(district) {
@@ -302,11 +305,22 @@
               .then(res => {
                 this.menus = res.data.menus
                 this.selected_menu = {}
+                //this.select
               })
             },
             getFilter() {
+              let query = {}
+
+              if(!_.isEmpty(this.selected_menu)) {
+                 Object.assign(query, {
+                    menu_id: this.selected_menu.id
+                 })
+              }
+
               axios
-              .get('api/category/all')
+              .get('api/category/all', {
+                params: query
+              })
               .then(res => {
                 let filter = []
                 res.data.data.forEach((cur) => {

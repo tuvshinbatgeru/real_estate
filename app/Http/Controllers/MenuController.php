@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Menu;
+use App\Category;
 
 class MenuController extends Controller
 {
@@ -41,8 +42,54 @@ class MenuController extends Controller
     public function categories(Request $request) 
     {
         $title = "Ангилалд бүлэг тохируулах";
+        if($request->type) {
+            $type = $request->type;    
+        } else {
+            $type = Menu::first()->id;
+        }
+
         $menus = Menu::all();
-        return view('admin.menu.categories', compact('title', 'menus'));
+        $menu = Menu::find($type);
+
+        //dd($menu);
+        $categories = $menu->categories;
+
+        return view('admin.menu.categories', compact('title', 'menus', 'type', 'categories'));
+    }
+
+    public function saveConfigure($menu_id, Request $request) {
+        $rules = [
+            'categories'  => 'required'
+        ];
+
+        $this->validate($request, $rules);
+
+        $menu = Menu::find($menu_id);
+        $menu->categories()->sync($request->categories);
+
+        return redirect()->back()->with('success', trans('app.success'));
+    }
+
+    public function configure($menu_id) {
+        $menu = Menu::find($menu_id);
+        $categories = Category::all();
+        $title = '"' . $menu->name . '" бүлэг тохируулах';
+        $type = $menu_id;
+
+        $selected_categories = $menu->categories;
+
+        foreach ($categories as $category) {
+            $checked = false;
+            foreach($selected_categories as $cur) {
+                if($cur->id == $category->id) {
+                    $checked = true;
+                }
+            }
+
+            $category->checked = $checked;
+        }
+
+        return view('admin.menu.configure', compact('categories', 'title', 'type', 'selected_categories'));
     }
 
     /**

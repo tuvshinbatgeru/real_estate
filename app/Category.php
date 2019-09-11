@@ -12,6 +12,10 @@ class Category extends Model
         return $this->hasMany('App\Sub_Category');
     }
 
+    public function menus() {
+        return $this->belongsToMany('App\Menu', 'menu_categories', 'category_id', 'menu_id');
+    }
+
     public function options(){
         return $this->hasMany('App\CategoryOptions');
     }

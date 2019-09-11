@@ -78,6 +78,8 @@ Route::resource('user', 'UserController');
 //Dashboard Route
 Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
     Route::get('/menus/categories', 'MenuController@categories');
+    Route::get('/menus/categories/{id}', 'MenuController@configure');
+    Route::post('/menus/categories/{id}', 'MenuController@saveConfigure');
     Route::resource('/menus', 'MenuController');
     Route::resource('/poi', 'PoiController');
     Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@dashboard']);
@@ -121,7 +123,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
         
         Route::get('ad_queries', 'AdQueriesController@index')->name('ad_queries_listing');
 
-        Route::group(['prefix'=>'categories'], function(){
+        Route::group(['prefix'=>'categories'], function() {
             Route::get('/', ['as'=>'parent_categories', 'uses' => 'CategoriesController@index']);
             Route::post('/', ['uses' => 'CategoriesController@store']);
 

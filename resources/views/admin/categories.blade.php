@@ -26,17 +26,6 @@
 
                         {{ Form::open(['class' => 'form-horizontal']) }}
 
-                        <!-- <div class="form-group">
-                            <label for="category_type" class="col-sm-4 control-label">@lang('app.categories_type')</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select2icon" name="category_type">
-                                    <option value="indoor">@lang('app.indoor')</option>
-                                    <option value="outdoor">@lang('app.outdoor')</option>
-                                </select>
-                            </div>
-                        </div> -->
-
-
                         <div class="form-group {{ $errors->has('category_name')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.category_name')</label>
                             <div class="col-sm-8">
@@ -95,10 +84,8 @@
                                 <button type="submit" class="btn btn-primary">@lang('app.save_new_category')</button>
                             </div>
                         </div>
-                        {{ Form::close() }}
-
                     </div>
-
+                    {{ Form::close() }}
                 </div>
 
 

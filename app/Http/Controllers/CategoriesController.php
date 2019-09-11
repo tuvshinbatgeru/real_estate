@@ -23,9 +23,18 @@ class CategoriesController extends Controller
         return view('admin.categories', compact('title', 'categories'));
     }
 
-    public function all()
+    public function all(Request $request)
     {
-        $categories = Category::with('options')->where('value_type', 'chooser')->get();
+        $query = Category::with('options');
+
+        if($request->menu_id) {
+            $menu_id = $request->menu_id;
+            $query->whereHas('menus', function ($q) use ($menu_id) {
+                $q->where('menu_id', $menu_id);
+            });
+        }
+
+        $categories = $query->where('value_type', 'chooser')->get();
         return response()->json([
             'code' => 0,
             'data' => $categories
