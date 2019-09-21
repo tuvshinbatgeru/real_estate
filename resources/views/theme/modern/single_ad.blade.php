@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="icons">
                                         <i class="material-icons">favorite_border</i>
-                                        <i class="material-icons">share</i>
+                                        <i class="material-icons share s_facebook">share</i>
                                     </div>
                                 </div>
                                 <div class="tags">
@@ -631,7 +631,13 @@
 @endsection
 
 @section('page-js')
-
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=241110544128";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{get_option('google_map_api_key')}}&libraries=places&callback=initMap" async defer></script>
     <script type="text/javascript">
         function initMap() {
