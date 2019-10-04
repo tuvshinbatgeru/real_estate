@@ -41,7 +41,7 @@ class MenuController extends Controller
 
     public function categories(Request $request) 
     {
-        $title = "Ангилалд бүлэг тохируулах";
+        $title = "Онцлогт төрөл тохируулах";
         if($request->type) {
             $type = $request->type;    
         } else {

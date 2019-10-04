@@ -27,7 +27,7 @@
             <li> <a href="{{ route('parent_categories') }}"><i class="fa"></i> @lang('app.categories')</a>  </li>
             <li> <a href="/dashboard/menus"><i class="fa"></i> @lang('app.menus')</a>  </li>
             <li> <a href="/dashboard/menus/categories"><i class="fa"></i> 
-            Бүлэг тохируулах</a>  </li>
+            Хайлтын тохиргоо</a>  </li>
             <li> <a href="/dashboard/poi"><i class="fa"></i> Байршил тохируулах</a>  </li>
             
 
@@ -42,7 +42,7 @@
 
             {{-- <li> <a href="{{ route('pages') }}"><i class="fa"></i> @lang('app.pages')</a>  </li> --}}
             {{-- <li> <a href="{{ route('ad_reports') }}"><i class="fa"></i> @lang('app.ad_reports')</a>  </li> --}}
-            <li> <a href="{{ route('users') }}"><i class="fa"></i> @lang('app.users')</a>  </li>
+            {{-- <li> <a href="{{ route('users') }}"><i class="fa"></i> @lang('app.users')</a>  </li> --}}
 
             {{-- <li>
                 <a href="#"><i class="fa"></i> @lang('app.appearance')<span class="fa arrow"></span></a>
@@ -83,7 +83,6 @@
                 <li> <a href="{{ route('administrators') }}"><i class="fa"></i> @lang('app.administrators')</a>  </li>
             @endif
 
-            <li> <a href="{{ route('payments') }}"><i class="fa"></i> @lang('app.payments')</a>  </li>
             <li> <a href="{{ route('change_password') }}"><i class="fa"></i> @lang('app.change_password')</a>  </li>
         </ul>
     </div>

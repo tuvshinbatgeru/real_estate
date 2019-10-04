@@ -67,7 +67,7 @@
                                     </td>
                                     <td>{{ $poi->searchable }}</td>
                                     <td>
-                                        <form action="{{ route('menus.destroy', $poi->id)}}" method="post">
+                                        <form action="{{ route('poi.destroy', $poi->id)}}" method="post">
                                               @csrf
                                               @method('DELETE')
                                               <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i> </button>

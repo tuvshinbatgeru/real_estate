@@ -201,7 +201,7 @@ class PoiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id, Request $request)
     {
         // $id = $request->data_id;
         
@@ -210,6 +210,7 @@ class PoiController extends Controller
         //     return ['success' => 1, 'msg' => trans('app.category_deleted_success')];
         // }
         // return ['success' => 0, 'msg' => trans('app.error_msg')];
-
+        Poi::find($id)->delete();
+        return redirect('/dashboard/poi')->with('success', 'Амжилттай устгалаа.');
     }
 }

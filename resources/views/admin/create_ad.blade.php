@@ -405,13 +405,9 @@
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">@lang('app.payment_info')</h3>
+                                    <h3 class="panel-title">Зарын төрөл</h3>
                                 </div>
                                 <div class="panel-body">
-
-
-
-
                                     <div class="form-group {{ $errors->has('price_plan')? 'has-error':'' }}">
                                         <label for="price_plan" class="col-sm-4 control-label">@lang('app.price_plan')</label>
                                         <div class="col-sm-8">

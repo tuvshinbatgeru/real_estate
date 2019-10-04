@@ -397,6 +397,8 @@
                         }
                     })
 
+                    console.log(ads)
+
                     this.ads = {
                         fetching: false,
                         data: ads,

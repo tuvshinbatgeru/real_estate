@@ -96,7 +96,6 @@ class AdsController extends Controller
 
             if($request->poi_id) {
                 $poi = $request->poi_id;
-                //dd($poi);
                 $query->whereHas('point_of_interests', function ($q) use ($poi) {
                     $q->where('poi_id', $poi);
                 });
@@ -110,9 +109,7 @@ class AdsController extends Controller
                 $query->where('purpose', $request->purpose);
             }
 
-            $result = $query->paginate(15);
-
-            //dd($result);
+            $result = $query->paginate(24);
         }
 
         // if($request->price_interval) {
