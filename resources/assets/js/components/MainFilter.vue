@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <button type="button" class="btn" :class="category == 'sale' ? 'btn-primary' : 'btn-light'" @click="resetFilter()">ХАЙЛТ ШИНЭЧЛЭХ</button>
+                        <button type="button" class="btn btn-primary" @click="resetFilter()">ХАЙЛТ ШИНЭЧЛЭХ</button>
                     </div>
                 </div>
 
