@@ -202,7 +202,7 @@
                                 </a>
                                 <button data-toggle="modal" class="loan-trigger" data-target="#loanmodal">Зээлийн хүсэлт</button>
                             </div>
-                            <div class="border">
+                            <!-- <div class="border">
                                 <div class="agent-header">
                                     <div class="agent-pro">
                                         <img src="{{ $ad->user->get_gravatar() }}" style="width: 50px; height: 50px; background: #333; border-radius: 50%;" />
@@ -222,7 +222,7 @@
                                         </a>
                                     @endforeach --}}
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>

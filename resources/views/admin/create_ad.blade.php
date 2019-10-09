@@ -14,8 +14,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header"> {{ $title }}  </h1>
-                        </div> <!-- /.col-lg-12 -->
-                    </div> <!-- /.row -->
+                        </div>
+                    </div>
                 @endif
 
                 @include('admin.flash_msg')
@@ -201,27 +201,21 @@
                         <legend>@lang('app.brand') сонгох</legend>
 
                         <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="district">
+                                        <option value="-1">Бүгд</option>
+                                        @foreach($districts as $district) 
+                                            <option value="{{ $district->id }}">{{ $district->city_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-xs-12">
-                                <table class="table table-bordered">
-                                    @foreach($point_of_interests as $poi)
-                                        <tr>
-                                            <td>
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td>
-                                                <div class="clearfix">
-                                                    <strong>{{ $poi->place_name }}</strong>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input 
-                                                    type="checkbox" 
-                                                    name="point_of_interests[]"
-                                                    value="{{ $poi->id }}"
-                                                />
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                <table class="table table-bordered" id="poi_table">
+                                   
                                 </table>
                             </div>
                         </div>
@@ -309,7 +303,6 @@
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.state')</label>
                             <div class="col-sm-8">
                                 <select class="form-control select2" id="state_select" name="state">
-                                    <option value='сонгох' />
                                     @if($previous_states->count() > 0)
                                         @foreach($previous_states as $state)
                                             <option value="{{ $state->id }}" {{ old('state') == $state->id ? 'selected' :'' }}>{{ $state->state_name }}</option>
@@ -355,6 +348,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
+                            <label for="address" class="col-sm-4 control-label">@lang('app.address')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $lUser->address }}" name="address" placeholder="@lang('app.address')">
+                                {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
+                                <p class="text-info">@lang('app.address_line_help_text')</p>
+                            </div>
+                        </div>
+
                         <div class="alert alert-info">
                             <p><i class="fa fa-info-circle"></i> @lang('app.map_click_help') </p>
                         </div>
@@ -363,7 +365,7 @@
                         <div id="dvMap" style="width: 100%; height: 400px; margin: 20px 0;"></div>
 
 
-                        <legend>@lang('app.seller_info')</legend>
+                        <!-- <legend>@lang('app.seller_info')</legend>
 
                         <div class="form-group {{ $errors->has('seller_name')? 'has-error':'' }}">
                             <label for="ad_title" class="col-sm-4 control-label">@lang('app.seller_name')</label>
@@ -388,18 +390,7 @@
                                 <input type="text" class="form-control" id="seller_phone" value="{{ old('seller_phone') ? old('seller_phone') : $lUser->phone }}" name="seller_phone" placeholder="@lang('app.seller_phone')">
                                 {!! $errors->has('seller_phone')? '<p class="help-block">'.$errors->first('seller_phone').'</p>':'' !!}
                             </div>
-                        </div>
-
-                        <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
-                            <label for="address" class="col-sm-4 control-label">@lang('app.address')</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $lUser->address }}" name="address" placeholder="@lang('app.address')">
-                                {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
-                                <p class="text-info">@lang('app.address_line_help_text')</p>
-                            </div>
-                        </div>
-
-
+                        </div> -->
 
                         @if(get_option('ads_price_plan') != 'all_ads_free')
 
@@ -608,6 +599,51 @@
             }
         }
 
+        function getFilterPois(district_id = -1) {
+            var point_of_interests = {!! json_encode($point_of_interests) !!};
+            let options = ''
+
+            point_of_interests.forEach((poi) => {
+                if(district_id != -1) {
+                    let index = poi.districts.findIndex((dist) => dist.id == district_id)
+                    if(index == -1) {
+                        options += `<tr>
+                                <td>
+                                    <div class="clearfix">
+                                        <strong>${poi.place_name}</strong>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input 
+                                        type="checkbox" 
+                                        name="point_of_interests[]"
+                                        value="${poi.id}"
+                                    />
+                                </td>
+                            </tr>`
+                    }
+
+                    return
+                }
+
+                options += `<tr>
+                                <td>
+                                    <div class="clearfix">
+                                        <strong>${poi.place_name}</strong>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input 
+                                        type="checkbox" 
+                                        name="point_of_interests[]"
+                                        value="${poi.id}"
+                                    />
+                                </td>
+                            </tr>`
+            })
+            $('#poi_table').html(options);
+        }
+
         function fillMenuList(menus) {
             var options = ''
 
@@ -629,6 +665,19 @@
                     fillMenuList(data.menus)
                 }
             })
+
+            var state_id = 2481;
+            $('#city_loader').show();
+            $.ajax({
+                type : 'POST',
+                url : '{{ route('get_city_by_state') }}',
+                data : { state_id : state_id,  _token : '{{ csrf_token() }}' },
+                success : function (data) {
+                    generate_option_from_json(data, 'state_to_city');
+                }
+            });
+
+            getFilterPois()
 
             $('[name="category"]').change(function(){
                 var category_id = $(this).val();
@@ -668,6 +717,11 @@
                         generate_option_from_json(data, 'country_to_state');
                     }
                 });
+            });
+
+            $('[name="district"]').change(function(){
+                var district = $(this).val();
+                getFilterPois(district)
             });
 
             $('[name="purpose"]').change(function() {

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Poi extends Model
 {
     protected $table = 'point_of_interests';
-	protected $fillable = ['place_name', 'longitude', 'latitude', 'searchable'];
+	protected $fillable = ['type', 'place_name', 'longitude', 'latitude', 'searchable'];
 
 	public function districts()
     {

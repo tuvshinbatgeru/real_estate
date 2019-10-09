@@ -47,7 +47,8 @@
                     <div class="col-xs-12">
                         <table class="table table-bordered">
                             <tr>
-                                <th><small>@lang('app.menus')</small></th>
+                                <th><small>Нэр</small></th>
+                                <th><small>Төрөл</small></th>
                                 <th><small>Дүүрэг</small> </th>
                                 <th><small>Хайлт хийх</small> </th>
                                 <th></th>
@@ -58,6 +59,34 @@
                                         <div class="clearfix">
                                             <strong>{{ $poi->place_name }}</strong>
                                             <span class="pull-right">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="clearfix">
+                                            @switch($poi->type)
+                                                @case("point")
+                                                    <span>Байршил</span>
+                                                    @break
+
+                                                @case("kindergarden")
+                                                    <span>Цэцэрлэг</span>
+                                                    @break
+
+                                                @case("school")
+                                                    <span>Сургууль</span>
+                                                    @break
+
+                                                @case("busstop")
+                                                    <span>Автобусны буудал</span>
+                                                    @break
+
+                                                @case("shop")
+                                                    <span>Дэлгүүр</span>
+                                                    @break
+
+                                                @default
+                                                    <span>Байршил</span>
+                                            @endswitch
                                         </div>
                                     </td>
                                     <td>

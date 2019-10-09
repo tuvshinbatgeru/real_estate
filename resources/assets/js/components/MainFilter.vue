@@ -3,9 +3,13 @@
         <div class="new-filter">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
                         <button type="button" class="btn" :class="category == 'sale' ? 'btn-primary' : 'btn-light'" @click="setCategory('sale')">ХУДАЛДАНА</button>
                         <button type="button" class="btn" :class="category == 'rent' ? 'btn-primary' : 'btn-light'" @click="setCategory('rent')">ТҮРЭЭСЛҮҮЛНЭ</button>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button type="button" class="btn" :class="category == 'sale' ? 'btn-primary' : 'btn-light'" @click="resetFilter()">ХАЙЛТ ШИНЭЧЛЭХ</button>
                     </div>
                 </div>
 
@@ -271,6 +275,10 @@
                 this.selected_poi = poi
                 this.isOpenPoi = false
                 this.getDatas()
+            },
+            resetFilter() {
+                this.setCategory('sale')
+                this.setDistricts({})
             },
             setFilter(category, option) {
                 let index = _.findIndex(this.filter, (cur) => {

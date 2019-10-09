@@ -29,8 +29,20 @@
                         <div class="form-group {{ $errors->has('name')? 'has-error':'' }}">
                             <label for="name" class="col-sm-4 control-label">Нэр</label>
                             <div class="col-sm-8">
-                                <input type="text" required class="form-control" id="name" value="{{ old('name') }}" name="name" placeholder="@lang('app.add_name')">
+                                <input type="text" required class="form-control" id="name" value="{{ old('name') }}" name="name" placeholder="Оруулах">
                                 {!! $errors->has('name')? '<p class="help-block">'.$errors->first('name').'</p>':'' !!}
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('type')? 'has-error':'' }}">
+                            <label for="type" class="col-sm-4 control-label">Төрөл</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="type" id="type">
+                                    <option value="point">Байршил</option>
+                                    <option value="busstop">Автобусны буудал</option>
+                                    <option value="kindergarden">Цэцэрлэг</option>
+                                    <option value="school">Сургууль</option>
+                                    <option value="shop">Дэлгүүр</option>
+                                </select>
                             </div>
                         </div>
 

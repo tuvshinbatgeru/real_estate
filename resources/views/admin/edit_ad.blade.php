@@ -27,8 +27,29 @@
 
                         <legend>@lang('app.ad_info')</legend>
 
+                        <div class="form-group {{ $errors->has('purpose')? 'has-error':'' }}">
+                            <label for="purpose" class="col-sm-4 control-label">@lang('app.purpose')</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="purpose" id="purpose">
+                                    <option value="sale" {{ $ad->purpose == 'sale' ? 'selected':'' }}>@lang('app.sale')</option>
+                                    <option value="rent" {{ $ad->purpose == 'rent' ? 'selected':'' }}>@lang('app.rent')</option>
+                                </select>
+                                {!! $errors->has('purpose')? '<p class="help-block">'.$errors->first('purpose').'</p>':'' !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('menu_id')? 'has-error':'' }}">
+                            <label for="menu_id" class="col-sm-4 control-label">@lang('app.sub_purpose')</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="menu_id" id="menu_id">
+                                    
+                                </select>
+                                {!! $errors->has('menu_id')? '<p class="help-block">'.$errors->first('menu_id').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('ad_title')? 'has-error':'' }}">
-                            <label for="ad_title" class="col-sm-4 control-label">@lang('app.ad_title')</label>
+                            <label for="ad_title" class="col-sm-4 control-label">@lang('app.property_name')</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="ad_title" value="{{ old('ad_title') ? old('ad_title') : $ad->title }}" name="ad_title" placeholder="@lang('app.ad_title')">
                                 {!! $errors->has('ad_title')? '<p class="help-block">'.$errors->first('ad_title').'</p>':'' !!}
@@ -44,57 +65,6 @@
                                 <p class="text-info"> @lang('app.ad_description_info_text')</p>
                             </div>
                         </div>
-
-
-
-                        <div class="form-group required {{ $errors->has('type')? 'has-error':'' }}">
-                            <label class="col-md-4 control-label">@lang('app.property_type') </label>
-                            <div class="col-md-8">
-                                <label for="type_apartment" class="radio-inline">
-                                    <input type="radio" value="apartment" id="type_apartment" name="type"  {{ $ad->type == 'apartment'? 'checked="checked"' : '' }}>
-                                    @lang('app.apartment')
-                                </label>
-
-                                <label for="type_condos" class="radio-inline">
-                                    <input type="radio" value="condos" id="type_condos" name="type"  {{ $ad->type == 'condos'? 'checked="checked"' : '' }}>
-                                    @lang('app.condos')
-                                </label>
-
-                                <label for="type_house" class="radio-inline">
-                                    <input type="radio" value="house" id="type_house" name="type" {{ $ad->type == 'house'? 'checked="checked"' : '' }}>
-                                    @lang('app.house')
-                                </label>
-
-                                <label for="type_land" class="radio-inline">
-                                    <input type="radio" value="land" id="type_land" name="type" {{ $ad->type == 'land'? 'checked="checked"' : '' }}>
-                                    @lang('app.land')
-                                </label>
-
-                                <label for="type_commercial_space" class="radio-inline">
-                                    <input type="radio" value="commercial_space" id="type_commercial_space" name="type" {{ $ad->type == 'commercial_space'? 'checked="checked"' : '' }}>
-                                    @lang('app.commercial_space')
-                                </label>
-
-                                <label for="type_villa" class="radio-inline">
-                                    <input type="radio" value="villa" id="type_villa" name="type" {{ $ad->type == 'villa'? 'checked="checked"' : '' }}>
-                                    @lang('app.villa')
-                                </label>
-
-                                {!! $errors->has('type')? '<p class="help-block">'.$errors->first('type').'</p>':'' !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group {{ $errors->has('purpose')? 'has-error':'' }}">
-                            <label for="purpose" class="col-sm-4 control-label">@lang('app.purpose')</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select2NoSearch" name="purpose" id="purpose">
-                                    <option value="sale" {{ $ad->purpose == 'sale' ? 'selected':'' }}>@lang('app.sale')</option>
-                                    <option value="rent" {{ $ad->purpose == 'rent' ? 'selected':'' }}>@lang('app.rent')</option>
-                                </select>
-                                {!! $errors->has('purpose')? '<p class="help-block">'.$errors->first('purpose').'</p>':'' !!}
-                            </div>
-                        </div>
-
 
                         <div class="form-group  {{ $errors->has('price')? 'has-error':'' }}">
                             <label for="price" class="col-md-4 control-label">@lang('app.price')</label>
@@ -223,24 +193,40 @@
                             </div>
                         </div> -->
 
-                        @if($distances->count() > 0)
+                        <legend>@lang('app.amenities')</legend>
 
-                            <legend>@lang('app.distances')</legend>
+                        <div class="form-group type_checkbox">
+                            <div class="col-sm-12">
+                                @if($categories->count() > 0)
+                                    @foreach($categories as $category)
+                                        <div class="form-group {{ $errors->has('square_unit_space')? 'has-error':'' }}">
+                                            <label for="square_unit_space" class="col-sm-4 control-label">{{ $category->category_name }}</label>
+                                            <div class="col-sm-8">
 
-                            @php $saved_distances = unserialize($ad->distances); @endphp
-                            @foreach($distances as $distance)
-                                @php $existing_value = (! empty($saved_distances[$distance->id]) ) ? $saved_distances[$distance->id] : '';  @endphp
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">{{ $distance->brand_name }}</label>
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="{{ $distance->brand_name }}"  class="form-control" value="{{ $existing_value }}" name="distances[{{$distance->id}}]">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        meters
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
+                                                @if($category->value_type == 'chooser')
+                                                    <select class="form-control" name="category_option[]">
+                                                        @foreach($category->options as $option)
+                                                            <option value="{{ $category->id }}.{{ $option->id }}">{{ $option->option }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @else
+                                                    <input type="text" value={{ $category->id }} class="form-control" name="category_option[]" placeholder="Утга оруулах">
+                                                @endif
+                                            </div>
+                                        </div>                                        
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+
+                        <legend>@lang('app.brand') сонгох</legend>
+
+                        <ad-poi-chooser
+                            :districts="{{ $districts }}"
+                            :pois="{{ $point_of_interests }}"
+                            :selected_pois="{{ $pois }}"
+                        >
+                        </ad-poi-chooser>
 
                         <legend>@lang('app.image')</legend>
 
@@ -302,20 +288,6 @@
 
                         <legend>@lang('app.location_info')</legend>
 
-                        <div class="form-group  {{ $errors->has('country')? 'has-error':'' }}">
-                            <label for="category_name" class="col-sm-4 control-label">@lang('app.country')</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select2" name="country">
-                                    <option value="">@lang('app.select_a_country')</option>
-
-                                    @foreach($countries as $country)
-                                        <option value="{{ $country->id }}" {{ $ad->country_id == $country->id ? 'selected' :'' }}>{{ $country->country_name }}</option>
-                                    @endforeach
-                                </select>
-                                {!! $errors->has('country')? '<p class="help-block">'.$errors->first('country').'</p>':'' !!}
-                            </div>
-                        </div>
-
                         <div class="form-group  {{ $errors->has('state')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.state')</label>
                             <div class="col-sm-8">
@@ -335,7 +307,7 @@
                         <div class="form-group  {{ $errors->has('city')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.city')</label>
                             <div class="col-sm-8">
-                                <select class="form-control select2" id="city_select" name="city">
+                                <select class="form-control" id="city_select" name="city">
                                     @if($previous_cities->count() > 0)
                                         @foreach($previous_cities as $city)
                                         <option value="{{ $city->id }}" {{ $ad->city_id == $city->id ? 'selected':'' }}>{{ $city->city_name }}</option>
@@ -365,6 +337,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
+                            <label for="address" class="col-sm-4 control-label">@lang('app.address')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $ad->address }}" name="address" placeholder="@lang('app.address')">
+                                {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
+                                <p class="text-info">@lang('app.address_line_help_text')</p>
+                            </div>
+                        </div>
+
                         <div class="alert alert-info">
                             <p><i class="fa fa-info-circle"></i> @lang('app.map_click_help') </p>
                         </div>
@@ -373,7 +354,7 @@
                         <div id="dvMap" style="width: 100%; height: 400px; margin: 20px 0;"></div>
 
 
-                        <legend>@lang('app.seller_info')</legend>
+                        <!-- <legend>@lang('app.seller_info')</legend>
 
                         <div class="form-group {{ $errors->has('seller_name')? 'has-error':'' }}">
                             <label for="ad_title" class="col-sm-4 control-label">@lang('app.seller_name')</label>
@@ -398,17 +379,7 @@
                                 <input type="text" class="form-control" id="seller_phone" value="{{ old('seller_phone') ? old('seller_phone') : $ad->seller_phone }}" name="seller_phone" placeholder="@lang('app.seller_phone')">
                                 {!! $errors->has('seller_phone')? '<p class="help-block">'.$errors->first('seller_phone').'</p>':'' !!}
                             </div>
-                        </div>
-
-                        <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
-                            <label for="address" class="col-sm-4 control-label">@lang('app.address')</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $ad->address }}" name="address" placeholder="@lang('app.address')">
-                                {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
-                                <p class="text-info">@lang('app.address_line_help_text')</p>
-                            </div>
-                        </div>
-
+                        </div> -->
 
                         <div class="form-group {{ $errors->has('price_plan')? 'has-error':'' }}">
                             <label for="price_plan" class="col-sm-4 control-label">@lang('app.price_plan')</label>
@@ -584,8 +555,44 @@
 
         }
 
+        function fillMenuList(menus) {
+            var options = ''
+            var menu_id = "{{ $ad->menu_id }}"
+            menus.forEach((menu) => {
+                if(String(menu.id) == String(menu_id)) {
+                    options += `<option value="${menu.id}" selected`
+                } else options += `<option value="${menu.id}"`
+
+                options += `>${menu.name}</option>`
+            })
+
+            $('#menu_id').html(options);
+        }
+
 
         $(document).ready(function(){
+            var purpose = $("#purpose").val()
+            $.ajax({
+                type: 'GET',
+                url: `/menu/search?type=${purpose}`,
+                success: function(data) {
+                    fillMenuList(data.menus)
+                }
+            })
+
+            $('[name="purpose"]').change(function() {
+                //alert($(this).val());
+                const type = $(this).val()
+                $.ajax({
+                    type: 'GET',
+                    url: `/menu/search?type=${type}`,
+                    success: function(data) {
+                        fillMenuList(data.menus)
+                    }
+                })
+            })
+
+
             $('[name="category"]').change(function(){
                 var category_id = $(this).val();
                 $('#brand_loader').show();

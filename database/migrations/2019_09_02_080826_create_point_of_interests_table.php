@@ -15,6 +15,7 @@ class CreatePointOfInterestsTable extends Migration
     {
         Schema::create('point_of_interests', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type')->default('point'); //kindergarden, busstop, school, univercity, shop, location
             $table->string('place_name')->unique();
             $table->decimal('longitude', 10, 7);
             $table->decimal('latitude', 10, 7);

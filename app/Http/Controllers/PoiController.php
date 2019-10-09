@@ -84,12 +84,13 @@ class PoiController extends Controller
     {
         $rules = [
             'name' => 'required',
+            'type' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'districts' => 'required',
         ];
 
-        //dd($request->districts);
+        //dd($request->all());
 
         $this->validate($request, $rules);
 
@@ -104,25 +105,13 @@ class PoiController extends Controller
 
         $poi = Poi::create([
             'place_name' => $request->name,
+            'type' => $request->type,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'searchable' => isset($request->searchable) ? 'Y' : 'N'
         ]);
 
-        //dd($poi);
         $poi->districts()->sync($request->districts);
-        //dd($poi);
-        // if($request->value_type == 'chooser') {
-        //     $options = [];
-        //     foreach($request->category_option as $option){
-        //         array_push($options, [
-        //             //'category_id' => $category->id,
-        //             'option' => $option
-        //         ]);
-        //     }
-
-        //     $category->options()->createMany($options);
-        // }
 
         return back()->with('success', trans('app.category_created'));
     }

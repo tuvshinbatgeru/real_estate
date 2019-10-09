@@ -199,7 +199,7 @@ class AdsController extends Controller
         $title = trans('app.post_an_ad');
         $categories = Category::with('options')->get();
         $distances = Brand::all();
-        $point_of_interests = Poi::all();
+        $point_of_interests = Poi::with('districts')->get();
         $countries = Country::all();
 
         $ads_images = Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->get();
@@ -209,8 +209,10 @@ class AdsController extends Controller
         $previous_states = State::where('country_id', 146)->get();
         $previous_cities = City::where('state_id', old('state'))->get();
 
+        $districts = City::select('id', 'city_name')->get();
 
-        return view('admin.create_ad', compact('title', 'categories', 'countries', 'ads_images', 'distances', 'previous_states', 'previous_cities', 'point_of_interests'));
+
+        return view('admin.create_ad', compact('title', 'categories', 'countries', 'ads_images', 'distances', 'previous_states', 'previous_cities', 'point_of_interests', 'districts'));
     }
 
     /**
@@ -232,9 +234,9 @@ class AdsController extends Controller
             'purpose'  => 'required',
             'menu_id'  => 'required',
             //'country'  => 'required',
-            'seller_name'  => 'required',
-            'seller_email'  => 'required',
-            'seller_phone'  => 'required',
+            //'seller_name'  => 'required',
+            //'seller_email'  => 'required',
+            //'seller_phone'  => 'required',
             'address'  => 'required',
             'latitude'  => 'required',
             'longitude'  => 'required',
@@ -400,6 +402,8 @@ class AdsController extends Controller
         $title = trans('app.edit_ad');
         $ad = Ad::find($id);
 
+        $pois = $ad->point_of_interests()->get();
+
         if (!$ad)
             return view('admin.error.error_404');
 
@@ -411,14 +415,21 @@ class AdsController extends Controller
 
         $countries = Country::all();
         $ads_images = Media::whereUserId($user_id)->whereAdId(null)->whereRef('ad')->get();
+        //dd($ad);
+        $previous_states = State::where('country_id', 146)->get();
+        //$previous_states = State::where('country_id', $ad->country_id)->get();
+        $previous_cities = City::where('state_id', 2481)->get();
+        //$previous_cities = City::where('state_id')->get();
 
-        $previous_states = State::where('country_id', $ad->country_id)->get();
-        $previous_cities = City::where('state_id', $ad->state_id)->get();
-
-        $categories = Category::all();
+        //$categories = Category::all();
+        $categories = Category::with('options')->get();
         $distances = Brand::all();
+        $point_of_interests = Poi::with('districts')->get();
+        $districts = City::select('id', 'city_name')->get();
 
-        return view('admin.edit_ad', compact('title', 'categories', 'countries', 'ads_images', 'ad', 'distances', 'previous_states', 'previous_cities'));
+        //dd($ad->state_id);
+
+        return view('admin.edit_ad', compact('title', 'categories', 'countries', 'ads_images', 'ad', 'distances', 'previous_states', 'previous_cities', 'point_of_interests', 'districts', 'pois'));
 
     }
 
@@ -431,6 +442,7 @@ class AdsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request->city);
         $ad = Ad::find($id);
         $user = Auth::user();
         $user_id = $user->id;
@@ -445,12 +457,11 @@ class AdsController extends Controller
         $rules = [
             'ad_title'  => 'required',
             'ad_description'  => 'required',
-            'type'  => 'required',
-            'purpose'  => 'required',
-            'country'  => 'required',
-            'seller_name'  => 'required',
-            'seller_email'  => 'required',
-            'seller_phone'  => 'required',
+            'purpose' => 'required',
+            'menu_id'  => 'required',
+            // 'seller_name'  => 'required',
+            // 'seller_email'  => 'required',
+            // 'seller_phone'  => 'required',
             'address'  => 'required',
             'latitude'  => 'required',
             'longitude'  => 'required',
@@ -473,6 +484,7 @@ class AdsController extends Controller
             'title'         => $request->ad_title,
             'description'   => $request->ad_description,
             'type'          => $request->type,
+            'menu_id'       => $request->menu_id,
             'price'         => $request->price,
             'is_negotiable' => $is_negotialble,
 
@@ -490,9 +502,9 @@ class AdsController extends Controller
             'amenities'       => $amenities,
             'distances'       => $distances,
 
-            'seller_name' => $request->seller_name,
-            'seller_email' => $request->seller_email,
-            'seller_phone' => $request->seller_phone,
+            // 'seller_name' => $request->seller_name,
+            // 'seller_email' => $request->seller_email,
+            // 'seller_phone' => $request->seller_phone,
             'country_id' => $request->country,
             'state_id' => $request->state,
             'city_id' => $request->city,
@@ -507,7 +519,7 @@ class AdsController extends Controller
         ];
         
         $updated_ad = $ad->update($data);
-
+        $ad->point_of_interests()->sync($request->point_of_interests);
         /**
          * iF add created
          */
