@@ -60,8 +60,6 @@ class AdsController extends Controller
                 $i++;
             }
 
-            //dd($options);
-
             $stringBuilder = 'select B.* from (
                     select ads_id, count(1) as cnt from ads_categories where option_id in (:options)
                     group by ads_id
@@ -91,6 +89,22 @@ class AdsController extends Controller
                 'cnt' => count($optionIds),
             ]);
 
+            //dd($query);
+
+            foreach($query as $item) {
+                $images = Media::where('ad_id', $item->id)->get();
+
+                $featured = count($images) > 0 ? $images[0] : null;
+
+                foreach ($images as $image) {
+                    if($image->is_feature == 1) {
+                        $featured = $image;
+                    }
+                }
+
+                $item->feature_img = $featured;
+            }
+
             $result = $this->arrayPaginator($query, $request);
         } else {
             $query = Ad::with('feature_img');
@@ -111,6 +125,8 @@ class AdsController extends Controller
             }
 
             $result = $query->paginate(24);
+
+            //dd($result);
         }
         
         return response()->json([
