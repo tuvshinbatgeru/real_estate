@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <button type="button" class="btn btn-primary" @click="resetFilter()">ХАЙЛТ ШИНЭЧЛЭХ</button>
+                        <button type="button" class="btn btn-primary" @click="resetFilter()">ХАЙЛТ СЭРГЭЭХ</button>
                     </div>
                 </div>
 
@@ -277,8 +277,8 @@
                 this.getDatas()
             },
             resetFilter() {
-                this.setCategory('sale')
                 this.setDistricts({})
+                this.setCategory('sale')
             },
             setFilter(category, option) {
                 let index = _.findIndex(this.filter, (cur) => {

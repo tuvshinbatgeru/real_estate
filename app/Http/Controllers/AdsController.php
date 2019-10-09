@@ -60,12 +60,13 @@ class AdsController extends Controller
                 $i++;
             }
 
-            $stringBuilder = 'select B.*, C.* from (
+            //dd($options);
+
+            $stringBuilder = 'select B.* from (
                     select ads_id, count(1) as cnt from ads_categories where option_id in (:options)
                     group by ads_id
             ) as A 
-            inner join ads as B on A.ads_id = B.id
-            left outer join media as C on C.ad_id = B.id';
+            inner join ads as B on A.ads_id = B.id';
 
             if($request->poi_id) {
                 $stringBuilder = $stringBuilder . ' inner join ads_poi as D on D.ads_id = B.id';
@@ -111,22 +112,6 @@ class AdsController extends Controller
 
             $result = $query->paginate(24);
         }
-
-        // if($request->price_interval) {
-        //     $price = explode("-", $request->price_interval);
-        //     $query->whereBetween('price_per_unit', $price);    
-        // }
-
-        // if($request->size_interval) {
-        //     $size = explode("-", $request->size_interval);
-        //     $query->whereBetween('square_unit_space', $size);    
-        // }
-
-        //dd($query);
-
-        //$result = $query->paginate(15);
-
-        //\Log::info($result);
         
         return response()->json([
             'code' => 0,
@@ -137,7 +122,7 @@ class AdsController extends Controller
     public function arrayPaginator($array, $request)
     {
         $page = isset($request->page) ? $request->page : 1;
-        $perPage = 15;
+        $perPage = 24;
         $offset = ($page * $perPage) - $perPage;
 
         return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
