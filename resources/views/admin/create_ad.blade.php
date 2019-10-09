@@ -603,10 +603,12 @@
             var point_of_interests = {!! json_encode($point_of_interests) !!};
             let options = ''
 
+            debugger
+
             point_of_interests.forEach((poi) => {
                 if(district_id != -1) {
                     let index = poi.districts.findIndex((dist) => dist.id == district_id)
-                    if(index == -1) {
+                    if(index != -1) {
                         options += `<tr>
                                 <td>
                                     <div class="clearfix">
